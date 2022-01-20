@@ -16,9 +16,11 @@ namespace PhoneBook.Controllers
         }
 
         // GET: PhoneRecords
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? pageIndex,int pageSize=5)
         {
-            return View(await _repository.GetAllAsync());
+            var result = await _repository.GetPage(pageIndex??0, pageSize);
+            return View(result);
+            //return View(await _repository.GetAllAsync());
         }
 
         // GET: PhoneRecords/Details/5
@@ -29,7 +31,7 @@ namespace PhoneBook.Controllers
                 return NotFound();
             }
 
-            var phoneRecord = await _repository.GetAsync(id.Value);                
+            var phoneRecord = await _repository.GetByIdAsync(id.Value);                
             if (phoneRecord == null)
             {
                 return NotFound();
@@ -68,7 +70,7 @@ namespace PhoneBook.Controllers
                 return NotFound();
             }
 
-            var phoneRecord = await _repository.GetAsync(id.Value);
+            var phoneRecord = await _repository.GetByIdAsync(id.Value);
             if (phoneRecord == null)
             {
                 return NotFound();
@@ -119,7 +121,7 @@ namespace PhoneBook.Controllers
                 return NotFound();
             }
 
-            var phoneRecord = await _repository.GetAsync(id.Value);                
+            var phoneRecord = await _repository.GetByIdAsync(id.Value);                
             if (phoneRecord == null)
             {
                 return NotFound();
@@ -143,5 +145,10 @@ namespace PhoneBook.Controllers
         {
             return false;// _repository.PhoneRecords.Any(e => e.Id == id);
         }
+
+        //public async Task<IPage<PhoneRecord>> GetPage(int pageIndex,int pageSize)
+        //{
+        //    var result=await _repository.GetPage(pageIndex,pageSize);
+        //}
     }
 }

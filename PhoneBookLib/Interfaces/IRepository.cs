@@ -8,12 +8,14 @@ namespace PhoneBookLib.Interfaces
     public interface IRepository<T> where T : class,IEntity, new()
     {
         
-        Task<T> GetAsync(int id,CancellationToken cancel=default);
+        Task<T> GetByIdAsync(int id,CancellationToken cancel=default);
         Task<T> AddAsync(T item,CancellationToken cancel=default);
         Task<T> UpdateAsync(T item,CancellationToken cancel=default);
-        Task RemoveAsync(T item,CancellationToken cancel=default);
-        Task<int> GetCount(CancellationToken cancel = default);
+        Task<T> DeleteAsync(T item,CancellationToken cancel=default);
+        Task<T> DeleteByIdAsync(int id, CancellationToken cancel = default);
+        Task<int> GetCountAsync(CancellationToken cancel = default);
         Task<IEnumerable<T>> GetAllAsync(CancellationToken cancel = default);
         Task<int> SaveChangesAsync(CancellationToken cancel = default);
+        Task<IPage<T>> GetPage(int pageIndex,int pageSize,CancellationToken cancel=default);
     }
 }
