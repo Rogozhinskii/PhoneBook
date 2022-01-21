@@ -19,8 +19,7 @@ namespace PhoneBook.Controllers
         public async Task<IActionResult> Index(int? pageIndex,int pageSize=5)
         {
             var result = await _repository.GetPage(pageIndex??0, pageSize);
-            return View(result);
-            //return View(await _repository.GetAllAsync());
+            return View(result);            
         }
 
         // GET: PhoneRecords/Details/5

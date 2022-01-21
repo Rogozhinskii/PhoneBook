@@ -1,31 +1,30 @@
 ﻿@model Page<PhoneBookLib.Entities.PhoneRecord>
-@*@model IEnumerable<PhoneBookLib.Entities.PhoneRecord>*@
-
 @{
     ViewData["Title"] = "Index";
 }
 
 <h1 class="text-center"><i class="fa fa-address-book" aria-hidden="true"></i>Phone book</h1>
-
+<div>  
+ <p>
+   <input class="text-field__input" type="text" name="login" id="login" placeholder="Search"> 
+   <i class="fa fa-search" aria-hidden="true"></i>
+   <input type="submit" value="Search" class="btn btn-default" style="padding: 0px;"/>
+</p>
+</div>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @*@Html.DisplayNameFor(model => model.Id)*@
+            <th>                
                 Id
             </th>
             <th>
-                Last Name
-                @*@Html.DisplayNameFor(model => model.Items.LastName)*@
+                Last Name                
             </th>
             <th>
                 First Name
-                @*@Html.DisplayNameFor(model => model.FirstName)*@
-                
             </th>           
             <th>
-                Patronymic                
-                @*@Html.DisplayNameFor(model => model.Patronymic)*@
+                Patronymic
             </th>            
             <th>
                 <a asp-action="Create" class="btn btn-success text-white"><i class="fa fa-plus"></i> Create New</a>
@@ -77,6 +76,3 @@
     Next
 </a>
 
-
-@*asp-route-pageNumber="@(Model.PageIndex + 1)"*@
-@*asp-route-pageNumber="@(Model.PageIndex - 1)"*@
