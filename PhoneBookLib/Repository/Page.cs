@@ -22,7 +22,7 @@ namespace PhoneBookLib
         public int PageIndex{ get; set; }
 
         public int PageSize { get; set; }
-        int TotalPageCount => (int)Math.Ceiling((double)TotalCount / PageSize);
+        public int TotalPageCount => (int)Math.Ceiling((double)TotalCount / PageSize);
         public bool HasPreviousPage
         {
             get
@@ -38,10 +38,5 @@ namespace PhoneBookLib
             }
         }
     }
-    //public class Page(IEnumerable<T> Items, int TotalCount, int PageIndex, int PageSize) : IPage<T> where T : class, IEntity, new()
-    //{ }
-    //public partial class DbRepository<T> 
-    //{
-
-    //}
+   
 }

@@ -4,8 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PhoneBook.Data;
-using PhoneBookLib;
 using PhoneBookLib.Interfaces;
+using PhoneBookLib.Repository;
 using System;
 using System.Threading.Tasks;
 
@@ -34,9 +34,9 @@ namespace PhoneBook
         {
             //Task.Run(async () =>
             //{
-            //    using(var scope = serviceProvider.CreateScope())
+            //    using (var scope = serviceProvider.CreateScope())
             //    {
-            //       await scope.ServiceProvider.GetRequiredService<DbInitializer>().InitializeData();
+            //        await scope.ServiceProvider.GetRequiredService<DbInitializer>().InitializeData();
             //    }
             //});
 

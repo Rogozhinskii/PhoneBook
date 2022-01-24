@@ -235,7 +235,7 @@ namespace PhoneBookLib.RandomInfo
         /// </summary>
         /// <returns></returns>
         public static string GetRandomDescription() =>
-            rnd.NextItem<string>(addresses);
+            rnd.NextItem<string>(descriptions);
 
 
         /// <summary>

@@ -1,4 +1,5 @@
-﻿using PhoneBookLib.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using PhoneBookLib.Context;
 using PhoneBookLib.Entities;
 using PhoneBookLib.RandomInfo;
 using System.Linq;
@@ -17,6 +18,8 @@ namespace PhoneBook.Data
 
         public async Task InitializeData()
         {
+            await _db.Database.EnsureDeletedAsync().ConfigureAwait(false);
+            await _db.Database.MigrateAsync();
             var record = Enumerable.Range(1, 50).Select(i => new PhoneRecord
             {
                 FirstName = RandomData.GetRandomName(),
