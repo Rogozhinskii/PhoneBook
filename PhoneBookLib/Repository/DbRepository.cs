@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PhoneBookLib.Context;
-using PhoneBookLib.Interfaces;
+using PhoneBook.DAL.Context;
+using PhoneBook.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PhoneBookLib.Repository
+namespace PhoneBook.DAL.Repository
 {
     public partial class DbRepository<T> : IRepository<T> where T : class, IEntity, new()
     {

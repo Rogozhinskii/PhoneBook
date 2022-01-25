@@ -1,4 +1,4 @@
-﻿namespace PhoneBookLib.Interfaces
+﻿namespace PhoneBook.Interfaces
 {
     public interface IEntity
     {

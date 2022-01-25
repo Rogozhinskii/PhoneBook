@@ -1,4 +1,4 @@
-﻿namespace PhoneBookLib.Context
+﻿namespace PhoneBook.DAL.Context
 {
     internal class DbContextFactory
     {

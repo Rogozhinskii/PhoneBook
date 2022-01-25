@@ -1,6 +1,6 @@
-﻿@using PhoneBookLib.Entities
-@using PhoneBookLib.Interfaces
-@model Page<PhoneBookLib.Entities.PhoneRecord>
+﻿@using PhoneBook.DAL.Repository
+@using PhoneBook.Entities
+@model Page<PhoneBook.Entities.PhoneRecord>
 
 @{
     ViewData["Title"] = "Index";
@@ -66,23 +66,23 @@
         var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
         var nextDisabled = !Model.HasNextPage ? "disabled" : "";
         var totalPages = Model.TotalCount;
-        var itemsOnPage = new int[] { 5, 10, 15 };
+        var itemsOnPage = new int[] { 5, 10, 15 };        
     }
     
     <div align="left">
-        <a asp-action="Index" asp-route-pageIndex="@(Model.PageIndex-1)" asp-route-sortOrder="@ViewData["CurrentSort"]" 
-            asp-route-currentFilter="@ViewData["CurrentFilter"]" class="btn btn-default @prevDisabled">
+        <a asp-action="Index" asp-route-pageIndex="@(Model.PageIndex-1)" asp-route-currentFilter="@ViewData["CurrentFilter"]" 
+            asp-route-pageSize="@ViewData["PageSize"]" class="btn btn-default @prevDisabled">
             Previous
         </a>
-        <a asp-action="Index" asp-route-pageIndex="@(Model.PageIndex+1)" asp-route-sortOrder="@ViewData["CurrentSort"]"
-            asp-route-currentFilter="@ViewData["CurrentFilter"]" class="btn btn-default @nextDisabled">
+        <a asp-action="Index" asp-route-pageIndex="@(Model.PageIndex+1)" asp-route-currentFilter="@ViewData["CurrentFilter"]" 
+            asp-route-pageSize="@ViewData["PageSize"]" class="btn btn-default @nextDisabled">
             Next
         </a>
         
         <div  class="right">
             @using (Html.BeginForm("Index", "PhoneRecords", FormMethod.Get))
-            {
-                @Html.DropDownList("pageSize", new SelectList(itemsOnPage), new { @class = "form-group", onchange = "$(this.form).submit();" })              
+            {                
+                @Html.DropDownList("pageSize", new SelectList(itemsOnPage), new { @class = "form-group", onchange = "selectedText(this);$(this.form).submit();" })              
             }            
             <span style="align-content:flex-end">Page: @(Model.PageIndex+1)/@(Model.TotalPageCount).</span>
             <p style="align-content:flex-end">Total Items: @Model.TotalCount </p>
@@ -90,3 +90,10 @@
     </div>
 </div>
 
+<script>
+    function selectedText(ddlitem){
+        var selvalue=ddlitem.value;
+        var selText=ddlitem.options[ddlitem.selectedIndex].innerHTML;        
+        $('@ViewData["PageSize"]').val(selText);
+    }
+</script>

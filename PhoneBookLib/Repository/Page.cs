@@ -1,8 +1,8 @@
-﻿using PhoneBookLib.Interfaces;
+﻿using PhoneBook.Interfaces;
 using System;
 using System.Collections.Generic;
 
-namespace PhoneBookLib
+namespace PhoneBook.DAL.Repository
 {
     public class Page<T> : IPage<T> 
     {

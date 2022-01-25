@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PhoneBookLib.Entities;
+using PhoneBook.Entities;
 
-namespace PhoneBookLib.Context
+namespace PhoneBook.DAL.Context
 {
     public class PhoneBookDB:DbContext
     {

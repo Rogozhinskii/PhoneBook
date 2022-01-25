@@ -1,6 +1,7 @@
-﻿using PhoneBookLib.Interfaces;
+﻿using PhoneBook.Interfaces;
 
-namespace PhoneBookLib.Entities.Base
+
+namespace PhoneBook.DAL.Entities.Base
 {
     public class Entity : IEntity
     {

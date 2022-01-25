@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using PhoneBookLib.Entities;
-using PhoneBookLib.Interfaces;
-using PhoneBookLib.Repository;
+using PhoneBook.Common;
+using PhoneBook.Entities;
+using PhoneBook.Interfaces;
+
 
 namespace PhoneBook.Controllers
 {
@@ -19,7 +18,7 @@ namespace PhoneBook.Controllers
         }
 
         // GET: PhoneRecords
-        public async Task<IActionResult> Index(string currentFilter, string searchString, int? pageIndex,int pageSize=5)
+        public async Task<IActionResult> Index(string currentFilter, string searchString, int? pageIndex,int? pageSize)
         {            
             if (searchString != null){
                 pageIndex = 0;
@@ -30,15 +29,12 @@ namespace PhoneBook.Controllers
             else{
                 searchString = currentFilter;
             }
+            ViewData["pageSize"] = pageSize;
             ViewData["CurrentFilter"] = searchString;
-            return View(await _repository.GetPage(pageIndex ?? 0, pageSize));            
+            return View(await _repository.GetPage(pageIndex ?? 0, pageSize??5));            
         }
 
-        public async Task<IActionResult> GetOn(int miDropDownList)
-        {
-
-            return View();
-        }
+        
 
         // GET: PhoneRecords/Details/5
         public async Task<IActionResult> Details(int? id)

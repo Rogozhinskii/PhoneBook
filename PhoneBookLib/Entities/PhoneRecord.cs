@@ -1,7 +1,7 @@
-﻿using PhoneBookLib.Entities.Base;
+﻿using PhoneBook.DAL.Entities.Base;
 using System.ComponentModel.DataAnnotations;
 
-namespace PhoneBookLib.Entities
+namespace PhoneBook.Entities
 {
     public class PhoneRecord:Entity
     {

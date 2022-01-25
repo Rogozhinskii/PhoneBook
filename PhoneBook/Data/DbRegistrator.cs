@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using PhoneBookLib.Context;
+using PhoneBook.DAL.Context;
 using System;
 
 namespace PhoneBook.Data

@@ -3,11 +3,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PhoneBook.DAL.Repository;
 using PhoneBook.Data;
-using PhoneBookLib.Interfaces;
-using PhoneBookLib.Repository;
+using PhoneBook.Interfaces;
 using System;
-using System.Threading.Tasks;
 
 namespace PhoneBook
 {

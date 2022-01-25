@@ -1,11 +1,12 @@
-﻿using PhoneBookLib.Interfaces;
+﻿using PhoneBook.DAL.Repository;
+using PhoneBook.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PhoneBookLib.Repository
+namespace PhoneBook.Common
 {
     public static class RepositoryExtensions
     {

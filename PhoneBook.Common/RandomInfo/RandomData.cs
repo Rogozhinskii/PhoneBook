@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 
-namespace PhoneBookLib.RandomInfo
+namespace PhoneBook.Common.RandomInfo
 {
     /// <summary>
     /// Хранит коллекции имен и фамилий

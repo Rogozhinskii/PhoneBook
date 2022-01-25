@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PhoneBookLib.Interfaces
+namespace PhoneBook.Interfaces
 {
     public interface IRepository<T> where T : class,IEntity, new()
     {
