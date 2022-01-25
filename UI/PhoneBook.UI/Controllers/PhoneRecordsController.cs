@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using PhoneBook.Automapper;
 using PhoneBook.DAL.Repository.Extensions;
 using PhoneBook.Entities;
-using PhoneBook.Interfaces;
-
+using PhoneBook.Models;
 
 namespace PhoneBook.Controllers
 {
     public class PhoneRecordsController : Controller
     {
-        private readonly IRepository<PhoneRecord> _repository;
+        
+        private readonly IMappedRepository<PhoneRecordViewModel, PhoneRecord> _repository;
 
-        public PhoneRecordsController(IRepository<PhoneRecord> repository)
+        public PhoneRecordsController(IMappedRepository<PhoneRecordViewModel,PhoneRecord> repository)
         {
             _repository = repository;
         }
@@ -40,7 +41,7 @@ namespace PhoneBook.Controllers
         public async Task<IActionResult> Details(int? id)
         {
             if (id is null) return NotFound();                          
-            if (await _repository.GetByIdAsync(id.Value) is { } record){
+            if (await _repository.GetById(id.Value) is { } record){
                 return View(record);
             }
             return NotFound();

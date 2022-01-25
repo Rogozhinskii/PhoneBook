@@ -1,18 +1,21 @@
 ﻿using AutoMapper;
+using PhoneBook.DAL.Repository;
 using PhoneBook.Interfaces;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
-namespace PhoneBook.DAL.Repository
+namespace PhoneBook.Automapper
 {
-    internal abstract class MappedRepository<T, TBase> 
-        where TBase : IEntity, new()
-        where T : IEntity,new()
+    public class MappedRepository<T, TBase> : IMappedRepository<T, TBase> where TBase : IEntity, new()
+        where T : IEntity, new()
     {
         private readonly IRepository<TBase> _repository;
         private readonly IMapper _mapper;
 
-        public MappedRepository(IRepository<TBase> repository,IMapper mapper)
+        public MappedRepository(IRepository<TBase> repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
@@ -25,24 +28,30 @@ namespace PhoneBook.DAL.Repository
 
 
 
-        protected IPage<T> GetPage(IPage<TBase> page)
+        protected IPage<T> GetItem(IPage<TBase> page)
         {
-            return new Page<T>(GetItem(page.Items), page.TotalCount, page.PageIndex, page.PageSize);          
+            return new Page<T>(GetItem(page.Items), page.TotalCount, page.PageIndex, page.PageSize);
         }
 
         public async Task<IPage<T>> GetPage(int pageIndex, int pageSize)
         {
             var result = await _repository.GetPage(pageIndex, pageSize);
-            return GetPage(result);
+            return GetItem(result);
+        }
+
+        public async Task<IPage<T>> GetPage(Func<TBase, bool> filterExpression, CancellationToken cancel = default)
+        {
+            var items = await _repository.WhereAsync(filterExpression, cancel).ConfigureAwait(false);
+            return new Page<T>(GetItem(items), items.Count(), 0, items.Count());
         }
 
         public async Task<T> GetById(int id)
         {
-            var item=await _repository.GetByIdAsync(id);
+            var item = await _repository.GetByIdAsync(id);
             return GetItem(item);
-          
+
         }
-          
+
 
     }
 }

@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PhoneBook.Automapper;
 using PhoneBook.DAL.Context;
 using PhoneBook.DAL.Repository;
 using PhoneBook.Data;
@@ -22,11 +23,18 @@ namespace PhoneBook
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)=>
-            services.AddDatabase(Configuration)                   
-                    .AddScoped(typeof(IRepository<>),typeof(DbRepository<>))                    
-                    .AddControllersWithViews()
-            ;
+        public void ConfigureServices(IServiceCollection services) {
+            services.AddDatabase(Configuration).AddAutoMapper(typeof(Startup))
+                   .AddScoped(typeof(IRepository<>), typeof(DbRepository<>))
+
+                   .AddControllersWithViews();
+            services.AddScoped(typeof(IMappedRepository<,>), typeof(MappedRepository<,>));
+        
+        }
+           
+                    
+            
+            
         
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
