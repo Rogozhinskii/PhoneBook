@@ -23,34 +23,16 @@ namespace PhoneBook.DAL.Repository
         }
         protected virtual IQueryable<T> Items => Set;
 
-        /// <summary>
-        /// Определяет есть ли запись в хранилище с указанным id, true-вернет если запись найдена, 
-        /// иначе false
-        /// </summary>
-        /// <param name="id">идентификатор искомой записи</param>
-        /// <param name="cancel"></param>
-        /// <returns></returns>
         public async Task<bool> ExistAsync(int id, CancellationToken cancel = default) =>
             await Items.AnyAsync(item => item.Id == id, cancel).ConfigureAwait(false);
-
-        /// <summary>
-        /// Определяет есть ли указанная сущность в хранилище. true-вернет если запись найдена, иначе false
-        /// </summary>
-        /// <param name="item">искомая сущность</param>
-        /// <param name="cancel"></param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentNullException"></exception>
+        
         public async Task<bool> ExistAsync(T item, CancellationToken cancel = default)
         {
             if (item is null) throw new ArgumentNullException(nameof(item));
             return await ExistAsync(item.Id, cancel).ConfigureAwait(false);
         }
 
-        /// <summary>
-        /// Возвращает количество записей в хранилище
-        /// </summary>
-        /// <param name="cancel"></param>
-        /// <returns></returns>
+       
         public async Task<int> GetCountAsync(CancellationToken cancel = default) =>
             await Items.CountAsync(cancel).ConfigureAwait(false);
 
@@ -143,5 +125,8 @@ namespace PhoneBook.DAL.Repository
             var items = await query.ToArrayAsync(cancel).ConfigureAwait(false);
             return new Page<T>(items,total_count,pageIndex,pageSize);
         }
+
+        public void ChangeSaveMode(bool autoSaveChanges) =>
+            AutoSaveChanges= autoSaveChanges;
     }
 }

@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace PhoneBook.Data
 {
+    /// <summary>
+    /// если нужно будет наполнить БД случайными сущностями
+    /// </summary>
     public class DbInitializer
     {
         private readonly PhoneBookDB _db;

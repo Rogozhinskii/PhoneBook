@@ -9,6 +9,12 @@ namespace PhoneBook.Data
 {
     public static class DbRegistrator
     {
+        /// <summary>
+        /// регистрирует контекст базы данных
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
+        /// <returns></returns>
         public static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration) => services
             .AddDbContext<PhoneBookDB>(options =>
             {

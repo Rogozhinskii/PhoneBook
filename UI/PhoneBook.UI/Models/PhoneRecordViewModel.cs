@@ -2,6 +2,9 @@
 
 namespace PhoneBook.Models
 {
+    /// <summary>
+    /// Модель представления записи телефонного справочника
+    /// </summary>
     public class PhoneRecordViewModel: Entity
     {       
         public string FirstName { get; set; }        

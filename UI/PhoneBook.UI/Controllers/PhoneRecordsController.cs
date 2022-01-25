@@ -2,12 +2,12 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PhoneBook.Automapper;
-using PhoneBook.DAL.Repository.Extensions;
 using PhoneBook.Entities;
 using PhoneBook.Models;
 
 namespace PhoneBook.Controllers
 {
+
     public class PhoneRecordsController : Controller
     {
         

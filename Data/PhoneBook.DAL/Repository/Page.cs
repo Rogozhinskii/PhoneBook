@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace PhoneBook.DAL.Repository
 {
-    public class Page<T> : IPage<T> 
+    public class Page<T> : IPage<T> where T : IEntity
     {
         public Page(IEnumerable<T> items,int totalCount,int pageIndex,int pageSize)
         {
