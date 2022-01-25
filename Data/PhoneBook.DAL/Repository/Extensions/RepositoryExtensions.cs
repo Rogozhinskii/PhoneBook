@@ -1,20 +1,13 @@
-﻿using PhoneBook.DAL.Repository;
-using PhoneBook.Interfaces;
+﻿using PhoneBook.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PhoneBook.Common
+namespace PhoneBook.DAL.Repository.Extensions
 {
     public static class RepositoryExtensions
-    {
-        public static async Task<IEnumerable<T>> GetAllAsync<T>(this IRepository<T> rep,Func<T,bool> filterExpression, CancellationToken cancel=default) 
-            where T : class, IEntity, new()
-        => (await rep.GetAllAsync(cancel).ConfigureAwait(false)).Where(filterExpression);
-
-
+    {        
         /// <summary>
         /// Возвращает объект page, содержащий элементы удовлетворяющие условию делегата filterExpression
         /// </summary>

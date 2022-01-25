@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PhoneBook.DAL.Context;
+using PhoneBook.DAL.Entities.Base;
 using PhoneBook.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PhoneBook.DAL.Repository
 {
-    public partial class DbRepository<T> : IRepository<T> where T : class, IEntity, new()
+    public partial class DbRepository<T> : IRepository<T> where T : Entity, new()
     {
         private readonly PhoneBookDB _db;
         protected DbSet<T> Set { get; }

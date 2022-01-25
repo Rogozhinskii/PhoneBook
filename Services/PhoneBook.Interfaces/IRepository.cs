@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PhoneBook.Interfaces
 {
-    public interface IRepository<T> where T : class,IEntity, new()
+    public interface IRepository<T> where T : IEntity, new()
     {
         
         Task<T> GetByIdAsync(int id,CancellationToken cancel=default);

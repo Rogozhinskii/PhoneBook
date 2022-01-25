@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PhoneBook.DAL.Context;
 using PhoneBook.DAL.Repository;
 using PhoneBook.Data;
 using PhoneBook.Interfaces;
@@ -21,9 +23,8 @@ namespace PhoneBook
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)=>
-            services.AddDatabase(Configuration.GetSection("Database"))
-                    .AddScoped(typeof(IRepository<>),typeof(DbRepository<>))
-                    //.AddTransient<DbInitializer>()
+            services.AddDatabase(Configuration)                   
+                    .AddScoped(typeof(IRepository<>),typeof(DbRepository<>))                    
                     .AddControllersWithViews()
             ;
         
@@ -31,21 +32,13 @@ namespace PhoneBook
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env,IServiceProvider serviceProvider)
         {
-            //Task.Run(async () =>
-            //{
-            //    using (var scope = serviceProvider.CreateScope())
-            //    {
-            //        await scope.ServiceProvider.GetRequiredService<DbInitializer>().InitializeData();
-            //    }
-            //});
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Error");
             }
             app.UseStaticFiles();
 
@@ -57,7 +50,7 @@ namespace PhoneBook
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=PhoneRecords}/{action=Index}/{id?}");
+                    pattern: "{controller=PhoneRecords}/{action=Index}");
             });
         }
     }

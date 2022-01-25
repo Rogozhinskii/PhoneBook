@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.13">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -20,8 +21,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PhoneBook.Common\PhoneBook.Common.csproj" />
-    <ProjectReference Include="..\PhoneBookLib\PhoneBook.DAL.csproj" />
+    <ProjectReference Include="..\..\Common\PhoneBook.Common\PhoneBook.Common.csproj" />
+    <ProjectReference Include="..\..\Data\PhoneBook.DAL\PhoneBook.DAL.csproj" />
+    <ProjectReference Include="..\..\Services\PhoneBook.Interfaces\PhoneBook.Interfaces.csproj" />
   </ItemGroup>
+
+ 
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using PhoneBook.Common;
+using PhoneBook.DAL.Repository.Extensions;
 using PhoneBook.Entities;
 using PhoneBook.Interfaces;
 
