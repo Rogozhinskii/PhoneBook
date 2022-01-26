@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using PhoneBook.DAL.Repository;
+using PhoneBook.Common;
 using PhoneBook.Interfaces;
 using System;
 using System.Collections.Generic;

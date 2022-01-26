@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace PhoneBook.DAL.Repository
+namespace PhoneBook.Common
 {
     public class Page<T> : IPage<T> where T : IEntity
     {

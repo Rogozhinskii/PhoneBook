@@ -9,15 +9,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBook.Common", "Common\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{443EC4B6-188D-418D-BAFD-62B655B40A17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneBook.Interfaces", "Services\PhoneBook.Interfaces\PhoneBook.Interfaces.csproj", "{B95A677A-5517-40E9-BE2E-333199F2A31C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBook.Interfaces", "Services\PhoneBook.Interfaces\PhoneBook.Interfaces.csproj", "{B95A677A-5517-40E9-BE2E-333199F2A31C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{D109FBC4-27AE-4ED3-B24E-9893653C9DAD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneBook", "UI\PhoneBook.UI\PhoneBook.csproj", "{9524D407-1EF6-4BF7-BF06-768F514D63C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBook", "UI\PhoneBook.UI\PhoneBook.csproj", "{9524D407-1EF6-4BF7-BF06-768F514D63C7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{A2D3B62A-93FD-424F-8F98-0814BD72B79F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneBook.DAL", "Data\PhoneBook.DAL\PhoneBook.DAL.csproj", "{6957E940-2BD7-4675-8038-8830797370C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBook.DAL", "Data\PhoneBook.DAL\PhoneBook.DAL.csproj", "{6957E940-2BD7-4675-8038-8830797370C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
