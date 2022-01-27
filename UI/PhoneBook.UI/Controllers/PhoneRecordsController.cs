@@ -18,7 +18,7 @@ namespace PhoneBook.Controllers
             _repository = repository;
         }
 
-        // GET: PhoneRecords
+        [HttpGet]
         public async Task<IActionResult> Index(string currentFilter, string searchString, int? pageIndex,int? pageSize)
         {            
             if (searchString != null){
@@ -37,7 +37,7 @@ namespace PhoneBook.Controllers
 
         
 
-        // GET: PhoneRecords/Details/5
+        [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
             if (id is null) return NotFound();                          
