@@ -19,6 +19,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{A2D3B62A-9
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBook.DAL", "Data\PhoneBook.DAL\PhoneBook.DAL.csproj", "{6957E940-2BD7-4675-8038-8830797370C5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataBase", "DataBase", "{D33C8CA3-7004-4DF2-ABEB-856975D6CAC8}"
+	ProjectSection(SolutionItems) = preProject
+		DataBase\PhoneBookDB.db = DataBase\PhoneBookDB.db
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneBook.DAL.SQLite", "PhoneBook.DAL.SQLite\PhoneBook.DAL.SQLite.csproj", "{FF0A954A-67F5-400B-9648-DE01C867AFAC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneBook.DAL.SqlServer", "PhoneBook.DAL.SqlServer\PhoneBook.DAL.SqlServer.csproj", "{F51862E4-6454-4D2F-B05A-C611CC56275A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +50,14 @@ Global
 		{6957E940-2BD7-4675-8038-8830797370C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6957E940-2BD7-4675-8038-8830797370C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6957E940-2BD7-4675-8038-8830797370C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF0A954A-67F5-400B-9648-DE01C867AFAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF0A954A-67F5-400B-9648-DE01C867AFAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF0A954A-67F5-400B-9648-DE01C867AFAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF0A954A-67F5-400B-9648-DE01C867AFAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F51862E4-6454-4D2F-B05A-C611CC56275A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F51862E4-6454-4D2F-B05A-C611CC56275A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F51862E4-6454-4D2F-B05A-C611CC56275A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F51862E4-6454-4D2F-B05A-C611CC56275A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,6 +67,8 @@ Global
 		{B95A677A-5517-40E9-BE2E-333199F2A31C} = {443EC4B6-188D-418D-BAFD-62B655B40A17}
 		{9524D407-1EF6-4BF7-BF06-768F514D63C7} = {D109FBC4-27AE-4ED3-B24E-9893653C9DAD}
 		{6957E940-2BD7-4675-8038-8830797370C5} = {A2D3B62A-93FD-424F-8F98-0814BD72B79F}
+		{FF0A954A-67F5-400B-9648-DE01C867AFAC} = {A2D3B62A-93FD-424F-8F98-0814BD72B79F}
+		{F51862E4-6454-4D2F-B05A-C611CC56275A} = {A2D3B62A-93FD-424F-8F98-0814BD72B79F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {454121EF-DC80-4AFA-81F5-2166FE0BE99D}

@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace PhoneBookLib.Migrations
+namespace PhoneBook.DAL.SQLite.Migrations
 {
-    public partial class InitialDB : Migration
+    public partial class sqliteFirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

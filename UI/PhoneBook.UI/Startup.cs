@@ -8,6 +8,7 @@ using PhoneBook.DAL.Repository;
 using PhoneBook.Data;
 using PhoneBook.Interfaces;
 using System;
+using System.Threading.Tasks;
 
 namespace PhoneBook
 {
@@ -24,14 +25,14 @@ namespace PhoneBook
         public void ConfigureServices(IServiceCollection services) {
             services.AddDatabase(Configuration).AddAutoMapper(typeof(Startup))
                    .AddScoped(typeof(IRepository<>), typeof(DbRepository<>))
+                   .AddScoped(typeof(IMappedRepository<,>), typeof(MappedRepository<,>))
+                   .AddScoped(typeof(DbInitializer))
                    .AddControllersWithViews();
-            services.AddScoped(typeof(IMappedRepository<,>), typeof(MappedRepository<,>));
-        
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,IServiceProvider serviceProvider)
-        {
+        public async void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

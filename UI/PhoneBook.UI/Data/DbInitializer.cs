@@ -21,9 +21,9 @@ namespace PhoneBook.Data
 
         public async Task InitializeData()
         {
-            await _db.Database.EnsureDeletedAsync().ConfigureAwait(false);
-            await _db.Database.MigrateAsync();
-            var record = Enumerable.Range(1, 50).Select(i => new PhoneRecord
+            _db.Database.EnsureDeleted();
+            _db.Database.Migrate();
+            var record = Enumerable.Range(1, 100).Select(i => new PhoneRecord
             {
                 FirstName = RandomData.GetRandomName(),
                 LastName = RandomData.GetRandomSurname(),

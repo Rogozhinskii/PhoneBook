@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using PhoneBook.DAL.Context;
 
-namespace PhoneBookLib.Migrations
+namespace PhoneBook.DAL.SQLite.Migrations
 {
     [DbContext(typeof(PhoneBookDB))]
     partial class PhoneBookDBModelSnapshot : ModelSnapshot
@@ -14,7 +14,7 @@ namespace PhoneBookLib.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.13");
 
-            modelBuilder.Entity("PhoneBookLib.Entities.PhoneRecord", b =>
+            modelBuilder.Entity("PhoneBook.Entities.PhoneRecord", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

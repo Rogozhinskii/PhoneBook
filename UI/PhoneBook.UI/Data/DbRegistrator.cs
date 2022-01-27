@@ -18,12 +18,25 @@ namespace PhoneBook.Data
         public static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration) => services
             .AddDbContext<PhoneBookDB>(options =>
             {
-                var cs = configuration.GetConnectionString("SQLite");
-                var file = File.Exists(cs);
-                options.UseSqlite(configuration.GetConnectionString("SQLite"), sqliteOptions =>
+                var dbSection = configuration.GetSection("DataBase");
+                var type = dbSection["Type"];
+                var rr = configuration.GetConnectionString(type);
+                switch (type)
                 {
-                    sqliteOptions.MigrationsAssembly("PhoneBook.DAL");
-                });
+                    case "SQLite": options.UseSqlite(configuration.GetConnectionString(type), sqliteOptions =>
+                    {
+                        sqliteOptions.MigrationsAssembly("PhoneBook.DAL.SQLite");
+                    }); break;
+                    case "SQLServer":options.UseSqlServer(configuration.GetConnectionString(type), sqlOptions =>
+                    {
+                        sqlOptions.EnableRetryOnFailure()
+                                 .MigrationsAssembly("PhoneBook.DAL.SqlServer");
+                    }); break;
+                }
+                //options.UseSqlite(configuration.GetConnectionString("SQLite"), sqliteOptions =>
+                //{
+                //    sqliteOptions.MigrationsAssembly("PhoneBook.DAL.SQLite");
+                //});
             })
             ;
     }
