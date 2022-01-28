@@ -97,11 +97,10 @@ namespace PhoneBook.DAL.Repository
         {
             var item = Set.Local.FirstOrDefault(i => i.Id == id);
             if (item is null)
-                await Set.Select(i => new T { Id = i.Id })
+                item=await Set.Select(i => new T { Id = i.Id })
                          .FirstOrDefaultAsync(i => i.Id == id, cancel)
                          .ConfigureAwait(false);
-            if (item is null) return null;
-            _db.Remove(item);
+            if (item is null) return null;            
             return await DeleteAsync(item, cancel).ConfigureAwait(false);
         }
 

@@ -49,13 +49,37 @@
                     <td class="td-align-centr">
                         <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-secondary">
                             <i class="fa fa-sign-in" aria-hidden="true"></i>
-                        </a>
+                        </a>       
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-secondary">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </a>  
+                        @*<form asp-action="Delete" asp-route-id="@item.Id" class="d-inline">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                            <input class="btn btn-outline-danger" type="submit"/>
+                        </form> *@                       
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 
+    @*Диалоговое окно*@
+     <div id="modalSuccess" class="modal fade text-width:30%;" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2>Information</h2>
+            </div>
+            <div id="ModalSuccesAlertBody" class="modal-body alert alert-success">
+              "Message"
+            </div>
+            <div class=modal-footer>
+              &nbsp;
+              <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
     @{
         var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
@@ -77,7 +101,7 @@
         <div  class="right">
             @using (Html.BeginForm("Index", "PhoneRecords", FormMethod.Get))
             {                
-                @Html.DropDownList("pageSize", new SelectList(itemsOnPage), new { @class = "form-group", onchange = "selectedText(this);$(this.form).submit();" })              
+                @Html.DropDownList("pageSize", new SelectList(itemsOnPage), new { @class = "form-group", onchange = "selectedText(this);$(this.form).submit();" })             
             }            
             <span style="align-content:flex-end">Page: @(Model.PageIndex+1)/@(Model.TotalPageCount).</span>
             <p style="align-content:flex-end">Total Items: @Model.TotalCount </p>
@@ -85,10 +109,18 @@
     </div>
 </div>
 
-<script>
-    function selectedText(ddlitem){
-        var selvalue=ddlitem.value;
-        var selText=ddlitem.options[ddlitem.selectedIndex].innerHTML;        
+@section Scripts{
+<script type="text/javascript">
+    function selectedText(ddlitem) {
+        var selvalue = ddlitem.value;
+        var selText = ddlitem.options[ddlitem.selectedIndex].innerHTML;
         $('@ViewData["PageSize"]').val(selText);
     }
+    $(document).ready(function() {
+        var msg="@TempData["SuccessMessage"]";
+        if(msg)
+            openSuccessModal(msg);
+
+    })
 </script>
+}

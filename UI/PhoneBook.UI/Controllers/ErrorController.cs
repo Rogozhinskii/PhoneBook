@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using PhoneBook.Models;
+using System.Diagnostics;
 
 namespace PhoneBook.Controllers
 {
@@ -12,7 +13,7 @@ namespace PhoneBook.Controllers
             var exeprtionHandler = HttpContext.Features.Get<IExceptionHandlerPathFeature>();            
             var errorViewModel = new ErrorViewModel
             {
-                RequestId=HttpContext.TraceIdentifier,
+                RequestId=Activity.Current?.Id,
                 Path = exeprtionHandler.Path,
                 Message = exeprtionHandler.Error.Message,
                 StackTrace = exeprtionHandler.Error.StackTrace,

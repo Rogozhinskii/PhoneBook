@@ -48,6 +48,9 @@ namespace PhoneBook.Automapper
             return GetItem(item);
         }
 
+        public async Task<T> DeleteById(int id)=>
+             GetItem(await _repository.DeleteByIdAsync(id));
+
 
     }
 }

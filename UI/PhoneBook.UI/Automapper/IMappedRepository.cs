@@ -37,5 +37,7 @@ namespace PhoneBook.Automapper
         /// <param name="cancel"></param>
         /// <returns></returns>
         Task<IPage<T>> GetPage(int pageIndex, int pageSize, CancellationToken cancel = default);
+
+        Task<T> DeleteById(int id);
     }
 }

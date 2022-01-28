@@ -7,7 +7,7 @@ using PhoneBook.Models;
 
 namespace PhoneBook.Controllers
 {
-
+    
     public class PhoneRecordsController : Controller
     {
         
@@ -35,7 +35,23 @@ namespace PhoneBook.Controllers
             return View(await _repository.GetPage(pageIndex ?? 0, pageSize??5));            
         }
 
-        
+        [HttpGet]
+        public async Task<IActionResult> Delete(int? id)
+        {           
+            if (id is null) return NotFound();
+            return View(await _repository.GetById(id.Value));
+        }
+
+
+        [HttpPost]
+        [ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {                    
+            if(await _repository.DeleteById(id) is null) return NotFound();
+            TempData["SuccessMessage"] = $"Record deleted";
+            return Redirect("~/");
+        }
+                
 
         [HttpGet]
         public async Task<IActionResult> Details(int? id)
