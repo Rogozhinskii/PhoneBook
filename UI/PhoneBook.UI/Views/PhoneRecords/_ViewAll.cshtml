@@ -1,0 +1,101 @@
+﻿@model Page<PhoneBook.Models.PhoneRecordViewModel>
+
+<div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th class="th-text-align">
+                    Имя
+                </th>
+                <th class="th-text-align">
+                    Фамилия
+                </th>
+                <th class="th-text-align">
+                    Отчество
+                </th>
+                <th class=th-text-align>
+                    <a asp-action="Create" class="btn btn-outline-secondary">
+                        <i class="fa fa-plus" aria-hidden="true"></i> Create Record</a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td class="td-align-centr">
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td class="td-align-centr">
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td class="td-align-centr">
+                        @Html.DisplayFor(modelItem => item.Patronymic)
+                    </td>
+                    <td class="td-align-centr">
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-secondary">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @*Диалоговое окно*@
+    <div id="modalSuccess" class="modal fade text-width:30%;" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Information</h2>
+                </div>
+                <div id="ModalSuccesAlertBody" class="modal-body alert alert-success">
+                    "Message"
+                </div>
+                <div class=modal-footer>
+                    &nbsp;
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @{
+        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+        var totalPages = Model.TotalCount;
+        var itemsOnPage = new int[] { 5, 10, 15 };
+    }
+
+    <div align="left">
+        <a asp-action="Index" asp-route-pageIndex="@(Model.PageIndex-1)"
+            asp-route-currentFilter="@ViewData["CurrentFilter"]" asp-route-pageSize="@ViewData["PageSize"]"
+            class="btn btn-default @prevDisabled">
+            Previous
+        </a>
+        <a asp-action="Index" asp-route-pageIndex="@(Model.PageIndex+1)"
+            asp-route-currentFilter="@ViewData["CurrentFilter"]" asp-route-pageSize="@ViewData["PageSize"]"
+            class="btn btn-default @nextDisabled">
+            Next
+        </a>
+
+        <div class="right">
+            @using (Html.BeginForm("Index", "PhoneRecords", FormMethod.Get))
+            {
+                @Html.DropDownList("pageSize", new SelectList(itemsOnPage), new { @class = "form-group", onchange =
+            "selectedText(this);$(this.form).submit();" })
+            }
+            <span style="align-content:flex-end">Page: @(Model.PageIndex+1)/@(Model.TotalPageCount).</span>
+            <p style="align-content:flex-end">Total Items: @Model.TotalCount </p>
+        </div>
+    </div>
+</div>

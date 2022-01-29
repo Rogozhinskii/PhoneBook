@@ -51,7 +51,22 @@ namespace PhoneBook.Controllers
             TempData["SuccessMessage"] = $"Record deleted";
             return Redirect("~/");
         }
-                
+        
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName(nameof(Create))]
+        public async Task<IActionResult> Create(PhoneRecordViewModel record)
+        {
+            if (record is null) return NotFound();
+            await _repository.AddAsync(record);
+            TempData["SuccessMessage"] = $"Record created";
+            return Redirect("~/");
+        }
 
         [HttpGet]
         public async Task<IActionResult> Details(int? id)
