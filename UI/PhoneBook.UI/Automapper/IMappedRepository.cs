@@ -19,7 +19,7 @@ namespace PhoneBook.Automapper
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<T> GetById(int id);
+        Task<T> GetByIdAsync(int id, CancellationToken cancel = default);
 
         /// <summary>
         /// Возвращает страницу наполенную вью моделями сущностей, которые удовлетворяют условию делегата Func<TBase,bool>
@@ -38,7 +38,8 @@ namespace PhoneBook.Automapper
         /// <returns></returns>
         Task<IPage<T>> GetPage(int pageIndex, int pageSize, CancellationToken cancel = default);
 
-        Task<T> DeleteById(int id);
-        Task<T> AddAsync(T item);
+        Task<T> DeleteByIdAsync(int id, CancellationToken cancel = default);
+        Task<T> AddAsync(T item, CancellationToken cancel = default);
+        Task<T> UpdateAsync(T item, CancellationToken cancel = default);
     }
 }

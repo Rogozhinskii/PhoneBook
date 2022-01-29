@@ -42,21 +42,25 @@ namespace PhoneBook.Automapper
             return new Page<T>(GetItem(items), items.Count(), 0, items.Count());
         }
 
-        public async Task<T> GetById(int id)
+        public async Task<T> GetByIdAsync(int id, CancellationToken cancel = default)
         {
-            var item = await _repository.GetByIdAsync(id);
+            var item = await _repository.GetByIdAsync(id,cancel);
             return GetItem(item);
         }
 
-        public async Task<T> DeleteById(int id)=>
-             GetItem(await _repository.DeleteByIdAsync(id));
+        public async Task<T> DeleteByIdAsync(int id, CancellationToken cancel = default) =>
+             GetItem(await _repository.DeleteByIdAsync(id,cancel));
 
-        public async Task<T> AddAsync(T item)
+        public async Task<T> AddAsync(T item, CancellationToken cancel = default)
         {
-            var result=await _repository.AddAsync(GetBase(item));
+            var result=await _repository.AddAsync(GetBase(item),cancel);
             return GetItem(result);
         }
 
-
+        public async Task<T> UpdateAsync(T item, CancellationToken cancel = default)
+        {
+            var result = await _repository.UpdateAsync(GetBase(item), cancel);           
+            return GetItem(result);            
+        }
     }
 }

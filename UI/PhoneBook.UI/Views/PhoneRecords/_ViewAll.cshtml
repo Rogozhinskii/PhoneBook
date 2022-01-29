@@ -39,6 +39,9 @@
                         @Html.DisplayFor(modelItem => item.Patronymic)
                     </td>
                     <td class="td-align-centr">
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-secondary">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </a>
                         <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-secondary">
                             <i class="fa fa-info-circle" aria-hidden="true"></i>
                         </a>

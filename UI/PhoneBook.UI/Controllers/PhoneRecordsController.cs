@@ -39,7 +39,7 @@ namespace PhoneBook.Controllers
         public async Task<IActionResult> Delete(int? id)
         {           
             if (id is null) return NotFound();
-            return View(await _repository.GetById(id.Value));
+            return View(await _repository.GetByIdAsync(id.Value));
         }
 
 
@@ -47,7 +47,7 @@ namespace PhoneBook.Controllers
         [ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {                    
-            if(await _repository.DeleteById(id) is null) return NotFound();
+            if(await _repository.DeleteByIdAsync(id) is null) return NotFound();
             TempData["SuccessMessage"] = $"Record deleted";
             return Redirect("~/");
         }
@@ -69,10 +69,25 @@ namespace PhoneBook.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if(id is null) return NotFound();
+            return View(await _repository.GetByIdAsync(id.Value));
+        }
+
+        [HttpPost]
+        [ActionName(nameof(Edit))]
+        public async Task<IActionResult> Edit(PhoneRecordViewModel phoneRecord) =>
+            await _repository.UpdateAsync(phoneRecord) is { } record
+            ? Redirect("~/")
+            : NotFound();
+
+
+        [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
             if (id is null) return NotFound();                          
-            if (await _repository.GetById(id.Value) is { } record){
+            if (await _repository.GetByIdAsync(id.Value) is { } record){
                 return View(record);
             }
             return NotFound();
