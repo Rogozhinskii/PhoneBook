@@ -21,8 +21,7 @@ namespace PhoneBook.Controllers
                                       ILogger<PhoneRecordsController> logger)
         {
             _repository = repository;
-            _logger = logger;
-            _logger.LogInformation($"{nameof(PhoneRecordsController)} initialized");
+            _logger = logger;            
         }
 
         /// <summary>
@@ -102,8 +101,8 @@ namespace PhoneBook.Controllers
         {
             if (record is null) return NotFound();
             _logger.LogInformation($">>>Start creating a new record.");
-            await _repository.AddAsync(record);
-            _logger.LogInformation($">>>New record created. Record id is {record.Id}");
+            var result=await _repository.AddAsync(record);
+            _logger.LogInformation($">>>New record created. Record id is {result.Id}");           
             TempData["SuccessMessage"] = $"Record created";
             return Redirect("~/");
         }
