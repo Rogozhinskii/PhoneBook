@@ -20,10 +20,33 @@ namespace PhoneBook.Automapper
             _repository = repository;
             _mapper = mapper;
         }
-               
+        
+        /// <summary>
+        /// Конвертирует объект T в TBase
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         protected virtual TBase GetBase(T item) => _mapper.Map<TBase>(item);
+
+        /// <summary>
+        /// Конвертирует объект TBase в T
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         protected virtual T GetItem(TBase item) => _mapper.Map<T>(item);
+
+        /// <summary>
+        /// Конвертирует перечисление объектов T в перечисление объектов TBase
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
         protected virtual IEnumerable<TBase> GetBase(IEnumerable<T> items) => _mapper.Map<IEnumerable<TBase>>(items);
+
+        /// <summary>
+        /// Конвертирует перечисление объектов TBase в перечисление объектов T 
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
         protected virtual IEnumerable<T> GetItem(IEnumerable<TBase> items) => _mapper.Map<IEnumerable<T>>(items);
 
         protected IPage<T> GetItem(IPage<TBase> page)=>

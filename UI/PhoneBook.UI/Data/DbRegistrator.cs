@@ -32,11 +32,7 @@ namespace PhoneBook.Data
                         sqlOptions.EnableRetryOnFailure()
                                  .MigrationsAssembly("PhoneBook.DAL.SqlServer");
                     }); break;
-                }
-                //options.UseSqlite(configuration.GetConnectionString("SQLite"), sqliteOptions =>
-                //{
-                //    sqliteOptions.MigrationsAssembly("PhoneBook.DAL.SQLite");
-                //});
+                }                
             })
             ;
     }

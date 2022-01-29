@@ -7,8 +7,6 @@ using PhoneBook.Automapper;
 using PhoneBook.DAL.Repository;
 using PhoneBook.Data;
 using PhoneBook.Interfaces;
-using System;
-using System.Threading.Tasks;
 
 namespace PhoneBook
 {
@@ -26,7 +24,7 @@ namespace PhoneBook
             services.AddDatabase(Configuration).AddAutoMapper(typeof(Startup))
                    .AddScoped(typeof(IRepository<>), typeof(DbRepository<>))
                    .AddScoped(typeof(IMappedRepository<,>), typeof(MappedRepository<,>))
-                   .AddScoped(typeof(DbInitializer))
+                   .AddScoped(typeof(DbInitializer))                   
                    .AddControllersWithViews();
         }
 

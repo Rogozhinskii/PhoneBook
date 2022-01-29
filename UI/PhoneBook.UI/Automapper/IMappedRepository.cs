@@ -38,8 +38,27 @@ namespace PhoneBook.Automapper
         /// <returns></returns>
         Task<IPage<T>> GetPage(int pageIndex, int pageSize, CancellationToken cancel = default);
 
+        /// <summary>
+        /// Удаляет запись из хранилища по идентификатору
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="cancel"></param>
+        /// <returns></returns>
         Task<T> DeleteByIdAsync(int id, CancellationToken cancel = default);
+        /// <summary>
+        /// Выполняет добавление записи в хранилище
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="cancel"></param>
+        /// <returns></returns>
         Task<T> AddAsync(T item, CancellationToken cancel = default);
+
+        /// <summary>
+        /// Выполняет обновление записи в хранилище
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="cancel"></param>
+        /// <returns></returns>
         Task<T> UpdateAsync(T item, CancellationToken cancel = default);
     }
 }
