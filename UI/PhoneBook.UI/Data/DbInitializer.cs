@@ -21,6 +21,7 @@ namespace PhoneBook.Data
 
         public async Task InitializeData()
         {
+            if (_db.PhoneRecords.Any()) return;
             _db.Database.EnsureDeleted();
             _db.Database.Migrate();
             var record = Enumerable.Range(1, 100).Select(i => new PhoneRecord
