@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using PhoneBook.Common.Models;
 using PhoneBook.Entities;
 
 namespace PhoneBook.DAL.Context
@@ -6,7 +8,7 @@ namespace PhoneBook.DAL.Context
     /// <summary>
     /// Контекст подключения к БД
     /// </summary>
-    public class PhoneBookDB:DbContext
+    public class PhoneBookDB:IdentityDbContext<User>
     {
         /// <summary>
         /// Таблица справочника

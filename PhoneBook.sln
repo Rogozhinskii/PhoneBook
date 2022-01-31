@@ -24,11 +24,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataBase", "DataBase", "{D3
 		DataBase\PhoneBookDB.db = DataBase\PhoneBookDB.db
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneBook.DAL.SQLite", "PhoneBook.DAL.SQLite\PhoneBook.DAL.SQLite.csproj", "{FF0A954A-67F5-400B-9648-DE01C867AFAC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBook.DAL.SQLite", "PhoneBook.DAL.SQLite\PhoneBook.DAL.SQLite.csproj", "{FF0A954A-67F5-400B-9648-DE01C867AFAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneBook.DAL.SqlServer", "PhoneBook.DAL.SqlServer\PhoneBook.DAL.SqlServer.csproj", "{F51862E4-6454-4D2F-B05A-C611CC56275A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBook.DAL.SqlServer", "PhoneBook.DAL.SqlServer\PhoneBook.DAL.SqlServer.csproj", "{F51862E4-6454-4D2F-B05A-C611CC56275A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneBook.Api", "Services\PhoneBook.Api\PhoneBook.Api.csproj", "{93124950-A629-4F5C-8399-91F147A16C32}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneBook.Api", "Services\PhoneBook.Api\PhoneBook.Api.csproj", "{2120C713-1A7B-4EFE-BE33-186C6C9EE461}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -60,10 +60,10 @@ Global
 		{F51862E4-6454-4D2F-B05A-C611CC56275A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F51862E4-6454-4D2F-B05A-C611CC56275A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F51862E4-6454-4D2F-B05A-C611CC56275A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{93124950-A629-4F5C-8399-91F147A16C32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{93124950-A629-4F5C-8399-91F147A16C32}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{93124950-A629-4F5C-8399-91F147A16C32}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{93124950-A629-4F5C-8399-91F147A16C32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2120C713-1A7B-4EFE-BE33-186C6C9EE461}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2120C713-1A7B-4EFE-BE33-186C6C9EE461}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2120C713-1A7B-4EFE-BE33-186C6C9EE461}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2120C713-1A7B-4EFE-BE33-186C6C9EE461}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,7 +75,7 @@ Global
 		{6957E940-2BD7-4675-8038-8830797370C5} = {A2D3B62A-93FD-424F-8F98-0814BD72B79F}
 		{FF0A954A-67F5-400B-9648-DE01C867AFAC} = {A2D3B62A-93FD-424F-8F98-0814BD72B79F}
 		{F51862E4-6454-4D2F-B05A-C611CC56275A} = {A2D3B62A-93FD-424F-8F98-0814BD72B79F}
-		{93124950-A629-4F5C-8399-91F147A16C32} = {443EC4B6-188D-418D-BAFD-62B655B40A17}
+		{2120C713-1A7B-4EFE-BE33-186C6C9EE461} = {443EC4B6-188D-418D-BAFD-62B655B40A17}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {454121EF-DC80-4AFA-81F5-2166FE0BE99D}
