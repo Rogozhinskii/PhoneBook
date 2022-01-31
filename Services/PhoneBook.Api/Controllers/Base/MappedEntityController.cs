@@ -57,7 +57,7 @@ namespace PhoneBook.Api.Controllers.Base
         protected virtual IEnumerable<T> GetItem(IEnumerable<TBase> items) => _mapper.Map<IEnumerable<T>>(items);
 
         protected IPage<T> GetItem(IPage<TBase> page) =>
-           new Page<T>(GetItem(page.Items), page.TotalCount, page.PageIndex, page.PageSize);
+           new Page<T> { Items = GetItem(page.Items), TotalCount = page.TotalCount, PageIndex = page.PageIndex, PageSize = page.PageSize };
 
 
         [HttpGet("{id:int}")]
@@ -84,6 +84,18 @@ namespace PhoneBook.Api.Controllers.Base
         {   
            return NotFound();
         }
+
+        [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> DeleteAsync(T item)
+        {
+            var result = await _repository.DeleteAsync(GetBase(item));
+            if(result is null)
+                return NotFound(item);
+            return Ok(GetItem(result));
+        }
+
 
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteByIdAsync(int id)

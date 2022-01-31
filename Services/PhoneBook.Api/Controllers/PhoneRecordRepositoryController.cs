@@ -22,7 +22,7 @@ namespace PhoneBook.Api.Controllers
         {
             var items = await _repository.WhereAsync(x => x.FirstName.Contains(searchString, StringComparison.InvariantCultureIgnoreCase)
                                                      || x.LastName.Contains(searchString, StringComparison.InvariantCultureIgnoreCase), cancel);
-            var result = new Page<PhoneRecordInfo>(GetItem(items), items.Count(), 0, items.Count());
+            var result = new Page<PhoneRecordInfo> { Items = GetItem(items), TotalCount = items.Count(), PageIndex = 0, PageSize = items.Count() };
             return items.Any()
                    ? Ok(result)
                    : NotFound();

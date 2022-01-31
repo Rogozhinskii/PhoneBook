@@ -6,14 +6,14 @@ namespace PhoneBook.Common
 {
     public class Page<T> : IPage<T> where T : IEntity
     {
-        public Page(IEnumerable<T> items,int totalCount,int pageIndex,int pageSize)
-        {
-            Items = items;
-            TotalCount = totalCount;
-            PageIndex = pageIndex;
-            PageSize = pageSize;
+        //public Page(IEnumerable<T> items,int totalCount,int pageIndex,int pageSize)
+        //{
+        //    Items = items;
+        //    TotalCount = totalCount;
+        //    PageIndex = pageIndex;
+        //    PageSize = pageSize;
 
-        }
+        //}
 
         public IEnumerable<T> Items { get; set; }
 

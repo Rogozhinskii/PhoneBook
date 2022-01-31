@@ -28,7 +28,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBook.DAL.SQLite", "Pho
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBook.DAL.SqlServer", "PhoneBook.DAL.SqlServer\PhoneBook.DAL.SqlServer.csproj", "{F51862E4-6454-4D2F-B05A-C611CC56275A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneBook.Api", "Services\PhoneBook.Api\PhoneBook.Api.csproj", "{2120C713-1A7B-4EFE-BE33-186C6C9EE461}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBook.Api", "Services\PhoneBook.Api\PhoneBook.Api.csproj", "{2120C713-1A7B-4EFE-BE33-186C6C9EE461}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneBook.WebApiClient", "Services\PhoneBook.WebApiClient\PhoneBook.WebApiClient.csproj", "{AD0FFFEE-C082-4152-B133-DC831782F528}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -64,6 +66,10 @@ Global
 		{2120C713-1A7B-4EFE-BE33-186C6C9EE461}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2120C713-1A7B-4EFE-BE33-186C6C9EE461}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2120C713-1A7B-4EFE-BE33-186C6C9EE461}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD0FFFEE-C082-4152-B133-DC831782F528}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD0FFFEE-C082-4152-B133-DC831782F528}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD0FFFEE-C082-4152-B133-DC831782F528}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD0FFFEE-C082-4152-B133-DC831782F528}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,6 +82,7 @@ Global
 		{FF0A954A-67F5-400B-9648-DE01C867AFAC} = {A2D3B62A-93FD-424F-8F98-0814BD72B79F}
 		{F51862E4-6454-4D2F-B05A-C611CC56275A} = {A2D3B62A-93FD-424F-8F98-0814BD72B79F}
 		{2120C713-1A7B-4EFE-BE33-186C6C9EE461} = {443EC4B6-188D-418D-BAFD-62B655B40A17}
+		{AD0FFFEE-C082-4152-B133-DC831782F528} = {443EC4B6-188D-418D-BAFD-62B655B40A17}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {454121EF-DC80-4AFA-81F5-2166FE0BE99D}

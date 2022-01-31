@@ -112,21 +112,23 @@ namespace PhoneBook.DAL.Repository
 
         public async Task<IPage<T>> GetPage(int pageIndex, int pageSize, CancellationToken cancel = default)
         {
-            if(pageSize < 0) return new Page<T>(Enumerable.Empty<T>(),pageSize,pageIndex,pageSize);
+            if(pageSize < 0) return new Page<T> { Items = Enumerable.Empty<T>(), TotalCount = pageSize, PageIndex = pageIndex, PageSize = pageSize };
             var query = Items;
             var total_count = await query.CountAsync(cancel).ConfigureAwait(false);
             if(total_count==0)
-                return new Page<T>(Enumerable.Empty<T>(),total_count,pageIndex,pageSize);
+                return new Page<T> { Items = Enumerable.Empty<T>(), TotalCount = total_count, PageIndex = pageIndex, PageSize = pageSize };
             if(query is not IOrderedQueryable<T>)
                 query=query.OrderBy(i=>i.Id);
             if (pageIndex > 0)
                 query = query.Skip(pageIndex * pageSize);
             query=query.Take(pageSize);
             var items = await query.ToArrayAsync(cancel).ConfigureAwait(false);
-            return new Page<T>(items,total_count,pageIndex,pageSize);
+            return new Page<T> { Items = items, TotalCount = total_count, PageIndex = pageIndex, PageSize = pageSize };
         }
 
         public void ChangeSaveMode(bool autoSaveChanges) =>
             AutoSaveChanges= autoSaveChanges;
+
+       
     }
 }

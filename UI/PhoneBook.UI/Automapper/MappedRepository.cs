@@ -50,7 +50,7 @@ namespace PhoneBook.Automapper
         protected virtual IEnumerable<T> GetItem(IEnumerable<TBase> items) => _mapper.Map<IEnumerable<T>>(items);
 
         protected IPage<T> GetItem(IPage<TBase> page)=>
-            new Page<T>(GetItem(page.Items), page.TotalCount, page.PageIndex, page.PageSize);
+            new Page<T> { Items = GetItem(page.Items), TotalCount = page.TotalCount, PageIndex = page.PageIndex, PageSize = page.PageSize };
         
 
         public async Task<IPage<T>> GetPage(int pageIndex, int pageSize, CancellationToken cancel = default)
@@ -62,7 +62,7 @@ namespace PhoneBook.Automapper
         public async Task<IPage<T>> GetPage(Func<TBase, bool> filterExpression, CancellationToken cancel = default)
         {
             var items = await _repository.WhereAsync(filterExpression, cancel).ConfigureAwait(false);
-            return new Page<T>(GetItem(items), items.Count(), 0, items.Count());
+            return new Page<T> { Items = GetItem(items), TotalCount = items.Count(), PageIndex = 0, PageSize = items.Count() };
         }
 
         public async Task<T> GetByIdAsync(int id, CancellationToken cancel = default)
