@@ -26,6 +26,7 @@
     <ProjectReference Include="..\..\PhoneBook.DAL.SQLite\PhoneBook.DAL.SQLite.csproj" />
     <ProjectReference Include="..\..\PhoneBook.DAL.SqlServer\PhoneBook.DAL.SqlServer.csproj" />
     <ProjectReference Include="..\..\Services\PhoneBook.Interfaces\PhoneBook.Interfaces.csproj" />
+    <ProjectReference Include="..\..\Services\PhoneBook.WebApiClient\PhoneBook.WebApiClient.csproj" />
   </ItemGroup>
 
  

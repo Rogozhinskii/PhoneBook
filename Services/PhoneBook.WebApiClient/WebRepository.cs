@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace PhoneBook.WebApiClient
 {
-    public class WebRepository<T>:IRepository<T>, IFilteredPage<T> where T:IEntity,new()
+    public class WebRepository<T>:IRepository<T> where T:IEntity,new()
     {
         private readonly HttpClient _client;
 

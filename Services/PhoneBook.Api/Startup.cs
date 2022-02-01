@@ -28,29 +28,29 @@ namespace PhoneBook.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDatabase(Configuration);
-            services.AddScoped(typeof(IRepository<>), typeof(DbRepository<>));       
-            services.AddIdentity<User,IdentityRole>()
-                .AddEntityFrameworkStores<PhoneBookDB>()
-                .AddDefaultTokenProviders();
+            services.AddScoped(typeof(IRepository<>), typeof(DbRepository<>));
+            //services.AddIdentity<User, IdentityRole>()
+            //    .AddEntityFrameworkStores<PhoneBookDB>()
+            //    .AddDefaultTokenProviders();
+            services.AddCors();
+            //services.Configure<IdentityOptions>(opt =>
+            //{
+            //    opt.Password.RequiredLength = 6;
+            //    opt.Lockout.MaxFailedAccessAttempts = 10;
+            //    opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
+            //    opt.Lockout.AllowedForNewUsers = true;
+            //});
 
-            services.Configure<IdentityOptions>(opt =>
-            {
-                opt.Password.RequiredLength = 6;
-                opt.Lockout.MaxFailedAccessAttempts = 10;
-                opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
-                opt.Lockout.AllowedForNewUsers = true;
-            });
-
-            services.ConfigureApplicationCookie(options =>
-            {
-                //options.Cookie.HttpOnly = true;
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
-                options.Cookie.MaxAge=options.ExpireTimeSpan;
-                //options.Cookie.Expiration = TimeSpan.FromDays(1);
-                //options.LoginPath = "/Account/Login";
-                //options.LogoutPath = "/Account/Logout";
-                options.SlidingExpiration = true;
-            });
+            //services.ConfigureApplicationCookie(options =>
+            //{
+            //    //options.Cookie.HttpOnly = true;
+            //    options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+            //    options.Cookie.MaxAge=options.ExpireTimeSpan;
+            //    //options.Cookie.Expiration = TimeSpan.FromDays(1);
+            //    //options.LoginPath = "/Account/Login";
+            //    //options.LogoutPath = "/Account/Logout";
+            //    options.SlidingExpiration = true;
+            //});
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -72,6 +72,11 @@ namespace PhoneBook.Api
             }
 
             app.UseRouting();
+            app.UseCors(options =>
+            {
+                options.AllowAnyOrigin();                
+                options.WithOrigins(Configuration["ClientHost"]);
+            });
             app.UseAuthentication();
             app.UseAuthorization();
 

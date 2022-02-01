@@ -114,9 +114,9 @@ namespace PhoneBook.Api.Controllers.Base
             return CreatedAtAction(nameof(Get), new { id = result.Id }, GetItem(result));
         }
 
-        [HttpPut("update")]
+        [HttpPut("update")]        
         [ProducesResponseType(StatusCodes.Status202Accepted)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]        
         public async Task<IActionResult> UpdateAsync(T item)
         {
             var result=await _repository.UpdateAsync(GetBase(item));
@@ -125,8 +125,7 @@ namespace PhoneBook.Api.Controllers.Base
             return AcceptedAtAction(nameof(Get),new {id=result.Id }, GetItem(result));
         }
 
-        [HttpGet("count")]
-        [Authorize]
+        [HttpGet("count")]        
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetItemsCount()=>
             Ok(await _repository.GetCountAsync());

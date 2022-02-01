@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PhoneBook.Automapper;
+using PhoneBook.Common.Models;
 using PhoneBook.Entities;
+using PhoneBook.Interfaces;
 using PhoneBook.Models;
 
 namespace PhoneBook.Controllers
@@ -13,14 +16,15 @@ namespace PhoneBook.Controllers
     /// </summary>
     public class PhoneRecordsController : Controller
     {
-        
-        private readonly IMappedRepository<PhoneRecordViewModel, PhoneRecord> _repository;
+        private readonly IRepository<PhoneRecordInfo> _repository;
+
+        //private readonly IMappedRepository<PhoneRecordViewModel, PhoneRecord> _repository;
         private readonly ILogger _logger;
 
-        public PhoneRecordsController(IMappedRepository<PhoneRecordViewModel,PhoneRecord> repository,
+        public PhoneRecordsController(IRepository<PhoneRecordInfo> repository,
                                       ILogger<PhoneRecordsController> logger)
         {
-            _repository = repository;
+            _repository = repository;            
             _logger = logger;            
         }
 
@@ -34,13 +38,13 @@ namespace PhoneBook.Controllers
         /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> Index(string currentFilter, string searchString, int? pageIndex,int? pageSize)
-        {            
+        {
+            
             if (searchString != null){
                 pageIndex = 0;
                 ViewData["CurrentFilter"] = searchString;
                 _logger.LogInformation($"Redirect to {nameof(PhoneRecordsController)} index page.Filter text:{searchString}");
-                return View(await _repository.GetPage(x => x.FirstName.Contains(searchString,StringComparison.InvariantCultureIgnoreCase)
-                                                        || x.LastName.Contains(searchString, StringComparison.InvariantCultureIgnoreCase)));
+                return View(await _repository.GetPage(searchString));
             }
             else{
                 searchString = currentFilter;
@@ -97,7 +101,7 @@ namespace PhoneBook.Controllers
         /// <returns></returns>
         [HttpPost]
         [ActionName(nameof(Create))]
-        public async Task<IActionResult> Create(PhoneRecordViewModel record)
+        public async Task<IActionResult> Create(PhoneRecordInfo record)
         {
             if (record is null) return NotFound();
             _logger.LogInformation($">>>Start creating a new record.");
@@ -113,6 +117,7 @@ namespace PhoneBook.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if(id is null) return NotFound();
@@ -126,7 +131,7 @@ namespace PhoneBook.Controllers
         /// <returns></returns>
         [HttpPost]
         [ActionName(nameof(Edit))]
-        public async Task<IActionResult> Edit(PhoneRecordViewModel phoneRecord) =>
+        public async Task<IActionResult> Edit(PhoneRecordInfo phoneRecord) =>
             await _repository.UpdateAsync(phoneRecord) is { } record
             ? Redirect("~/")
             : NotFound();
@@ -149,5 +154,7 @@ namespace PhoneBook.Controllers
             }
             return NotFound();
         }
+
+        
     }
 }

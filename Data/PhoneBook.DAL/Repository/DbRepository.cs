@@ -129,6 +129,9 @@ namespace PhoneBook.DAL.Repository
         public void ChangeSaveMode(bool autoSaveChanges) =>
             AutoSaveChanges= autoSaveChanges;
 
-       
+        public Task<IPage<T>> GetPage(string filterString, CancellationToken cancel = default)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

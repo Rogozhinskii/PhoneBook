@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "Add or Edit";
+}
+@model ApplicationRoleViewModel 
+<h1>Add or Edit</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="AddEditApplicationRole" role="form">
+            @{await Html.RenderPartialAsync("_AddEditApplicationRole");} 
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

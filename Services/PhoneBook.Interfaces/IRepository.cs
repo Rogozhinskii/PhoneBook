@@ -121,6 +121,14 @@ namespace PhoneBook.Interfaces
         /// <param name="cancel"></param>
         /// <returns></returns>
         Task<IEnumerable<T>> GetAsync(int skip, int count, CancellationToken cancel = default);
-                
+
+
+        /// <summary>
+        /// Возвращает страницу наполненную перечислением сущностей, удовлетворяющих значению искомой строки
+        /// </summary>
+        /// <param name="searchString"></param>
+        /// <param name="cancel"></param>
+        /// <returns></returns>
+        Task<IPage<T>> GetPage(string filterString, CancellationToken cancel = default);
     }
 }

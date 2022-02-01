@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Add";
+}
+
+<h1>Register</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="AddUser">
+            @{
+                await Html.RenderPartialAsync("_AddUser");
+            }
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

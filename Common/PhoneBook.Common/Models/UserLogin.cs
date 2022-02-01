@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using PhoneBook.Interfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace PhoneBook.Common.Models
 {
-    public class UserLogin
+    public class UserLogin: IUserLogin
     {
         [Required, MaxLength(20)]
         public string LoginProp { get; set; }

@@ -8,7 +8,7 @@ namespace PhoneBook.DAL.Context
     /// <summary>
     /// Контекст подключения к БД
     /// </summary>
-    public class PhoneBookDB:IdentityDbContext<User>
+    public class PhoneBookDB:IdentityDbContext<User,ApplicationRole, string>
     {
         /// <summary>
         /// Таблица справочника
