@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="PhoneBook.WPF.PhoneRecords.Views.PhoneRecordsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             >
+    <Grid Cursor="Hand">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <ToolBar Grid.Row="0"  Style="{DynamicResource MaterialDesignToolBar}" Height="50"
+                         Margin="0,0,0,10">
+            <Button Content="{materialDesign:PackIcon Kind=Update}"
+                            Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}" Cursor="Hand"
+                            Command="{Binding LoadDataCommand}"/>
+
+            <Separator/>
+            <Button Content="{materialDesign:PackIcon Kind=GetApp}"
+                            Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}" Cursor="Hand"
+                            Command="{Binding GetRoleCommand}"/>
+
+        </ToolBar>
+
+        <DataGrid Grid.Row="1"
+                      ItemsSource="{Binding RecordsView}"
+                      AutoGenerateColumns="False" SelectionMode="Extended" x:Name="_productsList"
+                      IsReadOnly="True"
+                      >
+
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn Header="IsSelected" 
+                                                Binding="{Binding Path=IsSelected,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGridRow}},Mode=OneWay}"
+                                                ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
+                                                EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"/>
+
+                <DataGridTextColumn Header="Имя" Binding="{Binding FirstName,UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName,UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Отчество" Binding="{Binding Patronymic,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Style="{StaticResource MaterialDesignIconForegroundButton}"
+                                                        ToolTip="Edit Record"
+                                                        Command="{Binding DataContext.EditRecordCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
+                                                        CommandParameter="{Binding ElementName=_productsList,Path=SelectedItems}">
+                                    <materialDesign:PackIcon Kind="Edit"
+                                                                 Height="12"
+                                                                 Width="12"/>
+                                </Button>
+                                <Button Style="{StaticResource MaterialDesignIconForegroundButton}"
+                                                        Command="{Binding DataContext.DeleteRecordCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
+                                                        CommandParameter="{Binding ElementName=_productsList,Path=SelectedItems}"
+                                                        ToolTip="Delete Record">
+                                    <materialDesign:PackIcon Kind="Delete"
+                                                                 Height="12"
+                                                                 Width="12"/>
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+    </Grid>
+</UserControl>

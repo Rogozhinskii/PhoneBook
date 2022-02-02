@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>PhoneBook.WPF</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="4.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.13" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
+    <PackageReference Include="Prism.DryIoc" Version="8.0.0.1909" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Data\PhoneBook.DAL\PhoneBook.DAL.csproj" />
+    <ProjectReference Include="..\..\..\Services\PhoneBook.WebApiClient\PhoneBook.WebApiClient.csproj" />
+    <ProjectReference Include="..\PhoneBook.WPF.Core\PhoneBook.WPF.Core.csproj" />
+    <ProjectReference Include="..\PhoneBook.WPF.Modules\PhoneBook.WPF.NotificationTools\PhoneBook.WPF.NotificationTools.csproj" />
+    <ProjectReference Include="..\PhoneBook.WPF.Modules\PhoneBook.WPF.PhoneRecords\PhoneBook.WPF.PhoneRecords.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>  
+</Project>

@@ -1,19 +1,15 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using PhoneBook.Automapper;
 using PhoneBook.Common.Models;
 using PhoneBook.DAL.Context;
-using PhoneBook.DAL.Repository;
 using PhoneBook.Data;
 using PhoneBook.Interfaces;
 using PhoneBook.WebApiClient;
 using System;
-using System.Security.Claims;
 
 namespace PhoneBook
 {
@@ -31,8 +27,7 @@ namespace PhoneBook
             services.AddDatabase(Configuration);
             services.AddTransient<DbInitializer>();
             services.AddHttpClient<IRepository<PhoneRecordInfo>, WebRepository<PhoneRecordInfo>>((client) =>
-            {
-                var str = $"{Configuration["WebApi"]}{Configuration["PhoneRecordRepositoryAddress"]}";
+            {                
                 client.BaseAddress = new($"{Configuration["WebApi"]}{Configuration["PhoneRecordRepositoryAddress"]}");
             });            
             services.AddIdentity<User, ApplicationRole>()
@@ -76,7 +71,7 @@ namespace PhoneBook
             //Если потребует создать БД с миграциями и тестовыми данными
             //using (var scope = app.ApplicationServices.CreateAsyncScope())
             //    await scope.ServiceProvider.GetRequiredService<DbInitializer>().InitializeData();
-            
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

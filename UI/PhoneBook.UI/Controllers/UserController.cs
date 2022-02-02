@@ -97,7 +97,7 @@ namespace PhoneBook.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = await _userManager.FindByIdAsync(id);
+                User user = await _userManager.FindByIdAsync(id); 
                 if (user != null)
                 {
                     user.UserName = model.UserName;

@@ -29,9 +29,10 @@ namespace PhoneBook.Api
         {
             services.AddDatabase(Configuration);
             services.AddScoped(typeof(IRepository<>), typeof(DbRepository<>));
-            //services.AddIdentity<User, IdentityRole>()
-            //    .AddEntityFrameworkStores<PhoneBookDB>()
-            //    .AddDefaultTokenProviders();
+            services.AddIdentity<User, ApplicationRole>()
+                    .AddEntityFrameworkStores<PhoneBookDB>()
+                    .AddDefaultTokenProviders()
+                    .AddRoles<ApplicationRole>();
             services.AddCors();
             //services.Configure<IdentityOptions>(opt =>
             //{
