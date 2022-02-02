@@ -1,4 +1,4 @@
-﻿@model IEnumerable<UserListViewModel> 
+﻿@model IEnumerable<UserViewModel> 
 
    
 <div class="top-buffer"></div> 
@@ -14,7 +14,7 @@
         <table class="table table-bordered table-striped table-condensed"> 
             <thead> 
                 <tr> 
-                    <th>Name</th> 
+                    <th>User Name</th> 
                     <th>Email</th>    
                     <th>Action</th> 
                 </tr> 
@@ -23,7 +23,7 @@
                 @foreach (var item in Model) 
                 { 
                     <tr> 
-                        <td>@item.Name</td> 
+                        <td>@item.UserName</td> 
                         <td>@item.Email</td>    
                         <td> 
                             <a asp-action="EditUser" asp-route-id="@item.Id" class="btn btn-outline-secondary"> 

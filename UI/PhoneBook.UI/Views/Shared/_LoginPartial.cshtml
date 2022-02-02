@@ -4,7 +4,7 @@
 @inject UserManager<User> UserManager
 
 @{
-    var role = UserRole.RegularUser.ToString();
+    var role = UserRoles.RegularUser.ToString();
     if (SignInManager.IsSignedIn(User))
     {
         User currentUser = await UserManager.FindByNameAsync(User.Identity.Name);
@@ -28,7 +28,7 @@
         </form>
     </li>
     
-    @if (@role!=null && @role == UserRole.Administrator.ToString())
+    @if (@role!=null && @role == UserRoles.Administrator.ToString())
     {
         <li class="nav-item">
                 <a class="nav-link text-dark" asp-controller="ApplicationRole" asp-action="Roles">Roles</a>

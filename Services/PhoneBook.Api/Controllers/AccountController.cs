@@ -43,7 +43,7 @@ namespace PhoneBook.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Login(UserLogin userLogin)
         {
-            var loginResult=await _signInManager.PasswordSignInAsync(userLogin.LoginProp,userLogin.Password,false,false);            
+            var loginResult=await _signInManager.PasswordSignInAsync(userLogin.UserName,userLogin.Password,false,false);            
             if (loginResult.Succeeded)
                 return Ok(loginResult);
             else

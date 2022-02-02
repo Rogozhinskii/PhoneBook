@@ -6,7 +6,7 @@ namespace PhoneBook.Common.Models
     public class UserLogin: IUserLogin
     {
         [Required, MaxLength(20)]
-        public string LoginProp { get; set; }
+        public string UserName { get; set; }
 
         [Required, DataType(DataType.Password)]
         public string Password { get; set; }

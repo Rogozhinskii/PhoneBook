@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PhoneBook.Common.Models;
 using PhoneBook.Models;
@@ -9,45 +11,45 @@ using System.Threading.Tasks;
 
 namespace PhoneBook.Controllers
 {
+    /// <summary>
+    /// Контроллер управления ролями пользователей
+    /// </summary>
+    [Authorize(Roles =UserRoles.Administrator)]
     public class ApplicationRoleController : Controller
     {
         private readonly RoleManager<ApplicationRole> _roleManager;
-        public ApplicationRoleController(RoleManager<ApplicationRole> roleManager)
-        {
-            _roleManager=roleManager;
-        }
+        private readonly IMapper _mapper;
 
-
-        public IActionResult Roles()
-        {
-            List<ApplicationRoleListViewModel> model = new List<ApplicationRoleListViewModel>();
-            
-            
-            model = _roleManager.Roles.Select(r => new ApplicationRoleListViewModel
-            {
-                RoleName = r.Name,
-                Id = r.Id,
-                Description = r.Description,
-                
-            }).ToList();
-            return View(model);
+        public ApplicationRoleController(RoleManager<ApplicationRole> roleManager, IMapper mapper) {
+            _roleManager = roleManager;
+            _mapper = mapper;
         }
+        
+        private ApplicationRoleViewModel GetItem(ApplicationRole item)=>_mapper.Map<ApplicationRoleViewModel>(item);
+       
+
+        public IActionResult Roles()=>
+            View(_roleManager.Roles.Select(r => new ApplicationRoleViewModel
+                                                    {
+                                                        Name = r.Name,
+                                                        Id = r.Id,
+                                                        Description = r.Description,
+
+                                                    }).ToList());
+        
 
         [HttpGet]
         public async Task<IActionResult> AddEditApplicationRole(string id)
         {
             ApplicationRoleViewModel model = new();
-            if (!String.IsNullOrEmpty(id))
+            if (!string.IsNullOrEmpty(id))
             {
                 ApplicationRole applicationRole = await _roleManager.FindByIdAsync(id);
-                if (applicationRole != null)
-                {
-                    model.Id = applicationRole.Id;
-                    model.RoleName = applicationRole.Name;
-                    model.Description = applicationRole.Description;
-                }
-            }
-            return View("AddEditApplicationRole", model);
+                if (applicationRole is null) return BadRequest("Role not found.");
+                return View(GetItem(applicationRole));
+
+            }          
+            return View(model);
         }
 
         [HttpPost]
@@ -61,7 +63,7 @@ namespace PhoneBook.Controllers
                {
                    CreatedDate = DateTime.UtcNow
                };
-                applicationRole.Name = model.RoleName;
+                applicationRole.Name = model.Name;
                 applicationRole.Description = model.Description;                
                 IdentityResult roleRuslt = isExist ? await _roleManager.UpdateAsync(applicationRole)
                                                     : await _roleManager.CreateAsync(applicationRole);
@@ -70,7 +72,7 @@ namespace PhoneBook.Controllers
                     return RedirectToAction("Roles");
                 }
             }
-            return View(model);
+            return BadRequest(model);
         }
 
         [HttpGet]
@@ -78,14 +80,8 @@ namespace PhoneBook.Controllers
         {
             if(id is null) return NotFound();
             ApplicationRole applicationRole = await _roleManager.FindByIdAsync(id);
-            if (applicationRole is null) return NotFound();
-            ApplicationRoleViewModel model = new()
-            {
-                Id = applicationRole.Id,
-                RoleName = applicationRole.Name,
-                Description = applicationRole.Description
-            };
-            return View(model);            
+            if (applicationRole is null) return NotFound();            
+            return View(GetItem(applicationRole));            
         }
 
         [HttpPost]

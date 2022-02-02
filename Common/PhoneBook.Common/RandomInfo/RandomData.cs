@@ -32,6 +32,20 @@ namespace PhoneBook.Common.RandomInfo
         /// </summary>
         private readonly static string[] descriptions;
 
+
+        /// <summary>
+        /// Массив userName 
+        /// </summary>
+        private readonly static string[] userNames;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly static string[] emails;
+        private readonly static string[] passwords;
+
+
+
         /// <summary>
         /// Генератор псевдослучайных чисел
         /// </summary>
@@ -191,6 +205,50 @@ namespace PhoneBook.Common.RandomInfo
                 "Bindery Worker",
                 "Teller",
             };
+            userNames = new string[]
+            {
+                "Rash",
+                "Estrhee",
+                "Yategi",
+                "Vanish",
+                "Tanam",
+                "Idictor",
+                "Tonel",
+                "Qianamia",
+                "Garikai",
+                "Julii",
+                "Seymon",
+                "Marcena",
+                "Burizel",
+                "Mranz",
+                "Rianan",
+            };
+            emails = new string[]
+            {
+                "wevaddosseuppo-8121@yopmail.com",
+                "greihigeillauya-7891@yopmail.com",
+                "jakasusaquo-3071@yopmail.com",
+                "zannalouproutei-3338@yopmail.com",
+                "bracettebrimme-2965@yopmail.com",
+                "frarapracraule-7261@yopmail.com",
+                "quoukoicrossize-8511@yopmail.com",
+                "lattexazibei-4574@yopmail.com",
+                "gauwogroyero-4765@yopmail.com",
+                "trehehoisowou-4809@yopmail.com",
+                "yabifrateido-9653@yopmail.com",
+                "freufroihebreuxa-8646@yopmail.com",
+            };
+            passwords = new string[]
+            {
+                "4dhUql67",
+                "06Ym1HDd",
+                "X00HOn8s",
+                "Jf8i86jF",
+                "olc385WZ",
+                "GBG6Mn73",
+                "iS35Hr4T",
+                "WjM5M41P"
+            };
         }
 
 
@@ -248,6 +306,16 @@ namespace PhoneBook.Common.RandomInfo
                 stringBuilder.Append(rnd.Next(9));
             return stringBuilder.ToString();
         }
+
+        public static string GetRandomUserName()=>
+            rnd.NextItem(userNames);
+
+        public static string GetRandomEmail() =>
+            rnd.NextItem(emails);
+
+
+        public static string GetRandomPassword() =>
+           rnd.NextItem(passwords);
 
     }
 }

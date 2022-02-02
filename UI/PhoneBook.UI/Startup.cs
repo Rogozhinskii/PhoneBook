@@ -28,16 +28,13 @@ namespace PhoneBook
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
-            services.AddDatabase(Configuration);            
+            services.AddDatabase(Configuration);
+            services.AddTransient<DbInitializer>();
             services.AddHttpClient<IRepository<PhoneRecordInfo>, WebRepository<PhoneRecordInfo>>((client) =>
             {
                 var str = $"{Configuration["WebApi"]}{Configuration["PhoneRecordRepositoryAddress"]}";
                 client.BaseAddress = new($"{Configuration["WebApi"]}{Configuration["PhoneRecordRepositoryAddress"]}");
-            });
-            //services.AddHttpClient<IAuthentication, AuthenticationService>((client) =>
-            //{
-            //    client.BaseAddress = new($"{Configuration["WebApi"]}{Configuration["AccountControllerAddress"]}");
-            //});
+            });            
             services.AddIdentity<User, ApplicationRole>()
                     .AddEntityFrameworkStores<PhoneBookDB>()
                     .AddDefaultTokenProviders()
@@ -45,6 +42,10 @@ namespace PhoneBook
             services.Configure<IdentityOptions>(opt =>
             {
                 opt.Password.RequiredLength = 6;
+                opt.Password.RequireNonAlphanumeric = false;
+                opt.Password.RequireLowercase = false;
+                opt.Password.RequireUppercase = false;
+                opt.Password.RequireDigit = false;
                 opt.Lockout.MaxFailedAccessAttempts = 10;
                 opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
                 opt.Lockout.AllowedForNewUsers = true;
@@ -60,6 +61,7 @@ namespace PhoneBook
                 options.SlidingExpiration = true;
             });
 
+            services.AddAutoMapper(typeof(Startup));
             services.AddMvc();
             services.AddControllersWithViews();
             
@@ -70,7 +72,11 @@ namespace PhoneBook
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public async void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {            
+        {
+            //Если потребует создать БД с миграциями и тестовыми данными
+            //using (var scope = app.ApplicationServices.CreateAsyncScope())
+            //    await scope.ServiceProvider.GetRequiredService<DbInitializer>().InitializeData();
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

@@ -2,7 +2,7 @@
     ViewData["Title"] = "Add or Edit";
 }
 @model ApplicationRoleViewModel 
-<h1>Add or Edit</h1>
+<h1>Add or Edit Role</h1>
 
 <hr />
 <div class="row">
@@ -11,6 +11,9 @@
             @{await Html.RenderPartialAsync("_AddEditApplicationRole");} 
         </form>
     </div>
+</div>
+<div>
+    <a asp-action="Roles">Back to List</a>
 </div>
 
 @section Scripts {

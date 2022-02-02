@@ -37,6 +37,7 @@ namespace PhoneBook.Controllers
         /// <param name="pageSize">размер страницы</param>
         /// <returns></returns>
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Index(string currentFilter, string searchString, int? pageIndex,int? pageSize)
         {
             
@@ -61,6 +62,7 @@ namespace PhoneBook.Controllers
         /// <param name="id">идентификатор записи</param>
         /// <returns></returns>
         [HttpGet]
+        [Authorize(Roles ="Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {            
             if (id is null) return NotFound();
@@ -88,6 +90,7 @@ namespace PhoneBook.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [Authorize(Roles =UserRoles.Administrator+","+UserRoles.RegularUser)]
         public IActionResult Create()
         {
             _logger.LogInformation($"{nameof(PhoneRecordsController)}. Start creating a new record");
@@ -101,6 +104,7 @@ namespace PhoneBook.Controllers
         /// <returns></returns>
         [HttpPost]
         [ActionName(nameof(Create))]
+        [Authorize(Roles = UserRoles.Administrator + "," + UserRoles.RegularUser)]
         public async Task<IActionResult> Create(PhoneRecordInfo record)
         {
             if (record is null) return NotFound();
@@ -117,7 +121,7 @@ namespace PhoneBook.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = UserRoles.Administrator)]
         public async Task<IActionResult> Edit(int? id)
         {
             if(id is null) return NotFound();
@@ -131,6 +135,7 @@ namespace PhoneBook.Controllers
         /// <returns></returns>
         [HttpPost]
         [ActionName(nameof(Edit))]
+        [Authorize(Roles = UserRoles.Administrator)]
         public async Task<IActionResult> Edit(PhoneRecordInfo phoneRecord) =>
             await _repository.UpdateAsync(phoneRecord) is { } record
             ? Redirect("~/")
@@ -142,6 +147,7 @@ namespace PhoneBook.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             if (id is null){
