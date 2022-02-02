@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace PhoneBook.WebApiClient
 {
-    public class AuthenticationService : IAuthentication
+    public class AuthentificationService : IAuthentificationService
     {
         private readonly HttpClient _client;
 
-        public AuthenticationService(HttpClient client)
+        public AuthentificationService(HttpClient client)
         {
             _client = client;
         }
@@ -30,9 +30,13 @@ namespace PhoneBook.WebApiClient
             }                
             return false;            
         }
-        
-        public async Task<string> GetUserRoleAsync(string userName, CancellationToken cancel = default)=>
-            await _client.GetStringAsync($"getRole/{userName}",cancel).ConfigureAwait(false);
+
+        public async Task<string> GetUserRoleAsync(string userName, CancellationToken cancel = default) {
+            var result=await _client.GetStringAsync($"getRole/{userName}", cancel).ConfigureAwait(false);
+            AuthenticatedUserRole=result;
+            return result;
+        }
+            
            
 
     }

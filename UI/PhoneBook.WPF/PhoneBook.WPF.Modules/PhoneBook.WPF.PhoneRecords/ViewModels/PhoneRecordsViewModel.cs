@@ -11,13 +11,13 @@ namespace PhoneBook.WPF.PhoneRecords.ViewModels
     public class PhoneRecordsViewModel:BindableBase
     {
         private readonly IPhoneRecordModel _phoneRecordModel;
-        private readonly IAuthentication _authentication;
+        private readonly IAuthentificationService _authentication;
         
 
-        public PhoneRecordsViewModel(IPhoneRecordModel phoneRecordModel, IAuthentication authentication)
+        public PhoneRecordsViewModel(IPhoneRecordModel phoneRecordModel )//, IAuthentication authentication)
         {
             _phoneRecordModel = phoneRecordModel;
-            _authentication = authentication;
+            //_authentication = authentication;
             
 
             
@@ -51,7 +51,7 @@ namespace PhoneBook.WPF.PhoneRecords.ViewModels
                    UserName = "Administrator",
                    Password = "Ca3(PO4)2"
                };
-               var role = await _authentication.GetUserRoleAsync(user.UserName);
+              // var role = await _authentication.GetUserRoleAsync(user.UserName);
            });
 
 

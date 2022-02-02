@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace PhoneBook.Interfaces
 {
-    public interface IAuthentication
+    public interface IAuthentificationService
     {
         public string AuthenticatedUserName { get; }
         public string AuthenticatedUserRole { get; }
