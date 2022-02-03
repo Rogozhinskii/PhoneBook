@@ -10,7 +10,7 @@
         </Grid.RowDefinitions>
         <UniformGrid Columns="2" Grid.Row="0">
             <TextBlock Text="Имя" Margin="5,0,5,0"/>
-            <TextBlock Text="{Binding FirstName}" TextWrapping="WrapWithOverflow"/>
+            <TextBox Text="{Binding FirstName}" TextWrapping="WrapWithOverflow"/>
             <TextBlock Text="Фамилия" Margin="5,0,5,0"/>
             <TextBox Text="{Binding LastName,Mode=TwoWay}"/>
             <TextBlock Text="Отчество" Margin="5,0,5,0"/>

@@ -8,9 +8,11 @@ using PhoneBook.WPF.PhoneRecords;
 using PhoneBook.WPF.Views;
 using Prism.Ioc;
 using Prism.Modularity;
+using Prism.Services.Dialogs;
 using System.IO;
 using System.Reflection;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace PhoneBook.WPF
 {
@@ -19,11 +21,29 @@ namespace PhoneBook.WPF
     /// </summary>
     public partial class App
     {
+        private IDialogService _dialogService;
         protected override Window CreateShell()
         {
+            _dialogService = Container.Resolve<IDialogService>();
+            DispatcherUnhandledException += App_DispatcherUnhandledException;
             return Container.Resolve<MainWindow>();
         }
-             
+
+        /// <summary>
+        /// все не обработанные исключения будут идти сюда.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            DialogParameters dialogParameters = new()
+            {
+                { DialogNames.DialogMessage, e.Exception.Message }
+            };
+            _dialogService.ShowDialog(DialogNames.NotificationDialog, dialogParameters, result => { });
+            e.Handled = true;
+        }
+
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {

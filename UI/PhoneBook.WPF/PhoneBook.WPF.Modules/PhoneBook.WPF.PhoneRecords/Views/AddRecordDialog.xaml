@@ -18,17 +18,17 @@
         </Grid.RowDefinitions>
         <UniformGrid Columns="2" Grid.Row="0">
             <TextBlock Text="Имя" Margin="5,0,5,0" Style="{StaticResource AlignCenter}"/>
-            <TextBox Text="{Binding PhoneRecord.FirstName}" TextWrapping="WrapWithOverflow" />
+            <TextBox Text="{Binding PhoneRecord.FirstName}" TextWrapping="WrapWithOverflow" Style="{StaticResource MaterialDesignFilledTextBox}" />
             <TextBlock Text="Фамилия" Margin="5,0,5,0" Style="{StaticResource AlignCenter}"/>
-            <TextBox Text="{Binding PhoneRecord.LastName,Mode=TwoWay}"/>
+            <TextBox Text="{Binding PhoneRecord.LastName,Mode=TwoWay}" Style="{StaticResource MaterialDesignFilledTextBox}"/>
             <TextBlock Text="Отчество" Margin="5,0,5,0" Style="{StaticResource AlignCenter}"/>
-            <TextBox Text="{Binding PhoneRecord.Patronymic,Mode=TwoWay}"/>
+            <TextBox Text="{Binding PhoneRecord.Patronymic,Mode=TwoWay}" Style="{StaticResource MaterialDesignFilledTextBox}"/>
             <TextBlock Text="Номер телефона" Margin="5,0,5,0" Style="{StaticResource AlignCenter}"/>
-            <TextBox Text="{Binding PhoneRecord.PhoneNumber,Mode=TwoWay}"/>
+            <TextBox Text="{Binding PhoneRecord.PhoneNumber,Mode=TwoWay}" Style="{StaticResource MaterialDesignFilledTextBox}"/>
             <TextBlock Text="Адресс" Margin="5,0,5,0" Style="{StaticResource AlignCenter}"/>
-            <TextBox Text="{Binding PhoneRecord.Address,Mode=TwoWay}"/>
+            <TextBox Text="{Binding PhoneRecord.Address,Mode=TwoWay}" Style="{StaticResource MaterialDesignFilledTextBox}"/>
             <TextBlock Text="Описание" Margin="5,0,5,0" Style="{StaticResource AlignCenter}"/>
-            <TextBox Text="{Binding PhoneRecord.Description,Mode=TwoWay}"/>
+            <TextBox Text="{Binding PhoneRecord.Description,Mode=TwoWay}" Style="{StaticResource MaterialDesignFilledTextBox}"/>
         </UniformGrid>
         
         <UniformGrid Columns="2" Grid.Row="1">
