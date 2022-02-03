@@ -1,5 +1,6 @@
 ﻿using PhoneBook.WPF.Core;
 using PhoneBook.WPF.PhoneRecords.Models;
+using PhoneBook.WPF.PhoneRecords.ViewModels;
 using PhoneBook.WPF.PhoneRecords.Views;
 using Prism.Ioc;
 using Prism.Modularity;
@@ -25,6 +26,8 @@ namespace PhoneBook.WPF.PhoneRecords
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.Register<IPhoneRecordModel, PhoneRecordsModel>();
+            containerRegistry.RegisterDialog<AddRecordDialog, AddRecordDialogViewModel>();
+            containerRegistry.RegisterDialog<EditRecordDialog, EditRecordDialogViewModel>();
         }
     }
 }

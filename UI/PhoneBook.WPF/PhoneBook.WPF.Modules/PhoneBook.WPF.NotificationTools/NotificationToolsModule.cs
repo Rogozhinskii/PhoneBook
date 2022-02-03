@@ -3,6 +3,8 @@ using PhoneBook.WPF.Core.Interfaces;
 using PhoneBook.WPF.NotificationTools.Controls;
 using PhoneBook.WPF.NotificationTools.Model;
 using PhoneBook.WPF.NotificationTools.ViewModels;
+using PhoneBook.WPF.NotificationTools.Views;
+using PhoneBook.WPF.PhoneRecords.Views;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Mvvm;
@@ -28,6 +30,7 @@ namespace PhoneBook.WPF.NotificationTools
         {
             ViewModelLocationProvider.Register<HeaderControl, HeaderControlViewModel>();
             containerRegistry.RegisterDialog<AuthentificationDialog, AuthentificationDialogViewModel>();
+            containerRegistry.RegisterDialog<NotificationDialog, NotificationDialogViewModel>();            
             containerRegistry.Register<IAuthentificationModel, AuthentificationModel>();
             
         }

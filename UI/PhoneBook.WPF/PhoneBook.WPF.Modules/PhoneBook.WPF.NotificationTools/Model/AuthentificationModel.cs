@@ -25,5 +25,9 @@ namespace PhoneBook.WPF.NotificationTools.Model
                 _eventAggregator.GetEvent<LoginEvent>().Publish(userLogin.UserName);
             return result;
         }
+
+        public async Task<bool> Logout(CancellationToken token = default) =>
+            await _authenticationService.Logout(token);
+        
     }
 }

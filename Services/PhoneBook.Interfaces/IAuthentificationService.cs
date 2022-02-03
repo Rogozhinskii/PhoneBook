@@ -10,6 +10,7 @@ namespace PhoneBook.Interfaces
         public string AuthenticatedUserRole { get; }
 
         Task<bool> Login(IUserLogin login,CancellationToken cancel=default);
+        Task<bool> Logout(CancellationToken cancel = default);
 
         Task<string> GetUserRoleAsync(string userName, CancellationToken cancel = default);
 

@@ -5,6 +5,7 @@ using PhoneBook.WPF.Core.Interfaces;
 using Prism.Commands;
 using Prism.Services.Dialogs;
 using System.Security;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 
 namespace PhoneBook.WPF.NotificationTools.ViewModels
@@ -52,11 +53,23 @@ namespace PhoneBook.WPF.NotificationTools.ViewModels
                };
                var loginResult=await _authenticationModel.Login(userLogin);
                if (loginResult)
-                   RaiseRequesClose(ButtonResult.OK);
+                   RaiseRequestClose(ButtonResult.OK);
+               else
+               {
+
+                   await RejectInputData();
+               }
            });
 
+        private async Task RejectInputData()
+        {
+            Message = "Не верный логин или пароль!";
+            UserName = string.Empty;
+            Password = null;
+            await Task.Delay(2000);
+            Message =string.Empty;
+        }
 
-        
         /// <summary>
         /// Вызывается при изменении поля с паролем
         /// </summary>

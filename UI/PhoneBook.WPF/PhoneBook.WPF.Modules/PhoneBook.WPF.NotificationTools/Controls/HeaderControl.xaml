@@ -26,7 +26,8 @@
             <Button Grid.Column="1"
                     Style="{StaticResource MaterialDesignOutlinedLightButton}"
                     Content="Logout"
-                    Margin="5,0,5,0" Cursor="Hand"/>
+                    Margin="5,0,5,0" Cursor="Hand"
+                    Command="{Binding LogoutCommand}"/>
 
         </StackPanel>
         <Border DockPanel.Dock="Top" HorizontalAlignment="Stretch">
@@ -44,7 +45,7 @@
                          TextWrapping="Wrap"                         
                          Grid.Column="0"
                          materialDesign:HintAssist.Hint="Filter"/>
-               
+
             </Grid>
             
             

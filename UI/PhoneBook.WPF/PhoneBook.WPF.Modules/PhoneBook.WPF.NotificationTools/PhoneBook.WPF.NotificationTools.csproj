@@ -11,5 +11,6 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\..\PhoneBook.WPF.Core\PhoneBook.WPF.Core.csproj" />
+	  <ProjectReference Include="..\PhoneBook.WPF.PhoneRecords\PhoneBook.WPF.PhoneRecords.csproj" />
 	</ItemGroup>
 </Project>

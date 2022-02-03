@@ -14,15 +14,19 @@
 
         <ToolBar Grid.Row="0"  Style="{DynamicResource MaterialDesignToolBar}" Height="50"
                          Margin="0,0,0,10">
-            <Button Content="{materialDesign:PackIcon Kind=Update}"
-                            Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}" Cursor="Hand"
-                            Command="{Binding LoadDataCommand}"/>
+            <Button Content="{materialDesign:PackIcon Kind=GetApp}"
+                    Style="{StaticResource MaterialDesignFlatDarkBgButton}" Cursor="Hand"
+                    Command="{Binding LoadDataCommand}"
+                    ToolTip="Загрузить данные"/>
+            <Button Content="{materialDesign:PackIcon Kind=Add}"
+                    Style="{StaticResource MaterialDesignFlatDarkBgButton}" Cursor="Hand"
+                    Command="{Binding AddNewRecordCommand}"
+                    ToolTip="Создать запись"
+                    Margin="5,0,0,0"/>
+
 
             <Separator/>
-            <Button Content="{materialDesign:PackIcon Kind=GetApp}"
-                            Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}" Cursor="Hand"
-                            Command="{Binding GetRoleCommand}"/>
-
+            
         </ToolBar>
 
         <DataGrid Grid.Row="1"

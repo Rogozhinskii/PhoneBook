@@ -26,9 +26,17 @@ namespace PhoneBook.WebApiClient
             if (responce.IsSuccessStatusCode)
             {
                 AuthenticatedUserName=login.UserName;
+                await GetUserRoleAsync(login.UserName, cancel);
                 return true;
             }                
             return false;            
+        }
+
+
+        public async Task<bool> Logout(CancellationToken cancel = default)
+        {
+            var result = await _client.GetAsync("logout", cancel).ConfigureAwait(false);
+            return result.IsSuccessStatusCode;
         }
 
         public async Task<string> GetUserRoleAsync(string userName, CancellationToken cancel = default) {

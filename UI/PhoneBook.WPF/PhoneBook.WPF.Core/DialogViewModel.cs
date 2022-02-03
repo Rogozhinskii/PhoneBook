@@ -10,15 +10,15 @@ namespace PhoneBook.WPF.Core
 
         public event Action<IDialogResult> RequestClose;
 
-        public virtual void RaiseRequesClose(IDialogResult dialogResult)
+        public virtual void RaiseRequestClose(IDialogResult dialogResult)
         {
             RequestClose?.Invoke(dialogResult);
         }
 
-        public virtual void RaiseRequesClose(ButtonResult buttonResult)
+        public virtual void RaiseRequestClose(ButtonResult buttonResult)
         {
             var dialogResult = new DialogResult(buttonResult);
-            RaiseRequesClose(dialogResult);
+            RaiseRequestClose(dialogResult);
         }
 
         public virtual bool CanCloseDialog() => true;
