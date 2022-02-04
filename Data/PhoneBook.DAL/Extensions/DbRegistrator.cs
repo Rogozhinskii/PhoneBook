@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PhoneBook.DAL.Context;
 
-namespace PhoneBook.Api.Extensions
+namespace PhoneBook.DAL
 {
     public static class DbRegistrator
     {

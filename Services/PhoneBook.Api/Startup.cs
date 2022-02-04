@@ -1,4 +1,3 @@
-using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -6,12 +5,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using PhoneBook.Api.Extensions;
 using PhoneBook.Common.Models;
+using PhoneBook.DAL;
 using PhoneBook.DAL.Context;
 using PhoneBook.DAL.Repository;
 using PhoneBook.Interfaces;
-using System;
 
 namespace PhoneBook.Api
 {
@@ -33,26 +31,7 @@ namespace PhoneBook.Api
                     .AddEntityFrameworkStores<PhoneBookDB>()
                     .AddDefaultTokenProviders()
                     .AddRoles<ApplicationRole>();
-            services.AddCors();
-            //services.Configure<IdentityOptions>(opt =>
-            //{
-            //    opt.Password.RequiredLength = 6;
-            //    opt.Lockout.MaxFailedAccessAttempts = 10;
-            //    opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
-            //    opt.Lockout.AllowedForNewUsers = true;
-            //});
-
-            //services.ConfigureApplicationCookie(options =>
-            //{
-            //    //options.Cookie.HttpOnly = true;
-            //    options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
-            //    options.Cookie.MaxAge=options.ExpireTimeSpan;
-            //    //options.Cookie.Expiration = TimeSpan.FromDays(1);
-            //    //options.LoginPath = "/Account/Login";
-            //    //options.LogoutPath = "/Account/Logout";
-            //    options.SlidingExpiration = true;
-            //});
-
+            services.AddCors();            
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

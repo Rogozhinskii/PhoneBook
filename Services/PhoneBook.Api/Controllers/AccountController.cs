@@ -24,6 +24,11 @@ namespace PhoneBook.Api.Controllers
         }
 
 
+        /// <summary>
+        /// Выполняет регистрацию пользователя
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost("registration")]        
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -44,6 +49,12 @@ namespace PhoneBook.Api.Controllers
             }
         }
 
+
+        /// <summary>
+        /// Выполняет вход пользователя в систему
+        /// </summary>
+        /// <param name="userLogin"></param>
+        /// <returns></returns>
         [HttpPost("login")]        
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -63,6 +74,11 @@ namespace PhoneBook.Api.Controllers
             }   
         }
 
+        /// <summary>
+        /// Возвращает роль пользователя
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
         [HttpGet("getRole/{userName}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -86,7 +102,10 @@ namespace PhoneBook.Api.Controllers
         }
 
 
-
+        /// <summary>
+        /// Выход из учетной записи
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("logout")]        
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Logout()

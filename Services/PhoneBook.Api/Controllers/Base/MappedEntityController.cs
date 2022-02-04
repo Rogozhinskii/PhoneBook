@@ -1,13 +1,10 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PhoneBook.Common;
 using PhoneBook.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -99,6 +96,12 @@ namespace PhoneBook.Api.Controllers.Base
            return NotFound();
         }
 
+        /// <summary>
+        /// Выполняет удаление сущности из хранилища
+        /// </summary>
+        /// <param name="item">удаляемая сущность</param>
+        /// <param name="cancel"></param>
+        /// <returns></returns>
         [HttpDelete]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -110,7 +113,12 @@ namespace PhoneBook.Api.Controllers.Base
             return Ok(GetItem(result));
         }
 
-
+        /// <summary>
+        /// Выполняет удаление сущности их хранилища по ее id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="cancel"></param>
+        /// <returns></returns>
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteByIdAsync(int id)
         {
@@ -120,6 +128,12 @@ namespace PhoneBook.Api.Controllers.Base
           
         }
 
+        /// <summary>
+        /// Добавляет сущность в хранилище, возвращает сущность с присвоенным идентификационным номером
+        /// </summary>
+        /// <param name="item">добавляемая сущность</param>
+        /// <param name="cancel"></param>
+        /// <returns></returns>
         [HttpPost("addnew")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<IActionResult> AddAsync(T item)
@@ -128,6 +142,12 @@ namespace PhoneBook.Api.Controllers.Base
             return CreatedAtAction(nameof(Get), new { id = result.Id }, GetItem(result));
         }
 
+        /// <summary>
+        /// Выполняет обновление сущности в хранилище, возвращает обновленную сущность
+        /// </summary>
+        /// <param name="item">обновляемая сущность</param>
+        /// <param name="cancel"></param>
+        /// <returns></returns>
         [HttpPut("update")]        
         [ProducesResponseType(StatusCodes.Status202Accepted)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]        
@@ -139,11 +159,22 @@ namespace PhoneBook.Api.Controllers.Base
             return AcceptedAtAction(nameof(Get),new {id=result.Id }, GetItem(result));
         }
 
+        /// <summary>
+        /// Возвращает количество записей в хранилище
+        /// </summary>
+        /// <param name="cancel"></param>
+        /// <returns></returns>
         [HttpGet("count")]        
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetItemsCount()=>
             Ok(await _repository.GetCountAsync());
 
+
+        /// <summary>
+        /// Возвращает вме имеющиеся записи типа Т из хранилища
+        /// </summary>
+        /// <param name="cancel"></param>
+        /// <returns></returns>
         [HttpGet("getAll")]
         [ProducesResponseType(StatusCodes.Status200OK,Type =typeof(int))]
         public async Task<IActionResult> GetAllItems() =>

@@ -11,6 +11,10 @@ using PhoneBook.Common;
 
 namespace PhoneBook.DAL.Repository
 {
+    /// <summary>
+    /// Реализует доступ к хранилищу данных
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public partial class DbRepository<T> : IRepository<T> where T : Entity, new()
     {
         private readonly PhoneBookDB _db;
