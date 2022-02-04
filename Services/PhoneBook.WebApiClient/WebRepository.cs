@@ -106,7 +106,7 @@ namespace PhoneBook.WebApiClient
                
         public async Task<IPage<T>> GetPage(string filterString, CancellationToken cancel = default)
         {
-            var responce = await _client.GetAsync($"searchString/{filterString}", cancel).ConfigureAwait(false);
+            var responce = await _client.GetAsync($"{filterString}", cancel).ConfigureAwait(false);
             if (responce.StatusCode == HttpStatusCode.NotFound)
             {
                 return new Page<T>

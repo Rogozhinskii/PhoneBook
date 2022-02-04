@@ -68,6 +68,14 @@ namespace PhoneBook.Api.Controllers.Base
             ? Ok(GetItem(item))
             : NotFound();
 
+
+        /// <summary>
+        /// Возвращает страницу с заданным количеством элементов на ней
+        /// </summary>
+        /// <param name="pageIndex">номер страницы</param>
+        /// <param name="pageSize">размер страницы</param>
+        /// <param name="cancel"></param>
+        /// <returns></returns>
         [HttpGet("page[[{pageIndex:int}/{pageSize:int}]]")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -79,6 +87,12 @@ namespace PhoneBook.Api.Controllers.Base
                                :NotFound();
         }
 
+        /// <summary>
+        /// Возвращает страницу наполненную перечислением сущностей, удовлетворяющих значению искомой строки
+        /// </summary>
+        /// <param name="searchString"></param>
+        /// <param name="cancel"></param>
+        /// <returns></returns>
         [HttpGet("{searchString}")]
         public virtual async Task<ActionResult<IPage<T>>> GetPage(string searchString, CancellationToken cancel = default)
         {   

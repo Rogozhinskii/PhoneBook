@@ -2,6 +2,9 @@
 
 namespace PhoneBook.Common.Models
 {
+    /// <summary>
+    /// модель формы регистрации
+    /// </summary>
     public class UserRegistration
     {
         [Required, MaxLength(20)]

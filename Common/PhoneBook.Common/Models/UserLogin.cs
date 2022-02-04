@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PhoneBook.Common.Models
 {
+    /// <summary>
+    /// Модель для формы аутентификации
+    /// </summary>
     public class UserLogin: IUserLogin
     {
         [Required, MaxLength(20)]

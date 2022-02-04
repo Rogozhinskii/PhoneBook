@@ -38,16 +38,18 @@ namespace PhoneBook.Controllers
 
        
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult AddUser()=>
             View(new UserViewModel());
         
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> AddUser(UserViewModel model)
         {
             if (ModelState.IsValid)
             {     
-                User user = new User
+                User user = new()
                 {                    
                     UserName = model.UserName,
                     Email = model.Email

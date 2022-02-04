@@ -4,17 +4,12 @@ using System.Collections.Generic;
 
 namespace PhoneBook.Common
 {
+    /// <summary>
+    /// Модель страницы с определенным количеством записей
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class Page<T> : IPage<T> where T : IEntity
-    {
-        //public Page(IEnumerable<T> items,int totalCount,int pageIndex,int pageSize)
-        //{
-        //    Items = items;
-        //    TotalCount = totalCount;
-        //    PageIndex = pageIndex;
-        //    PageSize = pageSize;
-
-        //}
-
+    {        
         public IEnumerable<T> Items { get; set; }
 
         public int TotalCount { get; set; }

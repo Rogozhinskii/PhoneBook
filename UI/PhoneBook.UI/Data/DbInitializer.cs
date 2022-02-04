@@ -28,10 +28,10 @@ namespace PhoneBook.Data
 
         public async Task InitializeData()
         {
+            if (_db.PhoneRecords.Any()) return;
             await _db.Database.EnsureDeletedAsync().ConfigureAwait(false);
             await _db.Database.MigrateAsync().ConfigureAwait(false);
             await InitializeUsersAndRoles();
-            if (_db.PhoneRecords.Any()) return;           
             var record = Enumerable.Range(1, 100).Select(i => new PhoneRecord
             {
                 FirstName = RandomData.GetRandomName(),
