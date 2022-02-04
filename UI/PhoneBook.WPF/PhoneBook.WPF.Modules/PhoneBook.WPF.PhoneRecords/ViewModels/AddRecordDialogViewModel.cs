@@ -5,6 +5,9 @@ using Prism.Services.Dialogs;
 
 namespace PhoneBook.WPF.PhoneRecords.ViewModels
 {
+    /// <summary>
+    /// Вью модель диалогового окна добавления записи
+    /// </summary>
     internal class AddRecordDialogViewModel:DialogViewModel
     {
         private DelegateCommand _cancelCommand;

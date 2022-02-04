@@ -1,5 +1,8 @@
 ﻿namespace PhoneBook.WPF.Core
 {
+    /// <summary>
+    /// Название диалогов и их параметров
+    /// </summary>
     public static class DialogNames
     {
         public const string AuthentificationDialog = "AuthentificationDialog";

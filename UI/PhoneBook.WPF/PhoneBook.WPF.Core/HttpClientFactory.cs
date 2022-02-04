@@ -9,6 +9,10 @@ namespace PhoneBook.WPF.Core
         RepositoryClient,
         AuthentificationClient
     }
+
+    /// <summary>
+    /// Фабрика слиентов для api
+    /// </summary>
     public class HttpClientFactory
     {
         private IConfigurationRoot _config;
@@ -19,6 +23,13 @@ namespace PhoneBook.WPF.Core
         {
             _config = config;
         }
+
+        /// <summary>
+        /// Возвращает сконфигурированный http слиент
+        /// </summary>
+        /// <param name="clientType">тип клиента</param>
+        /// <returns></returns>
+        /// <exception cref="InvalidOperationException"></exception>
         public HttpClient GetClient(HttpClientType clientType)
         {
             HttpClient client = new();            

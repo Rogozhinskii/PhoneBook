@@ -43,6 +43,9 @@ namespace PhoneBook.WPF.NotificationTools.ViewModels
             set { SetProperty(ref _message, value); }
         }
 
+        /// <summary>
+        /// Выполняет аутентификацию
+        /// </summary>
         public DelegateCommand LoginCommand =>
            _loginCommand ??= _loginCommand = new(async() =>
            {

@@ -22,6 +22,7 @@ namespace PhoneBook.WPF.PhoneRecords.ViewModels
         private DelegateCommand<object> _editRecordCommand;
         private DelegateCommand _addNewRecordCommand;
         private DelegateCommand _loadDataCommand;
+        private DelegateCommand<object> _deleteRecordCommand;
 
 
         public PhoneRecordsViewModel(IPhoneRecordModel phoneRecordModel,IDialogService dialogService,IEventAggregator eventAggregator)
@@ -75,7 +76,9 @@ namespace PhoneBook.WPF.PhoneRecords.ViewModels
            });
 
         
-
+        /// <summary>
+        /// Выполняет добавление новой записи
+        /// </summary>
         public DelegateCommand AddNewRecordCommand =>
            _addNewRecordCommand ??= _addNewRecordCommand = new(() =>
            {
@@ -99,8 +102,11 @@ namespace PhoneBook.WPF.PhoneRecords.ViewModels
                
            });
 
-        private DelegateCommand<object> _deleteRecordCommand;
+        
 
+        /// <summary>
+        /// Выполняет удаление записи
+        /// </summary>
         public DelegateCommand<object> DeleteRecordCommand =>
            _deleteRecordCommand ??= _deleteRecordCommand = new((obj) =>
            {
@@ -122,11 +128,12 @@ namespace PhoneBook.WPF.PhoneRecords.ViewModels
                    _recordsViewSource?.View.Refresh();
                });
 
-           });
-      
+           });      
 
 
-
+        /// <summary>
+        /// Выполняет редактирование записи
+        /// </summary>
         public DelegateCommand<object> EditRecordCommand =>
            _editRecordCommand ??= _editRecordCommand = new((obj) =>
            {
@@ -149,9 +156,7 @@ namespace PhoneBook.WPF.PhoneRecords.ViewModels
                {
                    ShowNotification(DialogNames.Unauthorized);
                }
-           });
-
-        
+           });        
 
         public void ShowNotification(string message)
         {

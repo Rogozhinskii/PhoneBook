@@ -4,6 +4,9 @@ using System;
 
 namespace PhoneBook.WPF.Core
 {
+    /// <summary>
+    /// базовая вью модель диалогового окна
+    /// </summary>
     public class DialogViewModel : BindableBase, IDialogAware
     {
         public virtual string Title => "";

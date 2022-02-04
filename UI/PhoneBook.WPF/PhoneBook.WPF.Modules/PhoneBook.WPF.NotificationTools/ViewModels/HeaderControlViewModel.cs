@@ -59,7 +59,9 @@ namespace PhoneBook.WPF.NotificationTools.ViewModels
 
 
 
-
+        /// <summary>
+        /// Вызывает диалоговое окно входа в приложение
+        /// </summary>
         public DelegateCommand ShowLoginDialog =>
            _showLoginDialog ??= _showLoginDialog = new(() =>
            {

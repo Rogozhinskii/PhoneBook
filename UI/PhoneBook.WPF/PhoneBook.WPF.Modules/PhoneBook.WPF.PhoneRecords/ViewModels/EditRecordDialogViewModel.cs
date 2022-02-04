@@ -8,6 +8,9 @@ using System.Runtime.CompilerServices;
 
 namespace PhoneBook.WPF.PhoneRecords.ViewModels
 {
+    /// <summary>
+    /// Вью модель диалогового окна редактирования записи
+    /// </summary>
     internal class EditRecordDialogViewModel:DialogViewModel
     {
 
