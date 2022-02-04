@@ -34,7 +34,7 @@ namespace PhoneBook.WPF.PhoneRecords.ViewModels
            _saveChangesCommand ??= _saveChangesCommand = new(() =>
            {
                SaveChanges(_originalRecord);
-               DialogResult result = new DialogResult(ButtonResult.OK);
+               DialogResult result = new(ButtonResult.OK);
                RaiseRequestClose(result);
            });
 

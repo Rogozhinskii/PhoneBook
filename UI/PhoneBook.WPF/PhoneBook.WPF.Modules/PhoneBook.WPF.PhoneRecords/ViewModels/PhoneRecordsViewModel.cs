@@ -84,8 +84,10 @@ namespace PhoneBook.WPF.PhoneRecords.ViewModels
            {
                if (_phoneRecordModel.IsUserCanAddNewRecord())
                {
-                   var dialogParameter = new DialogParameters();
-                   dialogParameter.Add(DialogNames.NewRecord, new PhoneRecordInfo());
+                   var dialogParameter = new DialogParameters
+                   {
+                       { DialogNames.NewRecord, new PhoneRecordInfo() }
+                   };
                    _dialogService.Show(DialogNames.AddRecordDialog, dialogParameter,async r =>
                    {
                        if (r.Result == ButtonResult.Cancel || r.Result==ButtonResult.None) return;                       
@@ -116,6 +118,7 @@ namespace PhoneBook.WPF.PhoneRecords.ViewModels
                    return;
                }   
                var itemList = (obj as ObservableCollection<object>).Cast<PhoneRecordInfo>().ToList();
+               if(itemList is null) return;
                var msg = $"Вы уверены, что хотите удалить {itemList.Count} записей?";
                var parameters = new DialogParameters{
                 { DialogNames.DialogMessage, msg }
@@ -160,8 +163,10 @@ namespace PhoneBook.WPF.PhoneRecords.ViewModels
 
         public void ShowNotification(string message)
         {
-            var dialogParameter = new DialogParameters();
-            dialogParameter.Add(DialogNames.DialogMessage,message);
+            var dialogParameter = new DialogParameters
+            {
+                { DialogNames.DialogMessage, message }
+            };
             _dialogService.ShowDialog(DialogNames.NotificationDialog, dialogParameter, null);
         }
 

@@ -32,18 +32,13 @@ namespace PhoneBook.WPF.Core
         /// <exception cref="InvalidOperationException"></exception>
         public HttpClient GetClient(HttpClientType clientType)
         {
-            HttpClient client = new();            
-            switch (clientType)
+            HttpClient client = new();
+            client.BaseAddress = clientType switch
             {
-                case HttpClientType.RepositoryClient:
-                    client.BaseAddress = new($"{_config.GetSection("ClientHost").Value}{_config.GetSection("PhoneRecordRepositoryAddress").Value}");
-                break;
-                case HttpClientType.AuthentificationClient:
-                    client.BaseAddress = new($"{_config.GetSection("ClientHost").Value}{_config.GetSection("AccountControllerAddress").Value}");
-                break;
-                    default: throw new InvalidOperationException("Invalig HttpClient Type");
-            }
-            
+                HttpClientType.RepositoryClient => new($"{_config.GetSection("ClientHost").Value}{_config.GetSection("PhoneRecordRepositoryAddress").Value}"),
+                HttpClientType.AuthentificationClient => new($"{_config.GetSection("ClientHost").Value}{_config.GetSection("AccountControllerAddress").Value}"),
+                _ => throw new InvalidOperationException("Invalig HttpClient Type"),
+            };
             return client;
         }
     }

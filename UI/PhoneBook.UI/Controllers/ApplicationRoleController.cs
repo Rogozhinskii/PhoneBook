@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using PhoneBook.Common.Models;
 using PhoneBook.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -27,7 +26,10 @@ namespace PhoneBook.Controllers
         
         private ApplicationRoleViewModel GetItem(ApplicationRole item)=>_mapper.Map<ApplicationRoleViewModel>(item);
        
-
+        /// <summary>
+        /// Возвразает представление наполненное зарегистрированными ролями 
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Roles()=>
             View(_roleManager.Roles.Select(r => new ApplicationRoleViewModel
                                                     {
@@ -37,7 +39,7 @@ namespace PhoneBook.Controllers
 
                                                     }).ToList());
         
-
+        
         [HttpGet]
         public async Task<IActionResult> AddEditApplicationRole(string id)
         {

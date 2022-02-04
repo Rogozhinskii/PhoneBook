@@ -2,11 +2,13 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PhoneBook.Common.Models;
-using PhoneBook.Interfaces;
 using System.Threading.Tasks;
 
 namespace PhoneBook.Controllers
 {
+    /// <summary>
+    /// Контроллер аутентификации пользователя
+    /// </summary>
     public class AccountController : Controller
     {       
         

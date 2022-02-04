@@ -89,7 +89,7 @@ namespace PhoneBook.DAL.Repository
         public async Task<T> DeleteAsync(T item, CancellationToken cancel = default)
         {
             if (item is null) throw new ArgumentNullException(nameof(item));
-            if (!(await ExistAsync(item)))
+            if (!(await ExistAsync(item,cancel)))
                 return null;
             _db.Remove(item);
             if (AutoSaveChanges)

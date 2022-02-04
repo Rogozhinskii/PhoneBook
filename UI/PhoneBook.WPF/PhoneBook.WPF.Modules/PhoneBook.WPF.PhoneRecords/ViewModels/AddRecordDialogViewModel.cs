@@ -39,7 +39,7 @@ namespace PhoneBook.WPF.PhoneRecords.ViewModels
 
         void ExecuteSaveChangesCommand()
         {            
-            DialogResult result = new DialogResult(ButtonResult.OK);
+            DialogResult result = new(ButtonResult.OK);
             result.Parameters.Add(DialogNames.NewRecord, PhoneRecord);
             RaiseRequestClose(result);
         }

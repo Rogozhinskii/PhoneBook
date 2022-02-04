@@ -1,13 +1,9 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using PhoneBook.Automapper;
 using PhoneBook.Common.Models;
-using PhoneBook.Entities;
 using PhoneBook.Interfaces;
-using PhoneBook.Models;
 
 namespace PhoneBook.Controllers
 {

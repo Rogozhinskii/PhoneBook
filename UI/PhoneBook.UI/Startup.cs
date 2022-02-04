@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PhoneBook.Common.Models;
+using PhoneBook.DAL;
 using PhoneBook.DAL.Context;
 using PhoneBook.Data;
 using PhoneBook.Interfaces;
@@ -66,7 +67,7 @@ namespace PhoneBook
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public async void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             //Если потребует создать БД с миграциями и тестовыми данными
             //using (var scope = app.ApplicationServices.CreateAsyncScope())

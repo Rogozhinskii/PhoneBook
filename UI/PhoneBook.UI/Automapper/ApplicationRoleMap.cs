@@ -4,6 +4,7 @@ using PhoneBook.Models;
 
 namespace PhoneBook.Automapper
 {
+
     public class ApplicationRoleMap:Profile
     {
         public ApplicationRoleMap()
