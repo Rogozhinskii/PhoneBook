@@ -1,11 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using PhoneBook.Common.RandomInfo;
 using PhoneBook.DAL.Context;
 using PhoneBook.DAL.Repository;
 using PhoneBook.Entities;
 using PhoneBook.Interfaces;
 using System.Collections.Generic;
+using System.Linq;
+using Tests.Helpers;
 
 namespace Tests
 {
@@ -13,52 +16,20 @@ namespace Tests
     public class PhoneRecordsRepositoryTest    
     {        
         private IRepository<PhoneRecord> _repository;
-
-        private void Populate(PhoneBookDB context)
-        {
-            var items = new List<PhoneRecord>()
-            {
-                new PhoneRecord
-                {
-                    FirstName = "Георгий",
-                    LastName = "Гагин"
-                },
-                new PhoneRecord
-                {
-                    FirstName = "Яков",
-                    LastName = "Абакшин"
-                }
-            };
-
-            context.AddRange(items);
-
-            context.SaveChanges();
-        }
-
-        private IRepository<PhoneRecord> GetInMemmoryRepository()
-        {
-            var options = new DbContextOptionsBuilder<PhoneBookDB>()
-                 .UseInMemoryDatabase(databaseName: "MockDB")
-                 .Options;
-
-            var initContext = new PhoneBookDB(options);
-            initContext.Database.EnsureCreated();
-            Populate(initContext);
-            var repository = new DbRepository<PhoneRecord>(initContext);
-            return repository;
-        }
+        
+        
 
         [TestInitialize]
         public void Setup()
-        {
-            _repository = GetInMemmoryRepository();
+        {                    
+            _repository = ContextHelper.Repository;
         }
 
         [TestMethod]
         public void ItemsCountTest()
         {
             var itemsCount = _repository.GetCountAsync().Result;
-            Assert.AreEqual(2, itemsCount);
+            Assert.IsTrue(itemsCount>0);
         }
 
         [TestMethod]
@@ -87,8 +58,9 @@ namespace Tests
         [DataRow(0)]
         public void GetPageTest(int pageindex)
         {
-            var page=_repository.GetPage(pageindex, _repository.GetCountAsync().Result).Result;            
-            Assert.AreEqual(2,page.PageSize);
+            var page=_repository.GetPage(pageindex, _repository.GetCountAsync().Result).Result;    
+            Assert.IsNotNull(page);
+            Assert.IsTrue(page.Items.Count() > 0);
         }
     }
 }
