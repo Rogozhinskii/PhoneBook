@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PhoneBook.Common.Models;
+using PhoneBook.Interfaces;
 using System.Threading.Tasks;
 
 namespace PhoneBook.Controllers
@@ -10,41 +11,42 @@ namespace PhoneBook.Controllers
     /// Контроллер аутентификации пользователя
     /// </summary>
     public class AccountController : Controller
-    {       
-        
-        private readonly SignInManager<User> _signInManager;
+    { 
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)=>
-            _signInManager = signInManager;
-        
+        private readonly IAuthentificationService _authentificationService;
 
+        public AccountController(SignInManager<User> signInManager, IAuthentificationService authentificationService)=>
+            _authentificationService = authentificationService;            
+        
 
         [HttpGet]
         public IActionResult Login()=>
             View();
         
         
-        [HttpPost, ValidateAntiForgeryToken]
-        [AllowAnonymous]
+        [HttpPost, ValidateAntiForgeryToken]        
         public async Task<IActionResult> Login(UserLogin login)
         {
             if (ModelState.IsValid)
             {
-                var loginResult = await _signInManager.PasswordSignInAsync(login.UserName,
-                                                                           login.Password,
-                                                                           false,
-                                                                           lockoutOnFailure: false);
-                if (loginResult.Succeeded)
+                var loginResult = await _authentificationService.Login(login);
+                if (loginResult.Success)
+                {
+                    HttpContext.Session.SetString("Token", loginResult.Token);
+                    HttpContext.Session.SetString("Role", loginResult.Role);
+                    HttpContext.Session.SetString("UserName", loginResult.UserName);
                     return RedirectToAction("Index", "PhoneRecords");
+                }
+
             }
             ModelState.AddModelError("", "Пользователь не найден");
-            return View(login);                     
+            return View(login);           
         }
 
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout(string returnUrl)
         {
-            await _signInManager.SignOutAsync();
+            HttpContext.Session.Clear();
             return RedirectToAction("Index", "PhoneRecords");
         }
 

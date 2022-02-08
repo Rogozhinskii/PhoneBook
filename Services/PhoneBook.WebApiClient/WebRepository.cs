@@ -5,13 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace PhoneBook.WebApiClient
 {
-    public class WebRepository<T>:IRepository<T> where T:IEntity,new()
+    public class WebRepository<T>:IRepository<T>, IAuthorizedRequest where T:IEntity,new()
     {
         private readonly HttpClient _client;
 
@@ -127,8 +128,13 @@ namespace PhoneBook.WebApiClient
             throw new NotImplementedException();
         }
 
-        public async Task<T> UpdateAsync(T item, CancellationToken cancel = default)
+        public void SetToken(string token)
         {
+            _client.DefaultRequestHeaders.Authorization=new AuthenticationHeaderValue("Bearer",token);
+        }
+
+        public async Task<T> UpdateAsync(T item, CancellationToken cancel = default)
+        {            
             var responce=await _client.PutAsJsonAsync("update",item,cancel).ConfigureAwait(false);
             return await responce.EnsureSuccessStatusCode()
                                        .Content.ReadFromJsonAsync<T>()

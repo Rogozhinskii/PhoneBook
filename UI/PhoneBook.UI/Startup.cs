@@ -15,6 +15,8 @@ using System;
 using System.Reflection;
 using PhoneBook.CommandsAndQueries.Commands;
 using PhoneBook.CommandsAndQueries.Queries;
+using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Http;
 
 namespace PhoneBook
 {
@@ -33,8 +35,18 @@ namespace PhoneBook
             services.AddTransient<DbInitializer>();
             services.AddHttpClient<IRepository<PhoneRecordInfo>, WebRepository<PhoneRecordInfo>>((client) =>
             {                
-                client.BaseAddress = new($"{Configuration["WebApi"]}{Configuration["PhoneRecordRepositoryAddress"]}");
-            });            
+                client.BaseAddress = new($"{Configuration["WebApi"]}{Configuration["PhoneRecordRepositoryAddress"]}");                
+            });
+            services.AddHttpClient<IAuthentificationService, ApiAuthentification>((client) =>
+            {
+                client.BaseAddress = new($"{Configuration["WebApi"]}{Configuration["AccountManagementControllerAddress"]}");
+            });
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(60);
+            });
+
             services.AddIdentity<User, ApplicationRole>()
                     .AddEntityFrameworkStores<PhoneBookDB>()
                     .AddDefaultTokenProviders()
@@ -86,7 +98,7 @@ namespace PhoneBook
                 app.UseExceptionHandler("/Error");
             }
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
             
             app.UseAuthentication();

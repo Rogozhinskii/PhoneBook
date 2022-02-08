@@ -1,4 +1,7 @@
-﻿using PhoneBook.Interfaces;
+﻿using PhoneBook.Api.Helpers;
+using PhoneBook.Interfaces;
+using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -6,6 +9,12 @@ namespace PhoneBook.WebApiClient
 {
     public class ApiAuthentification : IAuthentificationService
     {
+        private readonly HttpClient _client;
+
+        public ApiAuthentification(HttpClient client)
+        {
+            _client = client;
+        }
         public string AuthenticatedUserName => throw new System.NotImplementedException();
 
         public string AuthenticatedUserRole => throw new System.NotImplementedException();
@@ -15,9 +24,12 @@ namespace PhoneBook.WebApiClient
             throw new System.NotImplementedException();
         }
 
-        public Task<bool> Login(IUserLogin login, CancellationToken cancel = default)
+        public async Task<IAuthentificationResult> Login(IUserLogin login, CancellationToken cancel = default)
         {
-            throw new System.NotImplementedException();
+            var request = await _client.PostAsJsonAsync("login", login, cancel).ConfigureAwait(false);
+            var response = await request.EnsureSuccessStatusCode().Content.ReadFromJsonAsync<AuthentificationResult>().ConfigureAwait(false);
+
+            return response;
         }
 
         public Task<bool> Logout(CancellationToken cancel = default)

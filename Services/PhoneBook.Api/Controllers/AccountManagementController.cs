@@ -2,25 +2,35 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using PhoneBook.Api.Helpers;
 using PhoneBook.Common.Models;
+using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace PhoneBook.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AccountController : ControllerBase
+    public class AccountManagementController : ControllerBase
     {
-        private readonly ILogger<AccountController> _logger;
+        private readonly ILogger<AccountManagementController> _logger;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly JwtConfiguration _jwtConfig;
 
-        public AccountController(ILogger<AccountController> logger,UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountManagementController(ILogger<AccountManagementController> logger,UserManager<User> userManager, SignInManager<User> signInManager, IOptionsMonitor<JwtConfiguration> optionsMonitor)
         {
             _logger = logger;
             _userManager = userManager;
             _signInManager = signInManager;
+            _jwtConfig = optionsMonitor.CurrentValue;
         }
 
 
@@ -60,18 +70,100 @@ namespace PhoneBook.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Login(UserLogin userLogin)
         {
-            _logger.LogInformation($">>> Попытка входа в систему. Пользователь {userLogin.UserName}");
-            var loginResult=await _signInManager.PasswordSignInAsync(userLogin.UserName,userLogin.Password,false,false);            
-            if (loginResult.Succeeded)
+            if (ModelState.IsValid)
             {
-                _logger.LogInformation($">>> Вход выполнен. Пользователь {userLogin.UserName}");
-                return Ok(loginResult);
+                var existingUser = await _userManager.FindByNameAsync(userLogin.UserName);
+
+                if (existingUser == null)
+                {
+                    return BadRequest(new AuthentificationResult()
+                    {
+                        Errors = new List<string>() {
+                                "Invalid login request"
+                            },
+                        Success = false
+                    });
+                }
+
+                var isCorrect = await _userManager.CheckPasswordAsync(existingUser, userLogin.Password);
+                var userRole = (await _userManager.GetRolesAsync(existingUser)).FirstOrDefault();
+
+                if (!isCorrect)
+                {
+                    return BadRequest(new AuthentificationResult()
+                    {
+                        Errors = new List<string>() {
+                                "Invalid login request"
+                            },
+                        Success = false
+                    });
+                }
+
+                var jwtToken = GenerateJwtToken(existingUser, userRole);
+
+                return Ok(new AuthentificationResult()
+                {
+                    UserName = existingUser.UserName,
+                    Success = true,
+                    Token = jwtToken,
+                    Role=userRole
+                });
             }
-            else
+
+            return BadRequest(new AuthentificationResult()
             {
-                _logger.LogInformation($">>> Ошибка входа в систему. Пользователь {userLogin.UserName}");
-                return BadRequest(loginResult);
-            }   
+                Errors = new List<string>() {
+                        "Invalid payload"
+                    },
+                Success = false
+            });
+
+
+
+
+
+
+
+
+            //todo удалить
+            //_logger.LogInformation($">>> Попытка входа в систему. Пользователь {userLogin.UserName}");
+            //var loginResult=await _signInManager.PasswordSignInAsync(userLogin.UserName,userLogin.Password,false,false);            
+            //if (loginResult.Succeeded)
+            //{
+            //    _logger.LogInformation($">>> Вход выполнен. Пользователь {userLogin.UserName}");
+            //    return Ok(loginResult);
+            //}
+            //else
+            //{
+            //    _logger.LogInformation($">>> Ошибка входа в систему. Пользователь {userLogin.UserName}");
+            //    return BadRequest(loginResult);
+            //}   
+        }
+
+        private string GenerateJwtToken(User user, string role)
+        {
+            var jwtTokenHandler = new JwtSecurityTokenHandler();
+
+            var key = Encoding.ASCII.GetBytes(_jwtConfig.Secret);
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[]
+                {
+                    new Claim("Id", user.Id),
+                    new Claim(ClaimTypes.Role, role),
+                    new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                    new Claim(JwtRegisteredClaimNames.Sub, user.Email), //todo удалить
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                }),
+                Expires = DateTime.UtcNow.AddHours(6),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            var token = jwtTokenHandler.CreateToken(tokenDescriptor);
+            var jwtToken = jwtTokenHandler.WriteToken(token);
+
+            return jwtToken;
         }
 
         /// <summary>

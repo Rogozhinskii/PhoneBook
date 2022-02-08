@@ -17,7 +17,7 @@ namespace PhoneBook.Interfaces
         /// <param name="login"></param>
         /// <param name="cancel"></param>
         /// <returns></returns>
-        Task<bool> Login(IUserLogin login,CancellationToken cancel=default);
+        Task<IAuthentificationResult> Login(IUserLogin login,CancellationToken cancel=default);
 
         /// <summary>
         /// Выход

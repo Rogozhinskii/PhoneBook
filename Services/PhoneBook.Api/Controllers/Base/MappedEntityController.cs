@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PhoneBook.Common;
@@ -105,6 +106,7 @@ namespace PhoneBook.Api.Controllers.Base
         [HttpDelete]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize]
         public async Task<IActionResult> DeleteAsync(T item)
         {
             var result = await _repository.DeleteAsync(GetBase(item));
@@ -120,6 +122,7 @@ namespace PhoneBook.Api.Controllers.Base
         /// <param name="cancel"></param>
         /// <returns></returns>
         [HttpDelete("{id:int}")]
+        [Authorize(AuthenticationSchemes = "Bearer")]
         public async Task<IActionResult> DeleteByIdAsync(int id)
         {
             if(await _repository.DeleteByIdAsync(id) is not { } item)
@@ -150,7 +153,8 @@ namespace PhoneBook.Api.Controllers.Base
         /// <returns></returns>
         [HttpPut("update")]        
         [ProducesResponseType(StatusCodes.Status202Accepted)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]        
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "Administrator")]
         public async Task<IActionResult> UpdateAsync(T item)
         {
             var result=await _repository.UpdateAsync(GetBase(item));

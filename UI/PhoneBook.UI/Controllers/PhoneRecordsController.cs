@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PhoneBook.CommandsAndQueries.Queries;
@@ -52,8 +53,7 @@ namespace PhoneBook.Controllers
         /// </summary>
         /// <param name="id">идентификатор записи</param>
         /// <returns></returns>
-        [HttpGet]
-        [Authorize(Roles ="Administrator")]
+        [HttpGet]        
         public async Task<IActionResult> Delete(int? id)
         {            
             if (id is null) return NotFound();
@@ -69,6 +69,7 @@ namespace PhoneBook.Controllers
         [ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            ((IAuthorizedRequest)_repository).SetToken(HttpContext.Session.GetString("Token"));
             _logger.LogInformation($">>>Start deleting record. Record id is :{id}");
             if (await _repository.DeleteByIdAsync(id) is null) return NotFound();
             _logger.LogInformation($">>>Record deleted. Record id is :{id}");
@@ -140,7 +141,7 @@ namespace PhoneBook.Controllers
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
-        {
+        {            
             if (id is null){
                 _logger.LogError($"{nameof(PhoneRecordsController)}/Details passed id is null.");
                 return NotFound();

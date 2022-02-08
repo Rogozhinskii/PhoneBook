@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Common\PhoneBook.Common\PhoneBook.Common.csproj" />
+    <ProjectReference Include="..\PhoneBook.Api\PhoneBook.Api.csproj" />
     <ProjectReference Include="..\PhoneBook.Interfaces\PhoneBook.Interfaces.csproj" />
   </ItemGroup>
 

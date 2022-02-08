@@ -20,16 +20,17 @@ namespace PhoneBook.WebApiClient
 
         public string AuthenticatedUserRole { get; set; }
 
-        public async Task<bool> Login(IUserLogin login,CancellationToken cancel= default)
+        public async Task<IAuthentificationResult> Login(IUserLogin login,CancellationToken cancel= default)
         {
-            var responce =await _client.PostAsJsonAsync("login", login, cancel).ConfigureAwait(false);
-            if (responce.IsSuccessStatusCode)
-            {
-                AuthenticatedUserName=login.UserName;
-                await GetUserRoleAsync(login.UserName, cancel);
-                return true;
-            }                
-            return false;            
+            return null; //todo сделать нормально
+            //var responce =await _client.PostAsJsonAsync("login", login, cancel).ConfigureAwait(false);
+            //if (responce.IsSuccessStatusCode)
+            //{
+            //    AuthenticatedUserName=login.UserName;
+            //    await GetUserRoleAsync(login.UserName, cancel);
+            //    return true;
+            //}                
+            //return false;            
         }
 
 
