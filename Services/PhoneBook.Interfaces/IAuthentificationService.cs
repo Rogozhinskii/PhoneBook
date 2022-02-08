@@ -12,7 +12,7 @@ namespace PhoneBook.Interfaces
         public string AuthenticatedUserRole { get; }
 
         /// <summary>
-        /// Подключение к API
+        /// Вход в приложение
         /// </summary>
         /// <param name="login"></param>
         /// <param name="cancel"></param>

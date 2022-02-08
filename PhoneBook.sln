@@ -34,15 +34,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBook.WebApiClient", "S
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WPF", "WPF", "{87BF9EC8-F52F-4618-A7A9-EA867F09312C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneBook.WPF", "UI\PhoneBook.WPF\PhoneBook.WPF\PhoneBook.WPF.csproj", "{76C15BE8-9D1F-4F1D-9406-78027F55E7E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBook.WPF", "UI\PhoneBook.WPF\PhoneBook.WPF\PhoneBook.WPF.csproj", "{76C15BE8-9D1F-4F1D-9406-78027F55E7E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneBook.WPF.PhoneRecords", "UI\PhoneBook.WPF\PhoneBook.WPF.Modules\PhoneBook.WPF.PhoneRecords\PhoneBook.WPF.PhoneRecords.csproj", "{264680B4-9AB3-492C-A5EE-A6473864F8BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBook.WPF.PhoneRecords", "UI\PhoneBook.WPF\PhoneBook.WPF.Modules\PhoneBook.WPF.PhoneRecords\PhoneBook.WPF.PhoneRecords.csproj", "{264680B4-9AB3-492C-A5EE-A6473864F8BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneBook.WPF.Core", "UI\PhoneBook.WPF\PhoneBook.WPF.Core\PhoneBook.WPF.Core.csproj", "{631F0F69-9177-48EB-9876-F35DE1C9A374}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBook.WPF.Core", "UI\PhoneBook.WPF\PhoneBook.WPF.Core\PhoneBook.WPF.Core.csproj", "{631F0F69-9177-48EB-9876-F35DE1C9A374}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PhoneBook.WPF.Modules", "PhoneBook.WPF.Modules", "{DC4AC355-65C9-4824-BB6C-BF1DF38C9519}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneBook.WPF.NotificationTools", "UI\PhoneBook.WPF\PhoneBook.WPF.Modules\PhoneBook.WPF.NotificationTools\PhoneBook.WPF.NotificationTools.csproj", "{4175D9FC-38FC-4D81-BD07-4586D6B41878}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBook.WPF.NotificationTools", "UI\PhoneBook.WPF\PhoneBook.WPF.Modules\PhoneBook.WPF.NotificationTools\PhoneBook.WPF.NotificationTools.csproj", "{4175D9FC-38FC-4D81-BD07-4586D6B41878}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneBook.CommandsAndQueries", "Services\PhoneBook.CommandsAndQueries\PhoneBook.CommandsAndQueries.csproj", "{6457F137-D219-43D7-BA49-CA15FB5011C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -98,6 +100,10 @@ Global
 		{4175D9FC-38FC-4D81-BD07-4586D6B41878}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4175D9FC-38FC-4D81-BD07-4586D6B41878}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4175D9FC-38FC-4D81-BD07-4586D6B41878}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6457F137-D219-43D7-BA49-CA15FB5011C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6457F137-D219-43D7-BA49-CA15FB5011C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6457F137-D219-43D7-BA49-CA15FB5011C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6457F137-D219-43D7-BA49-CA15FB5011C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -117,6 +123,7 @@ Global
 		{631F0F69-9177-48EB-9876-F35DE1C9A374} = {87BF9EC8-F52F-4618-A7A9-EA867F09312C}
 		{DC4AC355-65C9-4824-BB6C-BF1DF38C9519} = {87BF9EC8-F52F-4618-A7A9-EA867F09312C}
 		{4175D9FC-38FC-4D81-BD07-4586D6B41878} = {DC4AC355-65C9-4824-BB6C-BF1DF38C9519}
+		{6457F137-D219-43D7-BA49-CA15FB5011C4} = {443EC4B6-188D-418D-BAFD-62B655B40A17}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {454121EF-DC80-4AFA-81F5-2166FE0BE99D}

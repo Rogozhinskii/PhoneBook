@@ -81,13 +81,14 @@ namespace PhoneBook.Interfaces
         /// <returns></returns>
         Task<IPage<T>> GetPage(int pageIndex,int pageSize,CancellationToken cancel=default);
 
+
         /// <summary>
         /// Возвращает перечисление сущностей удовлетворяющих заданному условия делегата Func<T,bool>
         /// </summary>
         /// <param name="filterExpression"></param>
         /// <param name="cancel"></param>
         /// <returns></returns>
-        Task<IEnumerable<T>> WhereAsync(Func<T, bool> filterExpression, CancellationToken cancel = default);
+        Task<IEnumerable<dynamic>> WhereAsync(Func<dynamic, bool> filterExpression, CancellationToken cancel = default);
 
         /// <summary>
         /// Изменяет режим сохранения изменений в хранилище. если autoSaveChanges is true, то сохранения будут выполняться автоматически
@@ -123,12 +124,12 @@ namespace PhoneBook.Interfaces
         Task<IEnumerable<T>> GetAsync(int skip, int count, CancellationToken cancel = default);
 
 
-        /// <summary>
-        /// Возвращает страницу наполненную перечислением сущностей, удовлетворяющих значению искомой строки
-        /// </summary>
-        /// <param name="searchString"></param>
-        /// <param name="cancel"></param>
-        /// <returns></returns>
-        Task<IPage<T>> GetPage(string filterString, CancellationToken cancel = default);
+        ///// <summary>
+        ///// Возвращает страницу наполненную перечислением сущностей, удовлетворяющих значению искомой строки
+        ///// </summary>
+        ///// <param name="searchString"></param>
+        ///// <param name="cancel"></param>
+        ///// <returns></returns>
+        //Task<IPage<T>> GetPage(string filterString, CancellationToken cancel = default);
     }
 }
