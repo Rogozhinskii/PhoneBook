@@ -6,6 +6,8 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.13">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -25,6 +27,7 @@
     <ProjectReference Include="..\..\Data\PhoneBook.DAL\PhoneBook.DAL.csproj" />
     <ProjectReference Include="..\..\PhoneBook.DAL.SQLite\PhoneBook.DAL.SQLite.csproj" />
     <ProjectReference Include="..\..\PhoneBook.DAL.SqlServer\PhoneBook.DAL.SqlServer.csproj" />
+    <ProjectReference Include="..\..\Services\PhoneBook.CommandsAndQueries\PhoneBook.CommandsAndQueries.csproj" />
     <ProjectReference Include="..\..\Services\PhoneBook.Interfaces\PhoneBook.Interfaces.csproj" />
     <ProjectReference Include="..\..\Services\PhoneBook.WebApiClient\PhoneBook.WebApiClient.csproj" />
   </ItemGroup>

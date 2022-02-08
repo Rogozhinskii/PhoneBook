@@ -1,7 +1,9 @@
 ﻿using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using PhoneBook.CommandsAndQueries.Queries;
 using PhoneBook.Common.Models;
 using PhoneBook.Interfaces;
 
@@ -14,14 +16,16 @@ namespace PhoneBook.Controllers
     {
         private readonly IRepository<PhoneRecordInfo> _repository;
 
-        //private readonly IMappedRepository<PhoneRecordViewModel, PhoneRecord> _repository;
+        
         private readonly ILogger _logger;
 
+        private readonly IMediator _mediator;
         public PhoneRecordsController(IRepository<PhoneRecordInfo> repository,
-                                      ILogger<PhoneRecordsController> logger)
+                                      ILogger<PhoneRecordsController> logger, IMediator mediator)
         {
             _repository = repository;            
-            _logger = logger;            
+            _logger = logger; 
+            _mediator = mediator;
         }
 
         /// <summary>
@@ -36,20 +40,11 @@ namespace PhoneBook.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Index(string currentFilter, string searchString, int? pageIndex,int? pageSize)
         {
-            
-            if (searchString != null){
-                pageIndex = 0;
-                ViewData["CurrentFilter"] = searchString;
-                _logger.LogInformation($"Redirect to {nameof(PhoneRecordsController)} index page.Filter text:{searchString}");
-                return View(await _repository.GetPage(searchString));
-            }
-            else{
-                searchString = currentFilter;
-            }
             ViewData["pageSize"] = pageSize;
             ViewData["CurrentFilter"] = searchString;
             _logger.LogInformation($"Redirect to {nameof(PhoneRecordsController)} index page.Filter text:{searchString}");
-            return View(await _repository.GetPage(pageIndex ?? 0, pageSize??5));            
+            return View(await _mediator.Send(new GetPageQuery { PageIndex = pageIndex ?? 0, PageSize = pageSize ?? 5, SearchString = searchString }));
+                 
         }
 
         /// <summary>

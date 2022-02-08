@@ -10,7 +10,11 @@ using PhoneBook.DAL.Context;
 using PhoneBook.Data;
 using PhoneBook.Interfaces;
 using PhoneBook.WebApiClient;
+using MediatR;
 using System;
+using System.Reflection;
+using PhoneBook.CommandsAndQueries.Commands;
+using PhoneBook.CommandsAndQueries.Queries;
 
 namespace PhoneBook
 {
@@ -56,7 +60,7 @@ namespace PhoneBook
                 options.LogoutPath = "/Account/Logout";
                 options.SlidingExpiration = true;
             });
-
+            services.AddMediatR(typeof(GetPageQuery).Assembly);
             services.AddAutoMapper(typeof(Startup));
             services.AddMvc();
             services.AddControllersWithViews();
