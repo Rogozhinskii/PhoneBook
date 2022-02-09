@@ -34,30 +34,30 @@ namespace PhoneBook.Api.Controllers
         }
 
 
-        /// <summary>
-        /// Выполняет регистрацию пользователя
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        [HttpPost("registration")]        
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Register(UserRegistration model)
-        {
-            _logger.LogInformation($">>> Рестрация пользователя. Пользователь {model.LoginProp}");
-            var user = new User { UserName = model.LoginProp };
-            var createResult=await _userManager.CreateAsync(user,model.Password);
-            if (createResult.Succeeded)
-            {
-                _logger.LogInformation($">>> Пользователь {model.LoginProp} зарегистрирован");
-                await _signInManager.SignInAsync(user,false);
-                return Ok(createResult);
-            }
-            else
-            {
-                return BadRequest(createResult);
-            }
-        }
+        ///// <summary>
+        ///// Выполняет регистрацию пользователя
+        ///// </summary>
+        ///// <param name="model"></param>
+        ///// <returns></returns>
+        //[HttpPost("registration")]        
+        //[ProducesResponseType(StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
+        //public async Task<IActionResult> Register(UserRegistration model)
+        //{
+        //    _logger.LogInformation($">>> Рестрация пользователя. Пользователь {model.LoginProp}");
+        //    var user = new User { UserName = model.LoginProp };
+        //    var createResult=await _userManager.CreateAsync(user,model.Password);
+        //    if (createResult.Succeeded)
+        //    {
+        //        _logger.LogInformation($">>> Пользователь {model.LoginProp} зарегистрирован");
+        //        await _signInManager.SignInAsync(user,false);
+        //        return Ok(createResult);
+        //    }
+        //    else
+        //    {
+        //        return BadRequest(createResult);
+        //    }
+        //}
 
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace PhoneBook.Api.Controllers
             });
         }
 
-        private string GenerateJwtToken(User user, string role)
+        private string GenerateJwtToken(IdentityUser user, string role)
         {
             var jwtTokenHandler = new JwtSecurityTokenHandler();
 
@@ -182,6 +182,9 @@ namespace PhoneBook.Api.Controllers
         public async Task<IActionResult> Logout()
         {
             _logger.LogInformation($">>> Выход  пользователя из приложения");
+            
+            
+            
             await _signInManager.SignOutAsync();
             return Ok();
         }

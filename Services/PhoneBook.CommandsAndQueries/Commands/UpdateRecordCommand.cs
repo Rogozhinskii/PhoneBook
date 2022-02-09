@@ -9,6 +9,7 @@ namespace PhoneBook.CommandsAndQueries.Commands
     public class UpdateRecordCommand : IRequest<PhoneRecordInfo> 
     {
         public PhoneRecordInfo UpdatableRecord { get; set; }
+        public string Token { get; set; }
     }
 
 
@@ -20,7 +21,7 @@ namespace PhoneBook.CommandsAndQueries.Commands
             _repository = repository;
 
         public async Task<PhoneRecordInfo> Handle(UpdateRecordCommand request, CancellationToken cancellationToken) =>
-             await _repository.UpdateAsync(request.UpdatableRecord, cancellationToken);
+             await _repository.UpdateAsync(request.UpdatableRecord,request.Token, cancellationToken);
 
     }
 }

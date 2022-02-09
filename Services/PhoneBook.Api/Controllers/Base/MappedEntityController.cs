@@ -140,6 +140,7 @@ namespace PhoneBook.Api.Controllers.Base
         /// <returns></returns>
         [HttpPost("addnew")]
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = UserRoles.Administrator + "," + UserRoles.RegularUser)]
         public async Task<IActionResult> AddAsync(T item)
         {
             var result = await _repository.AddAsync(GetBase(item));

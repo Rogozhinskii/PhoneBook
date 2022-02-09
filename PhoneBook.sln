@@ -44,7 +44,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PhoneBook.WPF.Modules", "Ph
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBook.WPF.NotificationTools", "UI\PhoneBook.WPF\PhoneBook.WPF.Modules\PhoneBook.WPF.NotificationTools\PhoneBook.WPF.NotificationTools.csproj", "{4175D9FC-38FC-4D81-BD07-4586D6B41878}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneBook.CommandsAndQueries", "Services\PhoneBook.CommandsAndQueries\PhoneBook.CommandsAndQueries.csproj", "{6457F137-D219-43D7-BA49-CA15FB5011C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBook.CommandsAndQueries", "Services\PhoneBook.CommandsAndQueries\PhoneBook.CommandsAndQueries.csproj", "{6457F137-D219-43D7-BA49-CA15FB5011C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneBook.Domain", "Common\PhoneBook.Domain\PhoneBook.Domain.csproj", "{822DDE20-52C6-41BD-9E57-F9B60A870F0E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -104,6 +106,10 @@ Global
 		{6457F137-D219-43D7-BA49-CA15FB5011C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6457F137-D219-43D7-BA49-CA15FB5011C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6457F137-D219-43D7-BA49-CA15FB5011C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{822DDE20-52C6-41BD-9E57-F9B60A870F0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{822DDE20-52C6-41BD-9E57-F9B60A870F0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{822DDE20-52C6-41BD-9E57-F9B60A870F0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{822DDE20-52C6-41BD-9E57-F9B60A870F0E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -124,6 +130,7 @@ Global
 		{DC4AC355-65C9-4824-BB6C-BF1DF38C9519} = {87BF9EC8-F52F-4618-A7A9-EA867F09312C}
 		{4175D9FC-38FC-4D81-BD07-4586D6B41878} = {DC4AC355-65C9-4824-BB6C-BF1DF38C9519}
 		{6457F137-D219-43D7-BA49-CA15FB5011C4} = {443EC4B6-188D-418D-BAFD-62B655B40A17}
+		{822DDE20-52C6-41BD-9E57-F9B60A870F0E} = {14E4D682-CA58-4CF5-A9D5-99AF9014C80E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {454121EF-DC80-4AFA-81F5-2166FE0BE99D}

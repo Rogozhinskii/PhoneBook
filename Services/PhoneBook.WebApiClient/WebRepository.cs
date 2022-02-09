@@ -23,7 +23,23 @@ namespace PhoneBook.WebApiClient
             _client = client;
         }
 
+        public async Task<T> DeleteByIdAsync(int id, string token, CancellationToken cancel = default)
+        {
+            SetToken(token);
+            return await DeleteByIdAsync(id, cancel).ConfigureAwait(false);
+        }
 
+        public async Task<T> AddAsync(T item, string token, CancellationToken cancel = default)
+        {
+            SetToken(token);
+            return await AddAsync(item, cancel).ConfigureAwait(false);
+        }
+
+        public async Task<T> UpdateAsync(T item, string token, CancellationToken cancel = default)
+        {
+            SetToken(token);
+            return await UpdateAsync(item, cancel).ConfigureAwait(false);
+        }
 
         public async Task<T> GetByIdAsync(int id, CancellationToken cancel = default) =>
             await _client.GetFromJsonAsync<T>($"{id}", cancel).ConfigureAwait(false);
@@ -37,9 +53,7 @@ namespace PhoneBook.WebApiClient
         }
 
 
-
-
-        public async Task<T> AddAsync(T item, CancellationToken cancel = default)
+        private async Task<T> AddAsync(T item, CancellationToken cancel = default)
         {
             var responce = await _client.PostAsJsonAsync("addnew", item, cancel).ConfigureAwait(false);
             var result = await responce.EnsureSuccessStatusCode()
@@ -47,27 +61,7 @@ namespace PhoneBook.WebApiClient
                                      .ConfigureAwait(false);
             return result;
         }
-
-
-        public void ChangeSaveMode(bool autoSaveChanges)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<T> DeleteAsync(T item, CancellationToken cancel = default)
-        {
-            var request = new HttpRequestMessage(HttpMethod.Delete, "")
-            {
-                Content = JsonContent.Create(item)
-            };
-            var responce = await _client.SendAsync(request, cancel).ConfigureAwait(false);
-            if (responce.StatusCode == HttpStatusCode.BadRequest)
-                return default;
-            return await responce.EnsureSuccessStatusCode()
-                                  .Content.ReadFromJsonAsync<T>(cancellationToken: cancel)
-                                  .ConfigureAwait(false);
-
-        }
+                    
 
         public async Task<T> DeleteByIdAsync(int id, CancellationToken cancel = default)
         {
@@ -77,31 +71,6 @@ namespace PhoneBook.WebApiClient
                                 .ReadFromJsonAsync<T>(cancellationToken: cancel)
                                 .ConfigureAwait(false);
         }
-                
-
-        public Task<bool> ExistAsync(int id, CancellationToken cancel = default)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<bool> ExistAsync(T item, CancellationToken cancel = default)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<IEnumerable<T>> GetAllAsync(CancellationToken cancel = default) =>
-            await _client.GetFromJsonAsync<IEnumerable<T>>("getAll").ConfigureAwait(false);
-
-
-
-        public Task<IEnumerable<T>> GetAsync(int skip, int count, CancellationToken cancel = default)
-        {
-            throw new NotImplementedException();
-        }
-                
-
-        public async Task<int> GetCountAsync(CancellationToken cancel = default) =>
-            await _client.GetFromJsonAsync<int>("count", cancel).ConfigureAwait(false);
 
         public async Task<IPage<T>> GetPage(int pageIndex, int pageSize, CancellationToken cancel = default)
         {
@@ -141,13 +110,7 @@ namespace PhoneBook.WebApiClient
         }
 
 
-
-        public Task<int> SaveChangesAsync(CancellationToken cancel = default)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<T> UpdateAsync(T item, CancellationToken cancel = default)
+        private async Task<T> UpdateAsync(T item, CancellationToken cancel = default)
         {
             var responce = await _client.PutAsJsonAsync("update", item, cancel).ConfigureAwait(false);
             return await responce.EnsureSuccessStatusCode()
@@ -155,27 +118,6 @@ namespace PhoneBook.WebApiClient
                                        .ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<T>> WhereAsync(Func<T, bool> filterExpression, CancellationToken cancel = default)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<T> DeleteByIdAsync(int id, string token, CancellationToken cancel = default)
-        {
-            SetToken(token);
-            return await DeleteByIdAsync(id, cancel).ConfigureAwait(false);
-        }
-
-        public async Task<T> AddAsync(T item, string token, CancellationToken cancel = default)
-        {
-            SetToken(token);
-            return await AddAsync(item, cancel).ConfigureAwait(false);
-        }
-
-        public async Task<T> UpdateAsync(T item, string token, CancellationToken cancel = default)
-        {
-            SetToken(token);
-            return await UpdateAsync(item, cancel).ConfigureAwait(false);
-        }
+       
     }
 }

@@ -45,6 +45,10 @@ namespace PhoneBook
             {
                 client.BaseAddress = new($"{Configuration["WebApi"]}{Configuration["PermissionControllerAddress"]}");
             });
+            services.AddHttpClient<IUserManagementService, UserManagementService>((client) =>
+            {
+                client.BaseAddress = new($"{Configuration["WebApi"]}{Configuration["UserManagementControllerAddress"]}");
+            });
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(60);

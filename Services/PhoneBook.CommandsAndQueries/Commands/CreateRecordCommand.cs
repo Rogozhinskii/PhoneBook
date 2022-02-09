@@ -20,7 +20,7 @@ namespace PhoneBook.CommandsAndQueries.Commands
             _repository = repository;
 
         public async Task<PhoneRecordInfo> Handle(CreateRecordCommand request, CancellationToken cancellationToken)        
-        => await _repository.AddAsync(request.Record, cancellationToken).ConfigureAwait(false);
+        => await _repository.AddAsync(request.Record,request.Token, cancellationToken).ConfigureAwait(false);
 
 
     }

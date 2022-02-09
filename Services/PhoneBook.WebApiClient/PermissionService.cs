@@ -18,7 +18,7 @@ namespace PhoneBook.WebApiClient
         {
             SetToken(token);
             var responce = await _client.GetAsync("cancreate", cancelationToken).ConfigureAwait(false);
-            if (responce.StatusCode == HttpStatusCode.Unauthorized || responce.StatusCode == HttpStatusCode.NotFound)
+            if (responce.StatusCode == HttpStatusCode.Unauthorized || responce.StatusCode == HttpStatusCode.NotFound || responce.StatusCode == HttpStatusCode.Forbidden)
                 return false;
             return true;
         }
@@ -27,7 +27,7 @@ namespace PhoneBook.WebApiClient
         {
             SetToken(token);
             var responce = await _client.GetAsync("candelete", cancelationToken).ConfigureAwait(false);
-            if (responce.StatusCode == HttpStatusCode.Unauthorized || responce.StatusCode == HttpStatusCode.NotFound)
+            if (responce.StatusCode == HttpStatusCode.Unauthorized || responce.StatusCode == HttpStatusCode.NotFound || responce.StatusCode == HttpStatusCode.Forbidden)
                 return false;
             return true;
         }
@@ -36,7 +36,7 @@ namespace PhoneBook.WebApiClient
         {
             SetToken(token);
             var responce=await _client.GetAsync("canedit", cancelationToken).ConfigureAwait(false);
-            if(responce.StatusCode==HttpStatusCode.Unauthorized || responce.StatusCode==HttpStatusCode.NotFound)
+            if(responce.StatusCode==HttpStatusCode.Unauthorized || responce.StatusCode==HttpStatusCode.NotFound || responce.StatusCode==HttpStatusCode.Forbidden)
                 return false;
             return true;
         }

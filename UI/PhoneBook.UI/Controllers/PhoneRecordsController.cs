@@ -107,7 +107,7 @@ namespace PhoneBook.Controllers
             if (!canCreate) return RedirectToAccesDeniedPage();
             if (record is null) return NotFound();
             _logger.LogInformation($">>>Start creating a new record.");
-            var result =await _mediator.Send(new CreateRecordCommand { Record = record }); 
+            var result = await _mediator.Send(new CreateRecordCommand { Record = record, Token = GetToken() }); 
             _logger.LogInformation($">>>New record created. Record id is {result.Id}");
             TempData["SuccessMessage"] = $"Record created";
             return Redirect("~/");
@@ -141,7 +141,7 @@ namespace PhoneBook.Controllers
         [ActionName(nameof(Edit))]
         [Authorize(Roles = UserRoles.Administrator)]
         public async Task<IActionResult> Edit(PhoneRecordInfo phoneRecord) =>
-            await _mediator.Send(new UpdateRecordCommand { UpdatableRecord=phoneRecord}) is { } record
+            await _mediator.Send(new UpdateRecordCommand { UpdatableRecord=phoneRecord,Token=GetToken() }) is { } record
             ? Redirect("~/")
             : NotFound();
 
