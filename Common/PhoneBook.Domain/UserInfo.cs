@@ -1,5 +1,4 @@
-﻿using PhoneBook.Interfaces;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace PhoneBook.Common.Models
 {

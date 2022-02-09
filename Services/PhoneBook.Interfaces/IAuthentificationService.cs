@@ -1,4 +1,5 @@
-﻿using PhoneBook.Domain;
+﻿using PhoneBook.Common.Models;
+using PhoneBook.Domain;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -21,7 +22,7 @@ namespace PhoneBook.Interfaces
         Task<IAuthentificationResult> Login(IUserLogin login,CancellationToken cancel=default);
 
 
-        Task<IAuthentificationResult> RegisterUser(IUserLogin userModel,CancellationToken cancel=default);
+        Task<IAuthentificationResult> RegisterUser(UserInfo userModel,CancellationToken cancel=default);
 
         /// <summary>
         /// Выход

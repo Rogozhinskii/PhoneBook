@@ -83,10 +83,10 @@ namespace PhoneBook.WebApiClient
             return await _client.GetFromJsonAsync<IEnumerable<User>>("getUsers", cancel).ConfigureAwait(false);
         }
 
-        public async Task<bool> CreateUser(IUserLogin user, string token, CancellationToken cancel = default)
-        {            
-            var userInfo = (UserInfo)user;
-            var responce = await _client.PostAsJsonAsync("addNewUser", userInfo, cancel).ConfigureAwait(false);
+        public async Task<bool> CreateUser(UserInfo user, string token, CancellationToken cancel = default)
+        {           
+            
+            var responce = await _client.PostAsJsonAsync("addNewUser", user, cancel).ConfigureAwait(false);
             var result = await responce.EnsureSuccessStatusCode()
                                      .Content.ReadFromJsonAsync<bool>(cancellationToken: cancel)
                                      .ConfigureAwait(false);

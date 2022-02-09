@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using PhoneBook.Common.Models;
 using PhoneBook.Interfaces;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -49,6 +50,11 @@ namespace PhoneBook.WebApiClient
         }
 
         public Task<IAuthentificationResult> RegisterUser(IUserLogin userModel, CancellationToken cancel = default)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<IAuthentificationResult> RegisterUser(UserInfo userModel, CancellationToken cancel = default)
         {
             throw new System.NotImplementedException();
         }

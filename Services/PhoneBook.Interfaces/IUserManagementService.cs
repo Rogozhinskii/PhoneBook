@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+using PhoneBook.Common.Models;
 using PhoneBook.Domain;
 
 namespace PhoneBook.Interfaces
@@ -14,7 +14,7 @@ namespace PhoneBook.Interfaces
         Task<bool> CreateRole(ApplicationRole role,string token,CancellationToken cancel=default);
         Task<bool> DeleteRole(ApplicationRole role, string token, CancellationToken cancel = default);
         Task<IEnumerable<User>> GetAllUsers(string token, CancellationToken cancel = default);
-        Task<bool> CreateUser(IUserLogin user, string token, CancellationToken cancel = default);
+        Task<bool> CreateUser(UserInfo user, string token, CancellationToken cancel = default);
         Task<User> GetUserById(string id, string token, CancellationToken cancel = default);
         Task<IList<string>> GetUserRoles(string userId, string token, CancellationToken cancel = default);
         Task<bool> UpdateUser(User user, string token, CancellationToken cancel = default);
