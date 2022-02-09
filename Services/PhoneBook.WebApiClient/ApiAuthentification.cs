@@ -17,20 +17,17 @@ namespace PhoneBook.WebApiClient
         {
             _client = client;
         }
-        public string AuthenticatedUserName => throw new System.NotImplementedException();
+        public string AuthenticatedUserName { get; set; }
 
-        public string AuthenticatedUserRole => throw new System.NotImplementedException();
-
-        public Task<string> GetUserRoleAsync(string userName, CancellationToken cancel = default)
-        {
-            throw new System.NotImplementedException();
-        }
+        public string AuthenticatedUserRole { get; set; }
+                
 
         public async Task<IAuthentificationResult> Login(IUserLogin login, CancellationToken cancel = default)
         {
             var request = await _client.PostAsJsonAsync("login", login, cancel).ConfigureAwait(false);
             var response = await request.EnsureSuccessStatusCode().Content.ReadFromJsonAsync<AuthentificationResult>().ConfigureAwait(false);
-
+            AuthenticatedUserName= response.UserName;
+            AuthenticatedUserRole = response.Role;
             return response;
         }
 

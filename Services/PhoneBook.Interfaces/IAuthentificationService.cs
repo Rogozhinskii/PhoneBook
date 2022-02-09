@@ -31,13 +31,7 @@ namespace PhoneBook.Interfaces
         /// <returns></returns>
         Task<bool> Logout(CancellationToken cancel = default);
 
-        /// <summary>
-        /// Возвращает роль пользователя
-        /// </summary>
-        /// <param name="userName"></param>
-        /// <param name="cancel"></param>
-        /// <returns></returns>
-        Task<string> GetUserRoleAsync(string userName, CancellationToken cancel = default);
+       
 
     }
 }
