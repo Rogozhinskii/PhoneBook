@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using PhoneBook.Domain;
 
 namespace PhoneBook.Interfaces
 {
@@ -12,16 +13,16 @@ namespace PhoneBook.Interfaces
         Task<bool> UpdateRole(IdentityRole role,string token,CancellationToken cancel=default);
         Task<bool> CreateRole(IdentityRole role,string token,CancellationToken cancel=default);
         Task<bool> DeleteRole(IdentityRole role, string token, CancellationToken cancel = default);
-        Task<IEnumerable<IdentityUser>> GetAllUsers(string token, CancellationToken cancel = default);
+        Task<IEnumerable<User>> GetAllUsers(string token, CancellationToken cancel = default);
         Task<bool> CreateUser(IUserLogin user, string token, CancellationToken cancel = default);
-        Task<IdentityUser> GetUserById(string id, string token, CancellationToken cancel = default);
+        Task<User> GetUserById(string id, string token, CancellationToken cancel = default);
         Task<IList<string>> GetUserRoles(string userId, string token, CancellationToken cancel = default);
-        Task<bool> UpdateUser(IdentityUser user, string token, CancellationToken cancel = default);
-        Task<bool> RemoveFromRole(IdentityUser user,string existingRole, string token, CancellationToken cancel = default);
-        Task<bool> AddToRole(IdentityUser user,string newRole, string token, CancellationToken cancel = default);
-
+        Task<bool> UpdateUser(User user, string token, CancellationToken cancel = default);
+        Task<bool> RemoveFromRole(User user,string existingRole, string token, CancellationToken cancel = default);
+        Task<bool> AddToRole(User user,string newRole, string token, CancellationToken cancel = default);
+        Task<bool> DeleteUserById(string id, string token, CancellationToken cancel = default);
         Task<string> GetRoleIdByName(string roleName,string token, CancellationToken cancel = default);
 
-        Task<bool> TT(User user, string newRole, string token, CancellationToken cancel = default);
+        
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace PhoneBook.Common.Models
+namespace PhoneBook.Domain
 {
     public class User:IdentityUser
     {

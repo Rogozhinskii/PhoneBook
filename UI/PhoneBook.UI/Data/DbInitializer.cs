@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using PhoneBook.Common.Models;
 using PhoneBook.Common.RandomInfo;
 using PhoneBook.DAL.Context;
+using PhoneBook.Domain;
 using PhoneBook.Entities;
 using System.Linq;
 using System.Threading.Tasks;

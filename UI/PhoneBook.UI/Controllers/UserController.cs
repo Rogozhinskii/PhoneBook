@@ -10,6 +10,7 @@ using PhoneBook.CommandsAndQueries.Commands.UsersAndRolesCommands.UsersCommands;
 using PhoneBook.CommandsAndQueries.Queries.UsersAndRolesQueries.RolesQueries;
 using PhoneBook.CommandsAndQueries.Queries.UsersAndRolesQueries.UsersQueries;
 using PhoneBook.Common.Models;
+using PhoneBook.Domain;
 using PhoneBook.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -144,18 +145,16 @@ namespace PhoneBook.Controllers
             return View(user);
         }
 
-        //[HttpPost]
-        //[ActionName("DeleteUser")]
-        //public async Task<IActionResult> DeleteUserConfirmed(string id)
-        //{
-        //    if (string.IsNullOrEmpty(id)) return BadRequest("id is null");
-        //    User applicationUser = await _userManager.FindByIdAsync(id);
-        //    if(applicationUser is null) return NotFound("User not found");
-        //    IdentityResult result = await _userManager.DeleteAsync(applicationUser);
-        //    if (result.Succeeded)
-        //        return RedirectToAction("Index");
-        //    return BadRequest("Something wrong");
-        //}
+        [HttpPost]
+        [ActionName("DeleteUser")]
+        public async Task<IActionResult> DeleteUserConfirmed(string id)
+        {
+            if (string.IsNullOrEmpty(id)) return BadRequest("id is null");
+            var result = await _mediator.Send(new DeleteUserByIdCommand { Id = id, Token = GetToken() });
+            if (result)
+                return RedirectToAction("Index");
+            return BadRequest("Something wrong");
+        }
 
     }
 }

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PhoneBook.Common.Models;
+using PhoneBook.Domain;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -93,7 +94,7 @@ namespace PhoneBook.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [Authorize(AuthenticationSchemes = "Bearer", Roles = UserRoles.Administrator)]
-        public async Task<IActionResult> UpdateUser(IdentityUser model)
+        public async Task<IActionResult> UpdateUser(User model)
         {
             User user = await _userManager.FindByIdAsync(model.Id);
             user.UserName = model.UserName;
@@ -108,10 +109,10 @@ namespace PhoneBook.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [Authorize(AuthenticationSchemes = "Bearer", Roles = UserRoles.Administrator)]
-        public async Task<IActionResult> RemoveFromUser(IdentityUser model,string existingRole)
+        public async Task<IActionResult> RemoveFromUser(User model,string existingRole)
         {
-            User user = await _userManager.FindByIdAsync(model.Id);
-            var result = await _userManager.RemoveFromRoleAsync(user, existingRole);
+            //User user = await _userManager.FindByIdAsync(model.Id);
+            var result = await _userManager.RemoveFromRoleAsync(model, existingRole);
             if (result.Succeeded)
                 return Ok(result.Succeeded);
             return BadRequest(result.Succeeded);
@@ -121,10 +122,10 @@ namespace PhoneBook.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [Authorize(AuthenticationSchemes = "Bearer", Roles = UserRoles.Administrator)]
-        public async Task<IActionResult> AddToRole(IdentityUser model, string newRole)
+        public async Task<IActionResult> AddToRole(User model, string newRole)
         {
-            User user = await _userManager.FindByIdAsync(model.Id);
-            var result = await _userManager.AddToRoleAsync(user, newRole);
+            //User user = await _userManager.FindByIdAsync(model.Id);
+            var result = await _userManager.AddToRoleAsync(model, newRole);
             if (result.Succeeded)
                 return Ok(result.Succeeded);
             return BadRequest(result.Succeeded);
@@ -188,7 +189,7 @@ namespace PhoneBook.Api.Controllers
             var result = await _roleManager.DeleteAsync(item).ConfigureAwait(false);
             if (result.Succeeded)
                 return Ok(result.Succeeded);
-            return BadRequest(result);
+            return BadRequest(result.Errors);
         }
 
         [HttpGet("getRoleId/{roleName}")]
@@ -202,5 +203,20 @@ namespace PhoneBook.Api.Controllers
                 return Ok(result);
             return BadRequest();
         }
+
+
+        [HttpPost("deleteUser/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = UserRoles.Administrator)]
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            User user = await _userManager.FindByIdAsync(id);
+            var result = await _userManager.DeleteAsync(user).ConfigureAwait(false);
+            if (result.Succeeded)
+                return Ok(result.Succeeded);
+            return BadRequest(result.Errors);
+        }
+
     }
 }

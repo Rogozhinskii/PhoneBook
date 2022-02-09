@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using PhoneBook.Common.Models;
+using PhoneBook.Domain;
 using PhoneBook.Interfaces;
 using System.Collections.Generic;
 using System.Net;
@@ -77,7 +78,7 @@ namespace PhoneBook.WebApiClient
         }
 
         #region Actions with users
-        public async Task<IEnumerable<IdentityUser>> GetAllUsers(string token, CancellationToken cancel = default)
+        public async Task<IEnumerable<User>> GetAllUsers(string token, CancellationToken cancel = default)
         {
             SetToken(token);
             return await _client.GetFromJsonAsync<IEnumerable<User>>("getUsers", cancel).ConfigureAwait(false);
@@ -96,10 +97,10 @@ namespace PhoneBook.WebApiClient
 
         
 
-        public async Task<IdentityUser> GetUserById(string id, string token, CancellationToken cancel = default)
+        public async Task<User> GetUserById(string id, string token, CancellationToken cancel = default)
         {
             SetToken(token);
-            return await _client.GetFromJsonAsync<IdentityUser>($"getUser/{id}", cancel).ConfigureAwait(false);
+            return await _client.GetFromJsonAsync<User>($"getUser/{id}", cancel).ConfigureAwait(false);
         }
 
         public async Task<IList<string>> GetUserRoles(string userId,string token, CancellationToken cancel = default)
@@ -109,7 +110,7 @@ namespace PhoneBook.WebApiClient
 
         }
 
-        public async Task<bool> UpdateUser(IdentityUser user, string token, CancellationToken cancel = default)
+        public async Task<bool> UpdateUser(User user, string token, CancellationToken cancel = default)
         {
             SetToken(token);
             var responce = await _client.PostAsJsonAsync("updateUser", user, cancel).ConfigureAwait(false);
@@ -120,7 +121,7 @@ namespace PhoneBook.WebApiClient
             return result;
         }
 
-        public async Task<bool> RemoveFromRole(IdentityUser user, string existingRole, string token, CancellationToken cancel = default)
+        public async Task<bool> RemoveFromRole(User user, string existingRole, string token, CancellationToken cancel = default)
         {
             SetToken(token);
             var responce = await _client.PostAsJsonAsync($"removeFromRole/{existingRole}", user, cancel).ConfigureAwait(false);
@@ -130,7 +131,7 @@ namespace PhoneBook.WebApiClient
             return result;
         }
 
-        public async Task<bool> AddToRole(IdentityUser user, string newRole, string token, CancellationToken cancel = default)
+        public async Task<bool> AddToRole(User user, string newRole, string token, CancellationToken cancel = default)
         {
             SetToken(token);
             var responce = await _client.PostAsJsonAsync($"addToRole/{newRole}", user, cancel).ConfigureAwait(false);
@@ -144,6 +145,16 @@ namespace PhoneBook.WebApiClient
         {
             SetToken(token);            
             return await _client.GetStringAsync($"getRoleId/{roleName}",cancel).ConfigureAwait(false);
+        }
+
+        public async Task<bool> DeleteUserById(string id, string token, CancellationToken cancel = default)
+        {
+            SetToken(token);
+            var responce = await _client.PostAsJsonAsync($"deleteUser/{id}", cancel).ConfigureAwait(false);
+            var result = await responce.EnsureSuccessStatusCode()
+                                    .Content.ReadFromJsonAsync<bool>(cancellationToken: cancel)
+                                    .ConfigureAwait(false);
+            return result;
         }
         #endregion
 

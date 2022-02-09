@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using PhoneBook.Common.Models;
+using PhoneBook.Domain;
 using PhoneBook.Entities;
 
 namespace PhoneBook.DAL.Context

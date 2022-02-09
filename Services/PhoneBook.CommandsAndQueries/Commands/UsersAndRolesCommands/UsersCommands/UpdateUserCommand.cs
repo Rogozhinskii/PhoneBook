@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Identity;
+using PhoneBook.Domain;
 using PhoneBook.Interfaces;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,7 +8,7 @@ namespace PhoneBook.CommandsAndQueries.Commands.UsersAndRolesCommands.UsersComma
 {
     public class UpdateUserCommand:IRequest<bool>
     {
-        public IdentityUser User { get; set; }
+        public User User { get; set; }
         public string Token { get; set; }
     }
 

@@ -17,6 +17,7 @@ using PhoneBook.CommandsAndQueries.Commands;
 using PhoneBook.CommandsAndQueries.Queries;
 using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Http;
+using PhoneBook.Domain;
 
 namespace PhoneBook
 {
