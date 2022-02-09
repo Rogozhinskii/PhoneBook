@@ -56,6 +56,7 @@ namespace PhoneBook.WPF
             var authentificationService = new ApiAuthentification(clientFactory.GetClient(HttpClientType.AuthentificationClient));
             containerRegistry.RegisterInstance<IWebRepository<PhoneRecordInfo>>(webRepository);
             containerRegistry.RegisterInstance<IAuthentificationService>(authentificationService);
+            containerRegistry.RegisterSingleton<ITokenHandler, TokenHandler>();
     
 
 

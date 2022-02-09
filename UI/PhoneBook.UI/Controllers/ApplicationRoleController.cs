@@ -75,6 +75,11 @@ namespace PhoneBook.Controllers
             return BadRequest(model);
         }
 
+        /// <summary>
+        /// Вернет представление предпросмотра перед удалением
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> DeleteApplicationRole(string id)
         {
@@ -84,6 +89,11 @@ namespace PhoneBook.Controllers
             return View(GetItem(applicationRole));
         }
 
+        /// <summary>
+        /// Выполняет удаление роли 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost]
         [ActionName("DeleteApplicationRole")]
         public async Task<IActionResult> DeleteApplicationRoleConfirmed(string id)

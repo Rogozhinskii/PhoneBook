@@ -21,7 +21,12 @@ namespace PhoneBook.Interfaces
         /// <returns></returns>
         Task<IAuthentificationResult> Login(IUserLogin login,CancellationToken cancel=default);
 
-
+        /// <summary>
+        /// Регистрирует пользователя
+        /// </summary>
+        /// <param name="userModel"></param>
+        /// <param name="cancel"></param>
+        /// <returns></returns>
         Task<IAuthentificationResult> RegisterUser(UserInfo userModel,CancellationToken cancel=default);
 
         /// <summary>

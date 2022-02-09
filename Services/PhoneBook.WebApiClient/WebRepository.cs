@@ -53,7 +53,7 @@ namespace PhoneBook.WebApiClient
         }
 
 
-        private async Task<T> AddAsync(T item, CancellationToken cancel = default)
+        public async Task<T> AddAsync(T item, CancellationToken cancel = default)
         {
             var responce = await _client.PostAsJsonAsync("addnew", item, cancel).ConfigureAwait(false);
             var result = await responce.EnsureSuccessStatusCode()
@@ -110,7 +110,7 @@ namespace PhoneBook.WebApiClient
         }
 
 
-        private async Task<T> UpdateAsync(T item, CancellationToken cancel = default)
+        public async Task<T> UpdateAsync(T item, CancellationToken cancel = default)
         {
             var responce = await _client.PutAsJsonAsync("update", item, cancel).ConfigureAwait(false);
             return await responce.EnsureSuccessStatusCode()
@@ -118,6 +118,26 @@ namespace PhoneBook.WebApiClient
                                        .ConfigureAwait(false);
         }
 
-       
+
+        public async Task<IEnumerable<T>> GetAllAsync(CancellationToken cancel = default) =>
+            await _client.GetFromJsonAsync<IEnumerable<T>>("getAll").ConfigureAwait(false);
+
+
+
+        public async Task<T> DeleteAsync(T item, CancellationToken cancel = default)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Delete, "")
+            {
+                Content = JsonContent.Create(item)
+            };
+            var responce = await _client.SendAsync(request, cancel).ConfigureAwait(false);
+            if (responce.StatusCode == HttpStatusCode.BadRequest)
+                return default;
+            return await responce.EnsureSuccessStatusCode()
+                                  .Content.ReadFromJsonAsync<T>(cancellationToken: cancel)
+                                  .ConfigureAwait(false);
+
+        }
+
     }
 }

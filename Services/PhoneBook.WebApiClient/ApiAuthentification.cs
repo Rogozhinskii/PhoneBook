@@ -34,6 +34,8 @@ namespace PhoneBook.WebApiClient
         public async Task<bool> Logout(CancellationToken cancel = default)
         {
             var request=await _client.GetAsync("logout",cancel).ConfigureAwait(false);
+            AuthenticatedUserName = null;
+            AuthenticatedUserRole = null;
             return request.IsSuccessStatusCode;
         }
 

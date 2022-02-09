@@ -53,9 +53,7 @@ namespace PhoneBook.Controllers
             return BadRequest(model);
         }
 
-
-
-
+        
         [HttpPost, ValidateAntiForgeryToken]        
         public async Task<IActionResult> Login(UserLogin login)
         {

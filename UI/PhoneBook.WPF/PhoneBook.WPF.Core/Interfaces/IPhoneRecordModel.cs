@@ -32,8 +32,8 @@ namespace PhoneBook.WPF.Core
         /// <returns></returns>
         public bool IsUserCanDeleteRecord();
         Task AddNewRecord(PhoneRecordInfo newRecord,CancellationToken cancelation=default);
-        Task UpdateRecord(PhoneRecordInfo newRecord,CancellationToken cancelation=default);
-        Task DeleteRecord(PhoneRecordInfo newRecord,CancellationToken cancelation=default);
+        Task UpdateRecord(PhoneRecordInfo record,CancellationToken cancelation=default);
+        Task DeleteRecord(PhoneRecordInfo record,CancellationToken cancelation=default);
 
     }
 }

@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace PhoneBook.Api.Controllers
 {
+    /// <summary>
+    /// Контроллер для работы с ролями и пользователями
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class UserManagementController : ControllerBase
@@ -22,6 +25,11 @@ namespace PhoneBook.Api.Controllers
             _roleManager = roleManager;
         }
 
+
+        /// <summary>
+        /// Возвращает всех пользователей
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("getUsers")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -39,7 +47,11 @@ namespace PhoneBook.Api.Controllers
             return NotFound();
         }
 
-
+        /// <summary>
+        /// Добавляет пользователя в систему (пришлось разделить с регистрацией)
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost("addNewUser")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]        
@@ -69,6 +81,11 @@ namespace PhoneBook.Api.Controllers
             return BadRequest(ModelState);
         }
 
+        /// <summary>
+        /// Возвращает пользователя по его идентификационному номеру
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("getUser/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -78,6 +95,11 @@ namespace PhoneBook.Api.Controllers
             ? Ok(item)
             : NotFound();
 
+        /// <summary>
+        /// Возвращает роль пользователя по id пользователя
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("getUserRoles/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -89,6 +111,11 @@ namespace PhoneBook.Api.Controllers
             return Ok(roles);
         }
 
+        /// <summary>
+        /// Выполняет обновление пользователя
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost("updateUser")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -104,6 +131,12 @@ namespace PhoneBook.Api.Controllers
             return BadRequest(result.Succeeded);
         }
 
+        /// <summary>
+        /// Удаляет роль у пользователя
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="existingRole"></param>
+        /// <returns></returns>
         [HttpPost("removeFromRole/{existingRole}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -117,6 +150,12 @@ namespace PhoneBook.Api.Controllers
             return BadRequest(result.Succeeded);
         }
 
+        /// <summary>
+        /// Добавляет роль пользователю
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="newRole"></param>
+        /// <returns></returns>
         [HttpPost("addToRole/{newRole}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -131,7 +170,10 @@ namespace PhoneBook.Api.Controllers
         }
 
 
-
+        /// <summary>
+        /// Возвращает перечисление ролей доступных в системе
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("getRoles")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -144,7 +186,11 @@ namespace PhoneBook.Api.Controllers
             return NotFound(Enumerable.Empty<ApplicationRole>());
         }
        
-        
+        /// <summary>
+        /// Возвращает роль по ее идентификатору
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("getRole/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -154,7 +200,11 @@ namespace PhoneBook.Api.Controllers
             ? Ok(item)
             : NotFound();
 
-
+        /// <summary>
+        /// Выполняет обновление параметров роли 
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         [HttpPost("updateRole")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [Authorize(AuthenticationSchemes = "Bearer", Roles = UserRoles.Administrator)]
@@ -169,7 +219,11 @@ namespace PhoneBook.Api.Controllers
             return BadRequest(result);
         }
 
-
+        /// <summary>
+        /// Создает новую роль
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         [HttpPost("createRole")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -182,6 +236,11 @@ namespace PhoneBook.Api.Controllers
             return BadRequest(result);
         }
 
+        /// <summary>
+        /// Удаляет роль
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         [HttpDelete("deleteRole")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -194,6 +253,11 @@ namespace PhoneBook.Api.Controllers
             return BadRequest(result.Errors);
         }
 
+        /// <summary>
+        /// возвращает идентификационный номер роли по ее названию
+        /// </summary>
+        /// <param name="roleName"></param>
+        /// <returns></returns>
         [HttpGet("getRoleId/{roleName}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -206,7 +270,11 @@ namespace PhoneBook.Api.Controllers
             return BadRequest();
         }
 
-
+        /// <summary>
+        /// Выполняет удаление пользователя из хранилища
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost("deleteUser/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

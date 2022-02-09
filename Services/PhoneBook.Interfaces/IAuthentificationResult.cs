@@ -2,6 +2,9 @@
 
 namespace PhoneBook.Interfaces
 {
+    /// <summary>
+    /// Интерфейс результата входа в систему
+    /// </summary>
     public interface IAuthentificationResult
     {
         public string Token { get; set; }

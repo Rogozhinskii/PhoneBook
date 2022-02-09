@@ -17,6 +17,9 @@ using System.Threading.Tasks;
 
 namespace PhoneBook.Api.Controllers
 {
+    /// <summary>
+    /// Контроллер в котором происходить вход в систему и регистрация пользователей, формирование токена
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class AccountManagementController : ControllerBase
@@ -27,7 +30,11 @@ namespace PhoneBook.Api.Controllers
         private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly JwtConfiguration _jwtConfig;
 
-        public AccountManagementController(ILogger<AccountManagementController> logger,UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<ApplicationRole> roleManager, IOptionsMonitor<JwtConfiguration> optionsMonitor)
+        public AccountManagementController(ILogger<AccountManagementController> logger,
+                                           UserManager<User> userManager, 
+                                           SignInManager<User> signInManager, 
+                                           RoleManager<ApplicationRole> roleManager,
+                                           IOptionsMonitor<JwtConfiguration> optionsMonitor)
         {
             _logger = logger;
             _userManager = userManager;
@@ -139,6 +146,12 @@ namespace PhoneBook.Api.Controllers
             });
         }
 
+        /// <summary>
+        /// Возвращает токен доступа 
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="role"></param>
+        /// <returns></returns>
         private string GenerateJwtToken(User user, string role)
         {
             var jwtTokenHandler = new JwtSecurityTokenHandler();
@@ -202,9 +215,6 @@ namespace PhoneBook.Api.Controllers
         public async Task<IActionResult> Logout()
         {
             _logger.LogInformation($">>> Выход  пользователя из приложения");
-            
-            
-            
             await _signInManager.SignOutAsync();
             return Ok();
         }

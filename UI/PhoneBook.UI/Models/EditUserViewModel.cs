@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using PhoneBook.Common.Models;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace PhoneBook.Models
 {
+    /// <summary>
+    /// Модель для редактирования пользователя
+    /// </summary>
     public class EditUserViewModel
     {
         public string Id { get; set; }

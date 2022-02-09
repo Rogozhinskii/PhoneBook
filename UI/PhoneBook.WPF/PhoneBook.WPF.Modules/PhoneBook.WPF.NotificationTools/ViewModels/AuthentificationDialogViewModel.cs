@@ -13,12 +13,14 @@ namespace PhoneBook.WPF.NotificationTools.ViewModels
     public class AuthentificationDialogViewModel:DialogViewModel
     {
         private readonly IAuthentificationModel _authenticationModel;
+        
         private DelegateCommand _loginCommand;
         private DelegateCommand<object> _passwordChangedCommand;
 
         public AuthentificationDialogViewModel(IAuthentificationModel authenticationModel)
         {
             _authenticationModel = authenticationModel;
+            
         }
 
 
@@ -56,7 +58,11 @@ namespace PhoneBook.WPF.NotificationTools.ViewModels
                };
                var loginResult=await _authenticationModel.Login(userLogin);
                if (loginResult)
+               {
+                   
                    RaiseRequestClose(ButtonResult.OK);
+               }
+                   
                else
                {
 

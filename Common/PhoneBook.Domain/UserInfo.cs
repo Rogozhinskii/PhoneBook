@@ -2,6 +2,9 @@
 
 namespace PhoneBook.Common.Models
 {
+    /// <summary>
+    /// Модель для работы с пользователями (отражение user)
+    /// </summary>
     public class UserInfo
     {
         public string Id { get; set; }

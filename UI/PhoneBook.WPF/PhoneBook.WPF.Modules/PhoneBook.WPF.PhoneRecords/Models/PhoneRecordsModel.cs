@@ -9,15 +9,17 @@ namespace PhoneBook.WPF.PhoneRecords.Models
 {
     public class PhoneRecordsModel : IPhoneRecordModel
     {
-        private readonly IRepository<PhoneRecordInfo> _repository;
+        private readonly IWebRepository<PhoneRecordInfo> _repository;
         private readonly IAuthentificationService _authentificationService;
+        private readonly ITokenHandler _tokenHandler;
 
         public ObservableCollection<PhoneRecordInfo> PhoreRecords { get; set; }=new ObservableCollection<PhoneRecordInfo>();
 
-        public PhoneRecordsModel(IRepository<PhoneRecordInfo> repository, IAuthentificationService authentificationService)
+        public PhoneRecordsModel(IWebRepository<PhoneRecordInfo> repository, IAuthentificationService authentificationService,ITokenHandler tokenHandler)
         {
             _repository = repository;
             _authentificationService = authentificationService;
+            _tokenHandler = tokenHandler;
         }
 
         public async Task LoadData()
@@ -36,7 +38,7 @@ namespace PhoneBook.WPF.PhoneRecords.Models
 
         public async Task AddNewRecord(PhoneRecordInfo newRecord, CancellationToken cancelation = default)
         {
-            var result= await _repository.AddAsync(newRecord, cancelation);
+            var result= await _repository.AddAsync(newRecord,_tokenHandler.Token, cancelation);
             PhoreRecords.Add(result);
         }
 
@@ -44,12 +46,12 @@ namespace PhoneBook.WPF.PhoneRecords.Models
 
         public async Task UpdateRecord(PhoneRecordInfo newRecord, CancellationToken cancelation = default)
         {
-            await _repository.UpdateAsync(newRecord,cancelation);            
+            await _repository.UpdateAsync(newRecord,_tokenHandler.Token,cancelation);            
         }
 
         public async Task DeleteRecord(PhoneRecordInfo newRecord, CancellationToken cancelation = default)
         {
-            await _repository.DeleteAsync(newRecord,cancelation);
+            await _repository.DeleteByIdAsync(newRecord.Id,_tokenHandler.Token,cancelation);
             PhoreRecords.Remove(newRecord);
         }
 

@@ -30,12 +30,7 @@ namespace PhoneBook.Controllers
             _mapper = mapper;
         }
 
-        private UserInfo GetItem(User item) => _mapper.Map<UserInfo>(item);
-        private User GetBase(UserInfo item) => _mapper.Map<User>(item);
         private IEnumerable<UserInfo> GetItem(IEnumerable<User> items) => _mapper.Map<IEnumerable<UserInfo>>(items);
-        
-
-
 
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -53,7 +48,11 @@ namespace PhoneBook.Controllers
         public IActionResult AddUser() =>
             View(new UserInfo());
 
-
+        /// <summary>
+        /// Сохранит пользователя с данными введенными в форме
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> AddUser(UserInfo model)
@@ -71,7 +70,11 @@ namespace PhoneBook.Controllers
             return BadRequest(model);
         }
 
-
+        /// <summary>
+        /// вернет представлениев котром можно отредактировать пользователя
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> EditUser(string id)
         {
@@ -94,6 +97,12 @@ namespace PhoneBook.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// сохранит изменения пользователя
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> EditUser(string id, EditUserViewModel model)
         {
@@ -135,7 +144,11 @@ namespace PhoneBook.Controllers
             return BadRequest(model);
         }
 
-
+        /// <summary>
+        /// Вернет представление перед удалением пользователя
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> DeleteUser(string id)
         {
@@ -149,6 +162,11 @@ namespace PhoneBook.Controllers
             return View(user);
         }
 
+        /// <summary>
+        /// Выполнит удаление пользователя
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost]
         [ActionName("DeleteUser")]
         public async Task<IActionResult> DeleteUserConfirmed(string id)

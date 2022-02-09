@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace PhoneBook.Api.Controllers
 {
+    /// <summary>
+    /// Контроллер для проверки прав у пользователя на выполнение того или иного действия 
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class PermissionController : ControllerBase
