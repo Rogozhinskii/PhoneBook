@@ -111,8 +111,8 @@ namespace PhoneBook.Api.Controllers
         [Authorize(AuthenticationSchemes = "Bearer", Roles = UserRoles.Administrator)]
         public async Task<IActionResult> RemoveFromUser(User model,string existingRole)
         {
-            //User user = await _userManager.FindByIdAsync(model.Id);
-            var result = await _userManager.RemoveFromRoleAsync(model, existingRole);
+            User user = await _userManager.FindByIdAsync(model.Id);
+            var result = await _userManager.RemoveFromRoleAsync(user, existingRole);
             if (result.Succeeded)
                 return Ok(result.Succeeded);
             return BadRequest(result.Succeeded);
@@ -124,8 +124,8 @@ namespace PhoneBook.Api.Controllers
         [Authorize(AuthenticationSchemes = "Bearer", Roles = UserRoles.Administrator)]
         public async Task<IActionResult> AddToRole(User model, string newRole)
         {
-            //User user = await _userManager.FindByIdAsync(model.Id);
-            var result = await _userManager.AddToRoleAsync(model, newRole);
+            User user = await _userManager.FindByIdAsync(model.Id);
+            var result = await _userManager.AddToRoleAsync(user, newRole);
             if (result.Succeeded)
                 return Ok(result.Succeeded);
             return BadRequest(result.Succeeded);

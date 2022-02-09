@@ -125,6 +125,10 @@ namespace PhoneBook.Controllers
                                 }
                             }
                         }
+                        else
+                        {
+                            return RedirectToAction("Index");
+                        }
                     }
                 }
             }

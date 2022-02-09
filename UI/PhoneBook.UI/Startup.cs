@@ -32,8 +32,8 @@ namespace PhoneBook
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
-            services.AddDatabase(Configuration);
-            services.AddTransient<DbInitializer>();
+            //services.AddDatabase(Configuration);
+            //services.AddTransient<DbInitializer>();
             services.AddHttpClient<IWebRepository<PhoneRecordInfo>, WebRepository<PhoneRecordInfo>>((client) =>
             {                
                 client.BaseAddress = new($"{Configuration["WebApi"]}{Configuration["PhoneRecordRepositoryAddress"]}");                
@@ -55,21 +55,7 @@ namespace PhoneBook
                 options.IdleTimeout = TimeSpan.FromMinutes(60);
             });
 
-            services.AddIdentity<User, ApplicationRole>()
-                    .AddEntityFrameworkStores<PhoneBookDB>()
-                    .AddDefaultTokenProviders()
-                    .AddRoles<ApplicationRole>();
-            services.Configure<IdentityOptions>(opt =>
-            {
-                opt.Password.RequiredLength = 6;
-                opt.Password.RequireNonAlphanumeric = false;
-                opt.Password.RequireLowercase = false;
-                opt.Password.RequireUppercase = false;
-                opt.Password.RequireDigit = false;
-                opt.Lockout.MaxFailedAccessAttempts = 10;
-                opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
-                opt.Lockout.AllowedForNewUsers = true;
-            });
+           
 
             services.ConfigureApplicationCookie(options =>
             {

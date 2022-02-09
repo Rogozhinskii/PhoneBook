@@ -14,6 +14,7 @@ using PhoneBook.DAL.Context;
 using PhoneBook.DAL.Repository;
 using PhoneBook.Domain;
 using PhoneBook.Interfaces;
+using System;
 using System.Text;
 
 namespace PhoneBook.Api
@@ -59,6 +60,18 @@ namespace PhoneBook.Api
                     .AddEntityFrameworkStores<PhoneBookDB>()
                     .AddDefaultTokenProviders()
                     .AddRoles<ApplicationRole>();
+            services.Configure<IdentityOptions>(opt =>
+            {
+                opt.Password.RequiredLength = 6;
+                opt.Password.RequireNonAlphanumeric = false;
+                opt.Password.RequireLowercase = false;
+                opt.Password.RequireUppercase = false;
+                opt.Password.RequireDigit = false;
+                opt.Lockout.MaxFailedAccessAttempts = 10;
+                opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
+                opt.Lockout.AllowedForNewUsers = true;
+            });
+
             services.AddCors();            
             services.AddControllers();
             services.AddSwaggerGen(c =>
