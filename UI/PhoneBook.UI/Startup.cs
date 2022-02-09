@@ -33,7 +33,7 @@ namespace PhoneBook
         public void ConfigureServices(IServiceCollection services) {
             services.AddDatabase(Configuration);
             services.AddTransient<DbInitializer>();
-            services.AddHttpClient<IRepository<PhoneRecordInfo>, WebRepository<PhoneRecordInfo>>((client) =>
+            services.AddHttpClient<IWebRepository<PhoneRecordInfo>, WebRepository<PhoneRecordInfo>>((client) =>
             {                
                 client.BaseAddress = new($"{Configuration["WebApi"]}{Configuration["PhoneRecordRepositoryAddress"]}");                
             });
@@ -41,7 +41,10 @@ namespace PhoneBook
             {
                 client.BaseAddress = new($"{Configuration["WebApi"]}{Configuration["AccountManagementControllerAddress"]}");
             });
-
+            services.AddHttpClient<IPermissionService, PermissionService>((client) =>
+            {
+                client.BaseAddress = new($"{Configuration["WebApi"]}{Configuration["PermissionControllerAddress"]}");
+            });
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(60);

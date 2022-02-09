@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PhoneBook.Common;
+using PhoneBook.Common.Models;
 using PhoneBook.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
@@ -106,7 +107,7 @@ namespace PhoneBook.Api.Controllers.Base
         [HttpDelete]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [Authorize]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = UserRoles.Administrator)]
         public async Task<IActionResult> DeleteAsync(T item)
         {
             var result = await _repository.DeleteAsync(GetBase(item));
@@ -122,7 +123,7 @@ namespace PhoneBook.Api.Controllers.Base
         /// <param name="cancel"></param>
         /// <returns></returns>
         [HttpDelete("{id:int}")]
-        [Authorize(AuthenticationSchemes = "Bearer")]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = UserRoles.Administrator)]
         public async Task<IActionResult> DeleteByIdAsync(int id)
         {
             if(await _repository.DeleteByIdAsync(id) is not { } item)

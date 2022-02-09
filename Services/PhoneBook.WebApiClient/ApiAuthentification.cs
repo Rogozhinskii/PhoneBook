@@ -32,9 +32,10 @@ namespace PhoneBook.WebApiClient
             return response;
         }
 
-        public Task<bool> Logout(CancellationToken cancel = default)
+        public async Task<bool> Logout(CancellationToken cancel = default)
         {
-            throw new System.NotImplementedException();
+            var request=await _client.GetAsync("logout",cancel).ConfigureAwait(false);
+            return request.IsSuccessStatusCode;
         }
     }
 }

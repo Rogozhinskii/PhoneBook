@@ -117,27 +117,6 @@ namespace PhoneBook.Api.Controllers
                     },
                 Success = false
             });
-
-
-
-
-
-
-
-
-            //todo удалить
-            //_logger.LogInformation($">>> Попытка входа в систему. Пользователь {userLogin.UserName}");
-            //var loginResult=await _signInManager.PasswordSignInAsync(userLogin.UserName,userLogin.Password,false,false);            
-            //if (loginResult.Succeeded)
-            //{
-            //    _logger.LogInformation($">>> Вход выполнен. Пользователь {userLogin.UserName}");
-            //    return Ok(loginResult);
-            //}
-            //else
-            //{
-            //    _logger.LogInformation($">>> Ошибка входа в систему. Пользователь {userLogin.UserName}");
-            //    return BadRequest(loginResult);
-            //}   
         }
 
         private string GenerateJwtToken(User user, string role)

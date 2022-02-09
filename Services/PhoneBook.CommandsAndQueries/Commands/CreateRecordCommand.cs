@@ -6,18 +6,22 @@ using System.Threading.Tasks;
 
 namespace PhoneBook.CommandsAndQueries.Commands
 {
-    public class CreateRecordCommand : CommandBase<PhoneRecordInfo> { }
+    public class CreateRecordCommand : IRequest<PhoneRecordInfo> 
+    {
+        public PhoneRecordInfo Record { get; set; }
+        public string Token { get; set; }
+    }
 
     public class CrateRecordCommandHandler : IRequestHandler<CreateRecordCommand, PhoneRecordInfo> 
     {
-        private readonly IRepository<PhoneRecordInfo> _repository;
+        private readonly IWebRepository<PhoneRecordInfo> _repository;
 
-        public CrateRecordCommandHandler(IRepository<PhoneRecordInfo> repository)=>
+        public CrateRecordCommandHandler(IWebRepository<PhoneRecordInfo> repository)=>
             _repository = repository;
 
-        public async Task<PhoneRecordInfo> Handle(CreateRecordCommand request, CancellationToken cancellationToken) =>
-            await _repository.AddAsync(request.Record, cancellationToken).ConfigureAwait(false);
+        public async Task<PhoneRecordInfo> Handle(CreateRecordCommand request, CancellationToken cancellationToken)        
+        => await _repository.AddAsync(request.Record, cancellationToken).ConfigureAwait(false);
 
-        
+
     }
 }

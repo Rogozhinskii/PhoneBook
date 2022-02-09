@@ -13,8 +13,8 @@ namespace PhoneBook.CommandsAndQueries.Queries
 
     public class GetPhoneRecordByIdQueryHandler : IRequestHandler<GetPhoneRecordByIdQuery, PhoneRecordInfo>
     {
-        private readonly IRepository<PhoneRecordInfo> _repository;
-        public GetPhoneRecordByIdQueryHandler(IRepository<PhoneRecordInfo> repository) =>
+        private readonly IWebRepository<PhoneRecordInfo> _repository;
+        public GetPhoneRecordByIdQueryHandler(IWebRepository<PhoneRecordInfo> repository) =>
             _repository = repository;
 
         public async Task<PhoneRecordInfo> Handle(GetPhoneRecordByIdQuery request, CancellationToken cancellationToken)=>

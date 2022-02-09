@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using PhoneBook.CommandsAndQueries.Commands;
 using PhoneBook.Common.Models;
 using PhoneBook.Interfaces;
 using System.Threading.Tasks;
@@ -11,13 +13,15 @@ namespace PhoneBook.Controllers
     /// Контроллер аутентификации пользователя
     /// </summary>
     public class AccountController : Controller
-    { 
-
+    {
+        private readonly IMediator _mediator;
         private readonly IAuthentificationService _authentificationService;
 
-        public AccountController(SignInManager<User> signInManager, IAuthentificationService authentificationService)=>
-            _authentificationService = authentificationService;            
-        
+        public AccountController(IMediator mediator, IAuthentificationService authentificationService)
+        {
+            _mediator = mediator;
+            _authentificationService = authentificationService;
+        }
 
         [HttpGet]
         public IActionResult Login()=>
@@ -35,6 +39,7 @@ namespace PhoneBook.Controllers
                     HttpContext.Session.SetString("Token", loginResult.Token);
                     HttpContext.Session.SetString("Role", loginResult.Role);
                     HttpContext.Session.SetString("UserName", loginResult.UserName);
+                    
                     return RedirectToAction("Index", "PhoneRecords");
                 }
 
@@ -47,11 +52,9 @@ namespace PhoneBook.Controllers
         public async Task<IActionResult> Logout(string returnUrl)
         {
             HttpContext.Session.Clear();
+            await _authentificationService.Logout();
             return RedirectToAction("Index", "PhoneRecords");
         }
-
-        public IActionResult AccessDenied()=>
-            View();
-        
+      
     }
 }

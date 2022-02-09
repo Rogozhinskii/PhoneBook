@@ -16,8 +16,8 @@ namespace PhoneBook.CommandsAndQueries.Queries
 
     public class GetPageQueryHandler : IRequestHandler<GetPageQuery, IPage<PhoneRecordInfo>>
     {
-        private readonly IRepository<PhoneRecordInfo> _repository;
-        public GetPageQueryHandler(IRepository<PhoneRecordInfo> repository) =>
+        private readonly IWebRepository<PhoneRecordInfo> _repository;
+        public GetPageQueryHandler(IWebRepository<PhoneRecordInfo> repository) =>
             _repository = repository;
 
         public async Task<IPage<PhoneRecordInfo>> Handle(GetPageQuery request, CancellationToken cancellationToken)
