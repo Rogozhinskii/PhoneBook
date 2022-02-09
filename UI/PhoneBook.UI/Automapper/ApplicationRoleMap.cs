@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using PhoneBook.Common.Models;
+using PhoneBook.Domain;
 using PhoneBook.Models;
 
 namespace PhoneBook.Automapper

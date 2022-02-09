@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PhoneBook.Common.Models
+namespace PhoneBook.Domain
 {
     /// <summary>
     /// модель формы регистрации
@@ -8,7 +8,7 @@ namespace PhoneBook.Common.Models
     public class UserRegistration
     {
         [Required, MaxLength(20)]
-        public string LoginProp { get; set; }
+        public string UserName { get; set; }
 
         [Required, DataType(DataType.Password)]
         public string Password { get; set; }

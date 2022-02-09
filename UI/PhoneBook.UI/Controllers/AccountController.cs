@@ -1,8 +1,7 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using PhoneBook.CommandsAndQueries.Commands;
 using PhoneBook.Common.Models;
 using PhoneBook.Interfaces;
 using System.Threading.Tasks;
@@ -26,8 +25,37 @@ namespace PhoneBook.Controllers
         [HttpGet]
         public IActionResult Login()=>
             View();
-        
-        
+
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult RegisterUser() =>
+            View(new UserInfo());
+
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> RegisterUser(UserInfo model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (model.Password.Length < 6)
+                    return ValidationProblem();
+                var result = await _authentificationService.RegisterUser(model);
+                if (result.Success)
+                {
+                    HttpContext.Session.SetString("Token", result.Token);
+                    HttpContext.Session.SetString("Role", result.Role);
+                    HttpContext.Session.SetString("UserName", result.UserName);
+                    return Redirect("~/");
+                }
+            }
+            return BadRequest(model);
+        }
+
+
+
+
         [HttpPost, ValidateAntiForgeryToken]        
         public async Task<IActionResult> Login(UserLogin login)
         {

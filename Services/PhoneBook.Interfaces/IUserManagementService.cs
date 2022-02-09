@@ -8,11 +8,11 @@ namespace PhoneBook.Interfaces
 {
     public interface IUserManagementService
     {
-        Task<IEnumerable<IdentityRole>> GetRoles(string token,CancellationToken cancel=default);
-        Task<IdentityRole> GetRoleById(string id,string token,CancellationToken cancel=default);
-        Task<bool> UpdateRole(IdentityRole role,string token,CancellationToken cancel=default);
-        Task<bool> CreateRole(IdentityRole role,string token,CancellationToken cancel=default);
-        Task<bool> DeleteRole(IdentityRole role, string token, CancellationToken cancel = default);
+        Task<IEnumerable<ApplicationRole>> GetRoles(string token,CancellationToken cancel=default);
+        Task<ApplicationRole> GetRoleById(string id,string token,CancellationToken cancel=default);
+        Task<bool> UpdateRole(ApplicationRole role,string token,CancellationToken cancel=default);
+        Task<bool> CreateRole(ApplicationRole role,string token,CancellationToken cancel=default);
+        Task<bool> DeleteRole(ApplicationRole role, string token, CancellationToken cancel = default);
         Task<IEnumerable<User>> GetAllUsers(string token, CancellationToken cancel = default);
         Task<bool> CreateUser(IUserLogin user, string token, CancellationToken cancel = default);
         Task<User> GetUserById(string id, string token, CancellationToken cancel = default);

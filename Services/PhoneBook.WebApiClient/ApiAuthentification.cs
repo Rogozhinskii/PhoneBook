@@ -1,4 +1,6 @@
 ﻿using PhoneBook.Api.Helpers;
+using PhoneBook.Common.Models;
+using PhoneBook.Domain;
 using PhoneBook.Interfaces;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -36,6 +38,13 @@ namespace PhoneBook.WebApiClient
         {
             var request=await _client.GetAsync("logout",cancel).ConfigureAwait(false);
             return request.IsSuccessStatusCode;
+        }
+
+        public async Task<IAuthentificationResult> RegisterUser(UserInfo userModel, CancellationToken cancel = default)
+        {
+            var request = await _client.PostAsJsonAsync("registration", userModel, cancel).ConfigureAwait(false);
+            var response = await request.EnsureSuccessStatusCode().Content.ReadFromJsonAsync<AuthentificationResult>().ConfigureAwait(false);
+            return response;
         }
     }
 }

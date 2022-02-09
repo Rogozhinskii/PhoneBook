@@ -65,7 +65,7 @@ namespace PhoneBook.Controllers
                 var result = await _mediator.Send(new AddNewUserCommand { User=model, Token = GetToken() });
                 if (result)
                 {
-                    return RedirectToAction("Index");                    
+                    return Redirect("~/");                    
                 }
             }
             return BadRequest(model);

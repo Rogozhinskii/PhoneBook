@@ -1,23 +1,14 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PhoneBook.Common.Models;
-using PhoneBook.DAL;
-using PhoneBook.DAL.Context;
-using PhoneBook.Data;
 using PhoneBook.Interfaces;
 using PhoneBook.WebApiClient;
 using MediatR;
 using System;
-using System.Reflection;
-using PhoneBook.CommandsAndQueries.Commands;
 using PhoneBook.CommandsAndQueries.Queries;
-using System.Net.Http.Headers;
-using Microsoft.AspNetCore.Http;
-using PhoneBook.Domain;
 
 namespace PhoneBook
 {
@@ -32,8 +23,8 @@ namespace PhoneBook
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
-            //services.AddDatabase(Configuration);
-            //services.AddTransient<DbInitializer>();
+            
+            
             services.AddHttpClient<IWebRepository<PhoneRecordInfo>, WebRepository<PhoneRecordInfo>>((client) =>
             {                
                 client.BaseAddress = new($"{Configuration["WebApi"]}{Configuration["PhoneRecordRepositoryAddress"]}");                
@@ -78,10 +69,7 @@ namespace PhoneBook
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            //Если потребует создать БД с миграциями и тестовыми данными
-            //using (var scope = app.ApplicationServices.CreateAsyncScope())
-            //    await scope.ServiceProvider.GetRequiredService<DbInitializer>().InitializeData();
+        {            
 
             if (env.IsDevelopment())
             {

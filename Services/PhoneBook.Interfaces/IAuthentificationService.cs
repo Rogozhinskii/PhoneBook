@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using PhoneBook.Domain;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PhoneBook.Interfaces
@@ -18,6 +19,9 @@ namespace PhoneBook.Interfaces
         /// <param name="cancel"></param>
         /// <returns></returns>
         Task<IAuthentificationResult> Login(IUserLogin login,CancellationToken cancel=default);
+
+
+        Task<IAuthentificationResult> RegisterUser(IUserLogin userModel,CancellationToken cancel=default);
 
         /// <summary>
         /// Выход

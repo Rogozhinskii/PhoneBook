@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Identity;
+using PhoneBook.Domain;
 using PhoneBook.Interfaces;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,7 +9,7 @@ namespace PhoneBook.CommandsAndQueries.Commands.UsersAndRolesCommands
     public class CreateRoleCommand : IRequest<bool>
     {
         public string Token { get; set; }
-        public IdentityRole Role { get; set; }
+        public ApplicationRole Role { get; set; }
     }
 
 

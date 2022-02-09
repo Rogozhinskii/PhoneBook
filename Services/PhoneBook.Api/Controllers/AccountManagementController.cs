@@ -24,41 +24,60 @@ namespace PhoneBook.Api.Controllers
         private readonly ILogger<AccountManagementController> _logger;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly JwtConfiguration _jwtConfig;
 
-        public AccountManagementController(ILogger<AccountManagementController> logger,UserManager<User> userManager, SignInManager<User> signInManager, IOptionsMonitor<JwtConfiguration> optionsMonitor)
+        public AccountManagementController(ILogger<AccountManagementController> logger,UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<ApplicationRole> roleManager, IOptionsMonitor<JwtConfiguration> optionsMonitor)
         {
             _logger = logger;
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
             _jwtConfig = optionsMonitor.CurrentValue;
         }
 
 
-        ///// <summary>
-        ///// Выполняет регистрацию пользователя
-        ///// </summary>
-        ///// <param name="model"></param>
-        ///// <returns></returns>
-        //[HttpPost("registration")]        
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //public async Task<IActionResult> Register(UserRegistration model)
-        //{
-        //    _logger.LogInformation($">>> Рестрация пользователя. Пользователь {model.LoginProp}");
-        //    var user = new User { UserName = model.LoginProp };
-        //    var createResult=await _userManager.CreateAsync(user,model.Password);
-        //    if (createResult.Succeeded)
-        //    {
-        //        _logger.LogInformation($">>> Пользователь {model.LoginProp} зарегистрирован");
-        //        await _signInManager.SignInAsync(user,false);
-        //        return Ok(createResult);
-        //    }
-        //    else
-        //    {
-        //        return BadRequest(createResult);
-        //    }
-        //}
+        /// <summary>
+        /// Выполняет регистрацию пользователя
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost("registration")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> RegisterUser(UserLogin model)
+        {
+            if (ModelState.IsValid)
+            {                
+                User user = new()
+                {
+                    UserName = model.UserName,
+                    Email = model.Email
+                };
+                IdentityResult creationResult = await _userManager.CreateAsync(user, model.Password);
+                if (creationResult.Succeeded)
+                {
+                    ApplicationRole applicationRole = await _roleManager.FindByNameAsync(UserRoles.RegularUser).ConfigureAwait(false);
+                    if (applicationRole != null)
+                    {
+                        IdentityResult roleResult = await _userManager.AddToRoleAsync(user, applicationRole.Name).ConfigureAwait(false);
+                        if (roleResult.Succeeded)
+                        {
+                            var existingUser = await _userManager.FindByNameAsync(model.UserName);
+                            var jwtToken = GenerateJwtToken(existingUser, applicationRole.Name);
+                            return Ok(new AuthentificationResult()
+                            {
+                                UserName = existingUser.UserName,
+                                Success = true,
+                                Token = jwtToken,
+                                Role = applicationRole.Name
+                            });
+                        }
+                    }
+                }
+            }
+            return BadRequest(ModelState);
+        }
 
 
         /// <summary>
@@ -120,7 +139,7 @@ namespace PhoneBook.Api.Controllers
             });
         }
 
-        private string GenerateJwtToken(IdentityUser user, string role)
+        private string GenerateJwtToken(User user, string role)
         {
             var jwtTokenHandler = new JwtSecurityTokenHandler();
 

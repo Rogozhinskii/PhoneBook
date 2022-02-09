@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
 
-namespace PhoneBook.Common.Models
+namespace PhoneBook.Domain
 {
     /// <summary>
     /// Роль пользователя приложения

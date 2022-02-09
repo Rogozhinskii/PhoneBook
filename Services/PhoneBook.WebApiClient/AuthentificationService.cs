@@ -47,8 +47,10 @@ namespace PhoneBook.WebApiClient
             AuthenticatedUserRole=result;
             return result;
         }
-            
-           
 
+        public Task<IAuthentificationResult> RegisterUser(IUserLogin userModel, CancellationToken cancel = default)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -42,8 +42,7 @@ namespace PhoneBook.Api.Controllers
 
         [HttpPost("addNewUser")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]        
         public async Task<IActionResult> AddUser(UserInfo model)
         {
             if (ModelState.IsValid)
@@ -161,7 +160,10 @@ namespace PhoneBook.Api.Controllers
         [Authorize(AuthenticationSchemes = "Bearer", Roles = UserRoles.Administrator)]
         public async Task<IActionResult> UpdateRole(ApplicationRole item)
         {
-            var result = await _roleManager.UpdateAsync(item).ConfigureAwait(false);
+            var role = await _roleManager.FindByIdAsync(item.Id);
+            role.Name=item.Name;
+            role.Description=item.Description;
+            var result = await _roleManager.UpdateAsync(role).ConfigureAwait(false);
             if (result.Succeeded)
                 return Ok(result.Succeeded);
             return BadRequest(result);
