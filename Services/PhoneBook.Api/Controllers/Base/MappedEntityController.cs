@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using PhoneBook.Common;
 using PhoneBook.Common.Models;
 using PhoneBook.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -59,10 +60,10 @@ namespace PhoneBook.Api.Controllers.Base
            new Page<T> { Items = GetItem(page.Items), TotalCount = page.TotalCount, PageIndex = page.PageIndex, PageSize = page.PageSize };
 
 
-        [HttpGet("{id:int}")]
+        [HttpGet("{id:guid}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Get(int id) =>
+        public async Task<IActionResult> Get(Guid id) =>
             await _repository.GetByIdAsync(id) is { } item
             ? Ok(GetItem(item))
             : NotFound();
@@ -122,9 +123,9 @@ namespace PhoneBook.Api.Controllers.Base
         /// <param name="id"></param>
         /// <param name="cancel"></param>
         /// <returns></returns>
-        [HttpDelete("{id:int}")]
+        [HttpDelete("{id:guid}")]
         [Authorize(AuthenticationSchemes = "Bearer", Roles = UserRoles.Administrator)]
-        public async Task<IActionResult> DeleteByIdAsync(int id)
+        public async Task<IActionResult> DeleteByIdAsync(Guid id)
         {
             if(await _repository.DeleteByIdAsync(id) is not { } item)
                 return NotFound();

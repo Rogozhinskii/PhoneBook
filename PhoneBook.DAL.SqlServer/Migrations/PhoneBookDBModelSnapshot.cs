@@ -123,7 +123,7 @@ namespace PhoneBook.DAL.SqlServer.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("PhoneBook.Common.Models.ApplicationRole", b =>
+            modelBuilder.Entity("PhoneBook.Domain.ApplicationRole", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -156,7 +156,7 @@ namespace PhoneBook.DAL.SqlServer.Migrations
                     b.ToTable("AspNetRoles");
                 });
 
-            modelBuilder.Entity("PhoneBook.Common.Models.User", b =>
+            modelBuilder.Entity("PhoneBook.Domain.User", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -223,10 +223,9 @@ namespace PhoneBook.DAL.SqlServer.Migrations
 
             modelBuilder.Entity("PhoneBook.Entities.PhoneRecord", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
@@ -256,7 +255,7 @@ namespace PhoneBook.DAL.SqlServer.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("PhoneBook.Common.Models.ApplicationRole", null)
+                    b.HasOne("PhoneBook.Domain.ApplicationRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -265,7 +264,7 @@ namespace PhoneBook.DAL.SqlServer.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("PhoneBook.Common.Models.User", null)
+                    b.HasOne("PhoneBook.Domain.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -274,7 +273,7 @@ namespace PhoneBook.DAL.SqlServer.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("PhoneBook.Common.Models.User", null)
+                    b.HasOne("PhoneBook.Domain.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -283,13 +282,13 @@ namespace PhoneBook.DAL.SqlServer.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.HasOne("PhoneBook.Common.Models.ApplicationRole", null)
+                    b.HasOne("PhoneBook.Domain.ApplicationRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PhoneBook.Common.Models.User", null)
+                    b.HasOne("PhoneBook.Domain.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -298,7 +297,7 @@ namespace PhoneBook.DAL.SqlServer.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("PhoneBook.Common.Models.User", null)
+                    b.HasOne("PhoneBook.Domain.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

@@ -25,7 +25,7 @@ namespace PhoneBook.WebApiClient
         public async Task<IAuthentificationResult> Login(IUserLogin login, CancellationToken cancel = default)
         {
             var request = await _client.PostAsJsonAsync("login", login, cancel).ConfigureAwait(false);
-            var response = await request.EnsureSuccessStatusCode().Content.ReadFromJsonAsync<AuthentificationResult>().ConfigureAwait(false);
+            var response = await request.Content.ReadFromJsonAsync<AuthentificationResult>().ConfigureAwait(false);
             AuthenticatedUserName= response.UserName;
             AuthenticatedUserRole = response.Role;
             return response;

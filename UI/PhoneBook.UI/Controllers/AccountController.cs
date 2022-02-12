@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PhoneBook.Common.Models;
 using PhoneBook.Interfaces;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PhoneBook.Controllers
@@ -57,6 +58,7 @@ namespace PhoneBook.Controllers
         [HttpPost, ValidateAntiForgeryToken]        
         public async Task<IActionResult> Login(UserLogin login)
         {
+            List<string> errors = new();
             if (ModelState.IsValid)
             {
                 var loginResult = await _authentificationService.Login(login);
@@ -64,13 +66,16 @@ namespace PhoneBook.Controllers
                 {
                     HttpContext.Session.SetString("Token", loginResult.Token);
                     HttpContext.Session.SetString("Role", loginResult.Role);
-                    HttpContext.Session.SetString("UserName", loginResult.UserName);
-                    
+                    HttpContext.Session.SetString("UserName", loginResult.UserName);                    
                     return RedirectToAction("Index", "PhoneRecords");
+                }
+                else{
+                    errors = loginResult.Errors;
                 }
 
             }
-            ModelState.AddModelError("", "Пользователь не найден");
+            TempData["ErrorMessage"] = $"{string.Join(';',errors)}";
+            //ModelState.AddModelError("", "Пользователь не найден");
             return View(login);           
         }
 

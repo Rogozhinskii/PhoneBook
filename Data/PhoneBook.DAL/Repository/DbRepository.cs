@@ -28,7 +28,7 @@ namespace PhoneBook.DAL.Repository
         }
         protected virtual IQueryable<T> Items => Set;
 
-        public async Task<bool> ExistAsync(int id, CancellationToken cancel = default) =>
+        public async Task<bool> ExistAsync(Guid id, CancellationToken cancel = default) =>
             await Items.AnyAsync(item => item.Id == id, cancel).ConfigureAwait(false);
         
         public async Task<bool> ExistAsync(T item, CancellationToken cancel = default)
@@ -67,7 +67,7 @@ namespace PhoneBook.DAL.Repository
             return item;
         }
 
-        public async Task<T> GetByIdAsync(int id, CancellationToken cancel = default) =>
+        public async Task<T> GetByIdAsync(Guid id, CancellationToken cancel = default) =>
             Items switch
             {
                 DbSet<T> set => await set.FindAsync(new object[] { id }, cancel).ConfigureAwait(false),
@@ -97,7 +97,7 @@ namespace PhoneBook.DAL.Repository
             return item;
         }
 
-        public async Task<T> DeleteByIdAsync(int id, CancellationToken cancel = default)
+        public async Task<T> DeleteByIdAsync(Guid id, CancellationToken cancel = default)
         {
             var item = Set.Local.FirstOrDefault(i => i.Id == id);
             if (item is null)

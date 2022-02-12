@@ -29,3 +29,32 @@
         </div>
     </div>
 </section>
+
+
+<div id="modalSuccess" class="modal fade text-width:30%;" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Information</h2>
+                </div>
+                <div id="ModalSuccesAlertBody" class="modal-body alert alert">
+                    "Message"
+                </div>
+                <div class=modal-footer>
+                    &nbsp;
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+@section Scripts{
+<script type="text/javascript">   
+    $(document).ready(function() {
+        var msg="@TempData["ErrorMessage"]";
+        if(msg)
+            openSuccessModal(msg);
+    })
+</script>
+}

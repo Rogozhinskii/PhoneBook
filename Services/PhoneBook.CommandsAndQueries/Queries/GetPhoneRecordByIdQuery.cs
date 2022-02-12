@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using PhoneBook.Common.Models;
 using PhoneBook.Interfaces;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -8,7 +9,7 @@ namespace PhoneBook.CommandsAndQueries.Queries
 {
     public class GetPhoneRecordByIdQuery:IRequest<PhoneRecordInfo>
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
     }
 
     public class GetPhoneRecordByIdQueryHandler : IRequestHandler<GetPhoneRecordByIdQuery, PhoneRecordInfo>

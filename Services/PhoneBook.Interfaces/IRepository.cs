@@ -17,7 +17,7 @@ namespace PhoneBook.Interfaces
         /// <param name="id">первичный ключ</param>
         /// <param name="cancel"></param>
         /// <returns></returns>
-        Task<T> GetByIdAsync(int id,CancellationToken cancel=default);
+        Task<T> GetByIdAsync(Guid id,CancellationToken cancel=default);
 
         /// <summary>
         /// Добавляет сущность в хранилище, возвращает сущность с присвоенным идентификационным номером
@@ -49,7 +49,7 @@ namespace PhoneBook.Interfaces
         /// <param name="id"></param>
         /// <param name="cancel"></param>
         /// <returns></returns>
-        Task<T> DeleteByIdAsync(int id, CancellationToken cancel = default);
+        Task<T> DeleteByIdAsync(Guid id, CancellationToken cancel = default);
 
         /// <summary>
         /// Возвращает количество записей в хранилище
@@ -102,7 +102,7 @@ namespace PhoneBook.Interfaces
         /// <param name="id">идентификатор искомой записи</param>
         /// <param name="cancel"></param>
         /// <returns></returns>
-        Task<bool> ExistAsync(int id, CancellationToken cancel = default);
+        Task<bool> ExistAsync(Guid id, CancellationToken cancel = default);
 
         /// <summary>
         /// Определяет есть ли указанная сущность в хранилище. true-вернет если запись найдена, иначе false

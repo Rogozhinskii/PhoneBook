@@ -55,7 +55,7 @@ namespace PhoneBook.Controllers
         /// <param name="id">идентификатор записи</param>
         /// <returns></returns>
         [HttpGet]        
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(Guid? id)
         {
             var canDelete =await _mediator.Send(new CanDeleteCommand { Token = GetToken() });
             if (!canDelete) return RedirectToAccesDeniedPage();            
@@ -70,7 +70,7 @@ namespace PhoneBook.Controllers
         /// <returns></returns>
         [HttpPost]
         [ActionName("Delete")]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
         {                 
             _logger.LogInformation($">>>Start deleting record. Record id is :{id}");
             var result=await _mediator.Send(new DeleteByIdRecordCommand { Id= id, Token= GetToken() });             
@@ -124,7 +124,7 @@ namespace PhoneBook.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]        
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(Guid? id)
         {
             if(id is null) return NotFound();
             var canEdit = await _mediator.Send(new CanEditCommand { Token = GetToken() });
@@ -138,8 +138,7 @@ namespace PhoneBook.Controllers
         ///// <param name="phoneRecord"></param>
         ///// <returns></returns>
         [HttpPost]
-        [ActionName(nameof(Edit))]
-        [Authorize(Roles = UserRoles.Administrator)]
+        [ActionName(nameof(Edit))]        
         public async Task<IActionResult> Edit(PhoneRecordInfo phoneRecord) =>
             await _mediator.Send(new UpdateRecordCommand { UpdatableRecord=phoneRecord,Token=GetToken() }) is { } record
             ? Redirect("~/")
@@ -152,7 +151,7 @@ namespace PhoneBook.Controllers
         /// <returns></returns>
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(Guid? id)
         {            
             if (id is null){
                 _logger.LogError($"{nameof(PhoneRecordsController)}/Details passed id is null.");

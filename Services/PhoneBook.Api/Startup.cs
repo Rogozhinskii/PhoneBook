@@ -17,6 +17,7 @@ using PhoneBook.Domain;
 using PhoneBook.Interfaces;
 using System;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace PhoneBook.Api
 {
@@ -85,7 +86,7 @@ namespace PhoneBook.Api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public async void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             //Если потребует создать БД с миграциями и тестовыми данными
             //using (var scope = app.ApplicationServices.CreateAsyncScope())

@@ -23,7 +23,7 @@ namespace PhoneBook.WebApiClient
             _client = client;
         }
 
-        public async Task<T> DeleteByIdAsync(int id, string token, CancellationToken cancel = default)
+        public async Task<T> DeleteByIdAsync(Guid id, string token, CancellationToken cancel = default)
         {
             SetToken(token);
             return await DeleteByIdAsync(id, cancel).ConfigureAwait(false);
@@ -41,7 +41,7 @@ namespace PhoneBook.WebApiClient
             return await UpdateAsync(item, cancel).ConfigureAwait(false);
         }
 
-        public async Task<T> GetByIdAsync(int id, CancellationToken cancel = default) =>
+        public async Task<T> GetByIdAsync(Guid id, CancellationToken cancel = default) =>
             await _client.GetFromJsonAsync<T>($"{id}", cancel).ConfigureAwait(false);
 
         public bool SetToken(string token)
@@ -63,7 +63,7 @@ namespace PhoneBook.WebApiClient
         }
                     
 
-        public async Task<T> DeleteByIdAsync(int id, CancellationToken cancel = default)
+        public async Task<T> DeleteByIdAsync(Guid id, CancellationToken cancel = default)
         {
             var responce = await _client.DeleteAsync($"{id}", cancel).ConfigureAwait(false);
             return await responce.EnsureSuccessStatusCode()

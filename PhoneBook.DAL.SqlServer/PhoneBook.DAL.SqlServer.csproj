@@ -17,4 +17,8 @@
     <ProjectReference Include="..\Data\PhoneBook.DAL\PhoneBook.DAL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

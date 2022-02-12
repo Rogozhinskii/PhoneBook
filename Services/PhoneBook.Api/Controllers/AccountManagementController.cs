@@ -120,7 +120,7 @@ namespace PhoneBook.Api.Controllers
                     return BadRequest(new AuthentificationResult()
                     {
                         Errors = new List<string>() {
-                                "Invalid login request"
+                                "Invalid login or password"
                             },
                         Success = false
                     });

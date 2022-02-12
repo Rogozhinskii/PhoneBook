@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -17,7 +18,7 @@ namespace PhoneBook.Interfaces
         /// <param name="token"></param>
         /// <param name="cancel"></param>
         /// <returns></returns>
-        public Task<T> DeleteByIdAsync(int id, string token, CancellationToken cancel = default);
+        public Task<T> DeleteByIdAsync(Guid id, string token, CancellationToken cancel = default);
 
         /// <summary>
         /// Добавит новую запись в хранилище
@@ -67,7 +68,7 @@ namespace PhoneBook.Interfaces
         /// <param name="id"></param>
         /// <param name="cancel"></param>
         /// <returns></returns>
-        public Task<T> GetByIdAsync(int id, CancellationToken cancel = default);
+        public Task<T> GetByIdAsync(Guid id, CancellationToken cancel = default);
 
         /// <summary>
         /// вернет все записи в хранилище

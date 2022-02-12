@@ -1,4 +1,5 @@
 ﻿using PhoneBook.Interfaces;
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -9,7 +10,7 @@ namespace PhoneBook.Common.Models
     /// </summary>
     public class PhoneRecordInfo: IEntity
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [DisplayName("First Name")]
         [Required(ErrorMessage = "This Field is Required")]

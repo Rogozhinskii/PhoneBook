@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using PhoneBook.Common.Models;
 using PhoneBook.Interfaces;
-using System.Net;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,7 +9,7 @@ namespace PhoneBook.CommandsAndQueries.Commands
 {
     public class DeleteByIdRecordCommand : IRequest<PhoneRecordInfo>
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Token { get; set; }
     }
 

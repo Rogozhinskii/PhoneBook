@@ -1,4 +1,6 @@
-﻿namespace PhoneBook.Interfaces
+﻿using System;
+
+namespace PhoneBook.Interfaces
 {
     /// <summary>
     /// Базовый интерфейс для хранимых в БД сущностей
@@ -8,6 +10,6 @@
         /// <summary>
         /// Идентификатор сущности
         /// </summary>
-        public int Id { get; set; }
+        public Guid Id { get; set; }
     }
 }

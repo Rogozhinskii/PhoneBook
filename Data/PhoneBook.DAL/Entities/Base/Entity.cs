@@ -1,10 +1,10 @@
 ﻿using PhoneBook.Interfaces;
-
+using System;
 
 namespace PhoneBook.DAL.Entities.Base
 {
     public class Entity : IEntity
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
     }
 }
