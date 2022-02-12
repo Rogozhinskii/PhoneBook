@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Net;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -11,7 +9,6 @@ using PhoneBook.CommandsAndQueries.Commands;
 using PhoneBook.CommandsAndQueries.Commands.PermissionCommands;
 using PhoneBook.CommandsAndQueries.Queries;
 using PhoneBook.Common.Models;
-using PhoneBook.Interfaces;
 
 namespace PhoneBook.Controllers
 {
