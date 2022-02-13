@@ -9,7 +9,7 @@ namespace PhoneBook.Interfaces
     /// Интерфейс для доступа к хранилищу данных
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IRepository<T> where T : IEntity, new()
+    public interface IRepository<T> where T : IEntity<Guid>, new()
     {
         /// <summary>
         /// Возвращает сущность по ее идентификационному номеру

@@ -16,8 +16,8 @@ namespace PhoneBook.Api.Controllers.Base
     [Route("api/[controller]")]
     [ApiController]
     public class MappedEntityController<T,TBase> : ControllerBase
-        where T : IEntity,new()
-        where TBase : IEntity,new()
+        where T : IEntity<Guid>,new()
+        where TBase : IEntity<Guid>,new()
     {
         protected readonly IRepository<TBase> _repository;
         private readonly IMapper _mapper;

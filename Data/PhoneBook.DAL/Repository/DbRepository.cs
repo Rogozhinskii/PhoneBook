@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PhoneBook.DAL.Context;
-using PhoneBook.DAL.Entities.Base;
 using PhoneBook.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -8,6 +7,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using PhoneBook.Common;
+using PhoneBook.Common.Models;
 
 namespace PhoneBook.DAL.Repository
 {
@@ -15,7 +15,7 @@ namespace PhoneBook.DAL.Repository
     /// Реализует доступ к хранилищу данных
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public partial class DbRepository<T> : IRepository<T> where T : Entity, new()
+    public partial class DbRepository<T> : IRepository<T> where T : Entity<Guid>, new()
     {
         private readonly PhoneBookDB _db;
         protected DbSet<T> Set { get; }

@@ -8,7 +8,7 @@ namespace PhoneBook.Common
     /// Модель страницы с определенным количеством записей
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class Page<T> : IPage<T> where T : IEntity
+    public class Page<T> : IPage<T> where T : IEntity<Guid>
     {        
         public IEnumerable<T> Items { get; set; }
 

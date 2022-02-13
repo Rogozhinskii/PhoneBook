@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using PhoneBook.Common;
+﻿using PhoneBook.Common;
+using PhoneBook.Common.Models;
 using PhoneBook.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace PhoneBook.WebApiClient
 {
-    public class WebRepository<T>: IWebRepository<T> where T:IEntity,new()
+    public class WebRepository<T>: IWebRepository<T> where T:Entity<Guid>,new()
     {
         private readonly HttpClient _client;
 

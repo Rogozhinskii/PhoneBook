@@ -5,11 +5,12 @@ namespace PhoneBook.Interfaces
     /// <summary>
     /// Базовый интерфейс для хранимых в БД сущностей
     /// </summary>
-    public interface IEntity
+    public interface IEntity<T>
     {
         /// <summary>
         /// Идентификатор сущности
         /// </summary>
-        public Guid Id { get; set; }
+        public T Id { get; set; }
+
     }
 }

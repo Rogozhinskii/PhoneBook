@@ -25,6 +25,10 @@
     <ProjectReference Include="..\..\Services\PhoneBook.Interfaces\PhoneBook.Interfaces.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Entities\Base\" />
+  </ItemGroup>
+
 
 
 

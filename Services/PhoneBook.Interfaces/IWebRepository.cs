@@ -9,7 +9,7 @@ namespace PhoneBook.Interfaces
     /// Интерфейс доступа к хранилищу через api
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IWebRepository<T> where T : IEntity,new()
+    public interface IWebRepository<T> where T : IEntity<Guid>,new()
     {
         /// <summary>
         /// Выполнит удаление записи по  id

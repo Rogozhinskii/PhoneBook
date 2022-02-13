@@ -1,5 +1,4 @@
-﻿using PhoneBook.Interfaces;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -8,9 +7,8 @@ namespace PhoneBook.Common.Models
     /// <summary>
     /// Модель представления записи телефонного справочника
     /// </summary>
-    public class PhoneRecordInfo: IEntity
-    {
-        public Guid Id { get; set; }
+    public class PhoneRecordInfo: Entity<Guid>
+    {        
 
         [DisplayName("First Name")]
         [Required(ErrorMessage = "This Field is Required")]
@@ -32,6 +30,6 @@ namespace PhoneBook.Common.Models
 
         [DisplayName("Description")]
         public string Description { get; set; }
-        
+                
     }
 }

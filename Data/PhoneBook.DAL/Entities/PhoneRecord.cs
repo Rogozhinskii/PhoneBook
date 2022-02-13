@@ -1,4 +1,5 @@
-﻿using PhoneBook.DAL.Entities.Base;
+﻿using PhoneBook.Common.Models;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace PhoneBook.Entities
@@ -7,7 +8,7 @@ namespace PhoneBook.Entities
     /// Сущность записи телефонной книги
     /// 
     /// </summary>
-    public class PhoneRecord:Entity
+    public class PhoneRecord:Entity<Guid>
     {
         /// <summary>
         /// Имя

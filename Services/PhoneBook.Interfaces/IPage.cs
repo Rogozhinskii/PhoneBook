@@ -7,7 +7,7 @@ namespace PhoneBook.Interfaces
     /// Интерфейс страницы, на которой отображаются записи справочника
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IPage<T> where T : IEntity
+    public interface IPage<T> where T : IEntity<Guid>
     {
         /// <summary>
         /// Записи справочника
