@@ -7,7 +7,7 @@ namespace PhoneBook.Common.Models
     /// <summary>
     /// Модель представления записи телефонного справочника
     /// </summary>
-    public class PhoneRecordInfo: Entity<Guid>
+    public class PhoneRecordInfo: Entity<Guid>,IEquatable<PhoneRecordInfo>
     {        
 
         [DisplayName("First Name")]
@@ -30,6 +30,24 @@ namespace PhoneBook.Common.Models
 
         [DisplayName("Description")]
         public string Description { get; set; }
-                
+
+        public bool Equals(PhoneRecordInfo other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return Id == other.Id && FirstName==other.FirstName;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((PhoneRecordInfo)obj);
+        }
+        public override int GetHashCode()=>
+            Id.GetHashCode();
+            
+        
     }
 }
